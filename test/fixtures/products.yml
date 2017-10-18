@@ -17,3 +17,7 @@ two:
   description: MyText
   image: MyString
   active: false
+
+valid_product:
+  name: shoe
+  price: 10.01
