@@ -1,17 +1,8 @@
 <section>
-  <h1>Merchants!</h1>
-
-
-  <h1>A</h1>
+  <h1>All Merchants</h1>
   <p>
     <% @users.each do |user| %>
-    <%= link_to(user.username, user_path(user.id), alt: 'link to', class: "title") %>
-    <% end %>
-  </p>
-  <h1>B</h1>
-  <p>
-    <% @users.each do |user| %>
-    <%= link_to(user.username, user_path(user.id), alt: 'link to', class: "title") %>
+    <%= link_to(user.username, user_path(user.id), alt: 'link to', class: "title") %> |
     <% end %>
   </p>
 
