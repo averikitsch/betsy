@@ -10,6 +10,8 @@ class Order < ApplicationRecord
   validates :cc_cvv, numericality: { only_integer: true }, length: { is: 3}
   validates :billing_zip, numericality: { only_integer: true }
 
+  private
+  
   def card_expiry_cannot_be_in_the_past
     if !cc_expiry.nil? && Date.strptime(cc_expiry, '%m/%y') < Date.today
       errors.add(:cc_expiry, "can't be in the past")
