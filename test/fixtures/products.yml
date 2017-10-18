@@ -3,8 +3,8 @@
 one:
   name: MyString
   price: 9.99
-  category: one
-  merchant: one
+  # categories: categories(one)
+  user_id: one
   stock: 1
   description: MyText
   image: MyString
@@ -13,8 +13,8 @@ one:
 two:
   name: MyString
   price: 9.99
-  category: two
-  merchant: two
+  # categories: categories(two)
+  user_id: two
   stock: 1
   description: MyText
   image: MyString
