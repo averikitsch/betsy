@@ -6,9 +6,16 @@ class CategoriesController < ApplicationController
   end
 
   def new
+    @category = Category.new
   end
 
   def create
+    @category = Category.new
+    if @category.save
+      redirect_to users_path
+    else
+      render :new
+    end
   end
 
   def edit
@@ -18,5 +25,11 @@ class CategoriesController < ApplicationController
   end
 
   def destroy
+  end
+
+  private
+
+  def category_params
+    return params.require(:category).permit(:name)
   end
 end
