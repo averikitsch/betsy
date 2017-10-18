@@ -22,9 +22,9 @@ describe Category do
   end
 
   it "has relations to product" do
-    prd = Product.first
+    prd = products(:one)
     cat = Category.first
-    prd << cat
-    cat.products[0] = products(:one)
+    cat.products << prd
+    cat.products[0].must_equal products(:one)
   end
 end
