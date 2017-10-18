@@ -1,7 +1,7 @@
 require "test_helper"
 
 describe OrderProduct do
-  let(:order_product) { OrderProduct.new(order_id: orders(:one), product_id: products(:one), quantity: 7) }
+  let(:order_product) { OrderProduct.new(order: orders(:one), product: products(:one), quantity: 7) }
 
   describe "order product validations" do
   it "must have a positive integer quantity" do
@@ -15,9 +15,9 @@ describe OrderProduct do
     order_product.valid?.must_equal true
   end
 
-  it "must have a default shipped value of false" do
-    order_product.shipped.must_equal false
-  end
+  # it "must have a default shipped value of false" do
+  #   order_product.shipped.must_equal false
+  # end
 
   it "must have an associated order" do
     order_product.order_id = nil
