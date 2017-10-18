@@ -2,7 +2,7 @@ Rails.application.routes.draw do
 
   root 'products#root'
 
-  resources :order_products
+  # resources :order_products
 
   resources :products do
     resources :reviews, only: [:new, :create]
@@ -15,6 +15,8 @@ Rails.application.routes.draw do
   resources :users
 
   resources :orders
+
+  post '/products/:id/order', to: 'order_products#create', as: 'order_product'
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
