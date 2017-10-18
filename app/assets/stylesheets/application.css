@@ -84,3 +84,12 @@ nav {
    padding-top: 1em;
    border-top: 0.2px solid rgba(0,0,0,0.3);
  }
+
+ .product {
+   display: inline-block;
+   width: 250px;
+ }
+
+ .product div {
+   height: 30px;
+ }
