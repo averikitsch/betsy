@@ -4,8 +4,3 @@ one:
   rating: 1
   product: one
   body: MyText
-
-two:
-  rating: 1
-  product: two
-  body: MyText
