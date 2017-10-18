@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  root 'products#root'
+
   resources :order_products
 
   resources :products do
