@@ -1,2 +1,29 @@
-<h1>Users#show</h1>
-<p>Find me in app/views/users/show.html.erb</p>
+<% if @user %>
+<h3>User Summary: <%= @user.username%></h3>
+<p>Joined site <%= @user.created_at.strftime("%b %d, %Y") %></p>
+<% end %>
+
+<h4>Products</h4>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Stock</th>
+      <th>Price</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @user.products.each do |product| %>
+    <tr>
+      <td><%= link_to product.name, product_path(product.id) %></td>
+      <td><%= product.stock %></td>
+      <td><%= product.price %></td>
+      <td><%= link_to "Edit" %></td>
+      <td><%= link_to "Retire" %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
