@@ -3,8 +3,7 @@
 one:
   name: MyString
   price: 9.99
-  # categories: categories(one)
-  user_id: one
+  user: one
   stock: 1
   description: MyText
   image: MyString
@@ -13,8 +12,7 @@ one:
 two:
   name: MyString
   price: 9.99
-  # categories: categories(two)
-  user_id: two
+  user: two
   stock: 1
   description: MyText
   image: MyString
