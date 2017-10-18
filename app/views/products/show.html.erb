@@ -1,2 +1,34 @@
-<h1>Products#show</h1>
-<p>Find me in app/views/products/show.html.erb</p>
+<section class = "row">
+  <article class = "column small-12 large-6">
+    <%= image_tag "tombstone.png" %>
+
+  </article>
+  <article class = "column small-12 large-6">
+    <h3><%=@product.name%><small class = "float-right"><%=@product.user.username%></small></h3>
+    <h4><%=@product.price%></h4>
+    <h5><%=stock(@product.stock)%></h5>
+
+    <%= link_to "Add to Coffin", order_product_path(@product.id),class:'button', method: :post%>
+    <p>
+      <%= @product.description %>
+    </p>
+    <p>
+      <%=print_categories(@product.categories)%>
+    </p>
+
+  </article>
+</section>
+<section class = "row">
+<h4>Ratings Summary</h4>
+<p>
+  <%= average_rating(@product.reviews) %> out of 5
+</p>
+</section>
+<section class = "row">
+<h4>Reviews</h4>
+<% @product.reviews.each do %>
+<section class = "row">
+
+</section>
+<%end %>
+</section>

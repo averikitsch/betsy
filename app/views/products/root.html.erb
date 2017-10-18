@@ -1,0 +1,24 @@
+<section class= "row">
+  <h3 class = "columns small-12">Promo Banner goes here</h3>
+</section>
+<section class = "row">
+  <section class = "columns large-6 small-12">
+    <h4>Trending</h4>
+    <% @top_products.each do |product|%>
+    <article>
+      <%=link_to image_tag("tombstone.png"), product_path(product.id) %>
+      <%=link_to product.name, product_path(product.id) %>
+    </article>
+    <%end %>
+  </section>
+  <section class = "columns large-6 small-12">
+    <h4>Recently Added</h4>
+    <% @recent_products.each do |product|%>
+    <article>
+      <%=link_to image_tag("tombstone.png"), product_path(product.id) %>
+      <%=link_to product.name, product_path(product.id) %>
+    </article>
+    <%end %>
+  </section>
+
+</section>
