@@ -1,2 +1,23 @@
-<h1>Products#index</h1>
-<p>Find me in app/views/products/index.html.erb</p>
+
+<section class="row">
+  <h1>All Products</h1>
+  <section class="all_products">
+    <% @products.each do |p| %>
+      <%= link_to product_path(p.id) do %>
+        <article class="product">
+        <p>
+          <img src="http://placebeyonce.com/250-250" alt="product image">
+          <%= p.image %>
+        </p>
+        <p>
+          <div><%= p.name %></div>
+        </p>
+        <p>
+          <%= format_price(p.price) %>
+        </p>
+        </article>
+      <% end %>
+    <% end %>
+  </section>
+
+</section>
