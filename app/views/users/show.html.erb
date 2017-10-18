@@ -3,6 +3,10 @@
 <p>Joined site <%= @user.created_at.strftime("%b %d, %Y") %></p>
 <% end %>
 
+<p><%= link_to "Add Product", new_product_path %></p>
+<p><%= link_to "Add Category", new_category_path %></p>
+<p><%= link_to "Order Summary" %></p>
+
 <h4>Products</h4>
 <table>
   <thead>
@@ -21,7 +25,7 @@
       <td><%= link_to product.name, product_path(product.id) %></td>
       <td><%= product.stock %></td>
       <td><%= product.price %></td>
-      <td><%= link_to "Edit" %></td>
+      <td><%= link_to "Edit", edit_product_path(product.id) %></td>
       <td><%= link_to "Retire" %></td>
     </tr>
     <% end %>
