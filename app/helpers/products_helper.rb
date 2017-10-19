@@ -29,7 +29,7 @@ module ProductsHelper
     if average == 0 || average.nil? || average.nan?
       return "The reviews were too scared and ran away"
     else
-      return "#{average} out of 5"
+      return "#{format("%.1f", average)} out of 5"
     end
   end
 end

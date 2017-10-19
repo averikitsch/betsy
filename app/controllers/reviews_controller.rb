@@ -12,6 +12,16 @@ class ReviewsController < ApplicationController
 
   def create
     @review = Review.new(review_params)
+    if @review.save
+      flash[:success] = :success
+      flash[:result_text] = "Successfully added your review"
+      redirect_to product_path(@review.product_id)
+    else
+      flash[:status] = :failure
+      flash[:result_text] = "Sorry! We lost your review...oops!"
+      flash[:messages] = @review.errors.messages
+      render :new, status: :bad_request
+    end
   end
 
   def edit
@@ -25,6 +35,6 @@ class ReviewsController < ApplicationController
 
   private
   def review_params
-    params.require(:work).permit(:rating, :body, :nickname, :location)
+    params.permit(:rating, :body, :nickname, :location, :product_id)
   end
 end
