@@ -11,6 +11,7 @@ class ReviewsController < ApplicationController
   end
 
   def create
+    @review = Review.new(review_params)
   end
 
   def edit
@@ -20,5 +21,10 @@ class ReviewsController < ApplicationController
   end
 
   def destroy
+  end
+
+  private
+  def review_params
+    params.require(:work).permit(:rating, :body, :nickname, :location)
   end
 end
