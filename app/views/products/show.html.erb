@@ -31,18 +31,25 @@
 <section class = "row">
 <h4>Ratings Summary</h4>
 <p>
-  <%= average_rating(@product.reviews) %> out of 5
+  <%= average_rating(@product.reviews) %>
 </p>
 </section>
 <section class = "row">
-<h4>Reviews</h4>
-<ul>
-  <% @product.reviews.each do |review| %>
-  <li>
-    <%= review.rating %> out of 5
-  </li>
+  <h4>Reviews</h4>
+  <% if @product.reviews.empty? %>
   <p>
-    <%= review.body %>
+    Be the first ghost to review!
   </p>
-  <%end %>
-</ul>
+  <%else %>
+  <ul>
+    <% @product.reviews.each do |review| %>
+    <li>
+      <%= review.rating %>
+    </li>
+    <p>
+      <%= review.body %>
+    </p>
+    <%end %>
+  </ul>
+  <% end %>
+<%=link_to "review now!", new_product_review_path(@product.id), class: 'button' %>

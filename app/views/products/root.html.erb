@@ -8,8 +8,8 @@
       <%p = Product.find(product.id)%>
       <%= link_to product_path(p.id) do %>
       <article class="product">
-          <%= image_tag "tombstone.png", alt:"product image"%>
-          <%# p.image %>
+          <%= image_tag p.image, alt:"product image"%>
+
           <div><%= p.name %></div>
         <p>
           <%= format_price(p.price) %>
@@ -23,8 +23,8 @@
     <% @recent_products.each do |p|%>
     <%= link_to product_path(p.id) do %>
     <article class="product">
-        <%= image_tag "tombstone.png", alt:"product image"%>
-        <%# p.image %>
+        <%= image_tag p.image, alt:"product image"%>
+      
         <div><%= p.name %></div>
       <p>
         <%= format_price(p.price) %>

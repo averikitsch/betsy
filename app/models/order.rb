@@ -2,11 +2,11 @@ class Order < ApplicationRecord
   has_many :order_products
   has_many :products, :through => :order_products
 
-  validates :order_products, :presence => true
+  # validates :order_products, :presence => true
   validates :name, presence: true
   validates :address, presence: true
   validates :email, presence: true
-  validates :cc_num, numericality: { only_integer: true }, length: { is: 16 }
+  validates :cc_num, presence: true #  numericality: { only_integer: true }, length: { is: 16 }
   validates :cc_expiry, presence: true
   validate :card_expiry_cannot_be_in_the_past
   validates :cc_cvv, numericality: { only_integer: true }, length: { is: 3}

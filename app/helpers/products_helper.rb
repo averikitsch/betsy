@@ -25,6 +25,11 @@ module ProductsHelper
     list.each do |review|
       sum += review.rating
     end
-    return (sum/num)
+    average = sum/num
+    if average == 0 || average.nil? || average.nan?
+      return "The reviews were too scared and ran away"
+    else
+      return "#{average} out of 5"
+    end
   end
 end
