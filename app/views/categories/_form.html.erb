@@ -1,7 +1,17 @@
+<% if @category.errors.any? %>
+  <ul class="errors">
+    <% @category.errors.each do |column, message| %>
+      <li>
+        <strong><%= column.capitalize %></strong> <%= message %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>
+
 <%= form_for @category do |f| %>
 
 <%= f.label :name %>
-<%= f.text_field :name, required: true %>
+<%= f.text_field :name %>
 
-<%= f.submit action_name %>
+<%= f.submit action_name, class: "button" %>
 <% end %>
