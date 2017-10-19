@@ -7,6 +7,8 @@ class ProductsController < ApplicationController
   end
 
   def index
+    @categories = Category.order(:name)
+
     if params[:category_id]
       @products = Product.includes(:categories).where(categories: { id: params[:category_id]})
     elsif params[:user_id]
