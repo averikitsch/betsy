@@ -18,5 +18,7 @@ Rails.application.routes.draw do
 
   post '/products/:id/order', to: 'order_products#create', as: 'order_products'
 
+  get '/auth/:provider/callback', to: 'users#create', as: 'auth_callback'
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
