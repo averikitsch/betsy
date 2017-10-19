@@ -1,24 +1,37 @@
 <section class= "row">
-  <h3 class = "columns small-12">Promo Banner goes here</h3>
+  <h3 class = "columns small-12 promo">Promo Banner goes here</h3>
 </section>
 <section class = "row">
   <section class = "columns large-6 small-12">
     <h4>Trending</h4>
     <% @top_products.each do |product|%>
-    <article>
-      <%=link_to image_tag("tombstone.png"), product_path(product.id) %>
-      <%=link_to product.name, product_path(product.id) %>
-    </article>
+      <%p = Product.find(product.id)%>
+      <%= link_to product_path(p.id) do %>
+      <article class="product">
+          <%= image_tag p.image, alt:"product image"%>
+
+          <div><%= p.name %></div>
+        <p>
+          <%= format_price(p.price) %>
+        </p>
+      </article>
+      <% end %>
     <%end %>
   </section>
   <section class = "columns large-6 small-12">
     <h4>Recently Added</h4>
-    <% @recent_products.each do |product|%>
-    <article>
-      <%=link_to image_tag("tombstone.png"), product_path(product.id) %>
-      <%=link_to product.name, product_path(product.id) %>
+    <% @recent_products.each do |p|%>
+    <%= link_to product_path(p.id) do %>
+    <article class="product">
+        <%= image_tag p.image, alt:"product image"%>
+      
+        <div><%= p.name %></div>
+      <p>
+        <%= format_price(p.price) %>
+      </p>
     </article>
-    <%end %>
+    <% end %>
+  <%end %>
   </section>
 
 </section>

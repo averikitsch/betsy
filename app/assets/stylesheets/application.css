@@ -46,9 +46,9 @@
    font-family: 'Creepster', cursive;
  }
 
-nav {
-  padding: 0 0 10px 10px;
-}
+  nav {
+    padding: 0 0 10px 10px;
+  }
 
  nav a {
    letter-spacing: 0.05em;
@@ -85,11 +85,26 @@ nav {
    border-top: 0.2px solid rgba(0,0,0,0.3);
  }
 
+ .all_products {
+   text-align: center;
+ }
+
  .product {
+   text-align: left;
    display: inline-block;
-   width: 250px;
+   width: 220px;
+   padding: 10px;
  }
 
  .product div {
    height: 30px;
+ }
+
+ .promo {
+   background-color: #bf022a;
+   text-align: center;
+   padding: 1em;
+   font-family: 'Nosifer';
+   color: crimson;
+   text-shadow: 2px 2px white;
  }

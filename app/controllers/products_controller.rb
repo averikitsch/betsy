@@ -1,14 +1,19 @@
 class ProductsController < ApplicationController
   before_action :find_product , only: [:show]
   def root
-    #I want to find prodcuts that were bought the most
-    #TODO: add quantity * count to top prodcuts
-    @top_products = Product.joins("LEFT JOIN order_products ON products.id = order_products.product_id").group(:id).order("count(order_products.id)  DESC").limit(10)
-    @recent_products =  Product.order(created_at: :desc).limit(10)
+    @top_products =  Product.select("products.id, avg(reviews.rating) as average_rating").joins("LEFT JOIN reviews ON products.id = reviews.product_id").group("products.id").order("average_rating DESC NULLS LAST").limit(6)
+    #Product.joins("LEFT JOIN order_products ON products.id = order_products.product_id").group(:id).order("count(order_products.id)  DESC").limit(10)
+    @recent_products =  Product.order(created_at: :desc).limit(6)
   end
 
   def index
-    @products = Product.order(:id)
+    if params[:category_id]
+      @products = Product.includes(:categories).where(categories: { id: params[:category_id]})
+    elsif params[:user_id]
+      @products = Product.where(user: params[:user_id])
+    else
+      @products = Product.order(:id)
+    end
   end
 
   def show

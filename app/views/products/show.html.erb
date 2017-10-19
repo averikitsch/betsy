@@ -1,10 +1,10 @@
 <section class = "row">
   <article class = "column small-12 large-6">
-    <%= image_tag "tombstone.png" %>
+    <%= image_tag @product.image, alt:@product.name %>
 
   </article>
   <article class = "column small-12 large-6">
-    <h3><%=@product.name%><small class = "float-right"><%=@product.user.username%></small></h3>
+    <h3><%=@product.name%><small class = "float-right"><%= link_to @product.user.username, user_products_path(@product.user)%></small></h3>
     <h4><%=format_price(@product.price)%></h4>
     <h5><%=stock(@product.stock)%></h5>
 
@@ -20,9 +20,9 @@
       <%= @product.description %>
     </p>
     <p>
-      <%= link_to @product.categories[0].name, "#" %>
-      <% num = @product.categories.length - 1 ; (1..num).each do |category| %>
-        , <%= link_to @product.categories[1].name, "#" %>
+      <%= link_to @product.categories[0].name, category_products_path(@product.categories[0].id) %>
+      <% num = @product.categories.length - 1 ; (1..num).each do |c| %>
+        , <%= link_to @product.categories[c].name, category_products_path(@product.categories[c].id) %>
         <% end %>
     </p>
 
@@ -31,18 +31,25 @@
 <section class = "row">
 <h4>Ratings Summary</h4>
 <p>
-  <%= average_rating(@product.reviews) %> out of 5
+  <%= average_rating(@product.reviews) %>
 </p>
 </section>
 <section class = "row">
-<h4>Reviews</h4>
-<ul>
-  <% @product.reviews.each do |review| %>
-  <li>
-    <%= review.rating %> out of 5
-  </li>
+  <h4>Reviews</h4>
+  <% if @product.reviews.empty? %>
   <p>
-    <%= review.body %>
+    Be the first ghost to review!
   </p>
-  <%end %>
-</ul>
+  <%else %>
+  <ul>
+    <% @product.reviews.each do |review| %>
+    <li>
+      <%= review.rating %>
+    </li>
+    <p>
+      <%= review.body %>
+    </p>
+    <%end %>
+  </ul>
+  <% end %>
+<%=link_to "review now!", new_product_review_path(@product.id), class: 'button' %>
