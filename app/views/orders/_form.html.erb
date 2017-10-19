@@ -1,0 +1,35 @@
+<% if @order.errors.any? %>
+  <ul class="errors">
+    <% @order.errors.each do |column, message| %>
+      <li>
+        <strong><%= column.capitalize %></strong> <%= message %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>
+
+<%= form_for @order do |f| %>
+
+<%= f.label :name %>
+<%= f.text_field :name %>
+
+<%= f.label :address %>
+<%= f.text_field :address %>
+
+<%= f.label :email %>
+<%= f.text_field :email %>
+
+<%= f.label :cc_num, 'Credit Card Number' %>
+<%= f.text_field :cc_num %>
+
+<%= f.label :cc_expiry, 'Expiration Date' %>
+<%= f.text_field :cc_expiry %>
+
+<%= f.label :cc_cvv, 'CVV' %>
+<%= f.text_field :cc_cvv %>
+
+<%= f.label :billing_zip %>
+<%= f.text_field :billing_zip %>
+
+<%= f.submit action_name, class: "button" %>
+<% end %>

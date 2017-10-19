@@ -10,7 +10,7 @@ class ProductsController < ApplicationController
     if params[:category_id]
       @products = Product.includes(:categories).where(categories: { id: params[:category_id]})
     elsif params[:user_id]
-      @products = Product.where(user: params[:user_id])
+      @products = Product.includes(:user).where(products: {user_id: params[:user_id]})
     else
       @products = Product.order(:id)
     end
