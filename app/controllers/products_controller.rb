@@ -9,6 +9,8 @@ class ProductsController < ApplicationController
   def index
     if params[:category_id]
       @products = Product.includes(:categories).where(categories: { id: params[:category_id]})
+    elsif params[:user_id]
+      @products = Product.where(user: :user_id)
     else
       @products = Product.order(:id)
     end

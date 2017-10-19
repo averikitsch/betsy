@@ -1,6 +1,8 @@
 <section class="row">
   <% if params[:category_id] %>
       <h1><%= Category.find(params[:category_id]).name  %></h1>
+  <% elsif params[:user_id]%>
+      <h1><%= User.find(params[:user_id]).username  %></h1>
   <% else %>
     <h1>All Products</h1>
   <% end %>
