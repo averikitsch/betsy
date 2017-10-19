@@ -5,15 +5,25 @@
   </article>
   <article class = "column small-12 large-6">
     <h3><%=@product.name%><small class = "float-right"><%=@product.user.username%></small></h3>
-    <h4><%=@product.price%></h4>
+    <h4><%=format_price(@product.price)%></h4>
     <h5><%=stock(@product.stock)%></h5>
 
-    <%= link_to "Add to Coffin", order_product_path(@product.id),class:'button', method: :post%>
+    <%= form_for @order_product do |f| %>
+        <%= f.label :quantity %>
+        <%= f.number_field :quantity, in: 1..10, step: 1 %>
+
+        <%= f.submit "Add to Coffin", class: "button" %>
+      <% end %>
+
+    <%# link_to "Add to Coffin", order_product_path(@product.id),class:'button', method: :post%>
     <p>
       <%= @product.description %>
     </p>
     <p>
-      <%=print_categories(@product.categories)%>
+      <%= link_to @product.categories[0].name, "#" %>
+      <% num = @product.categories.length - 1 ; (1..num).each do |category| %>
+        , <%= link_to @product.categories[1].name, "#" %>
+        <% end %>
     </p>
 
   </article>
@@ -26,9 +36,13 @@
 </section>
 <section class = "row">
 <h4>Reviews</h4>
-<% @product.reviews.each do %>
-<section class = "row">
-
-</section>
-<%end %>
-</section>
+<ul>
+  <% @product.reviews.each do |review| %>
+  <li>
+    <%= review.rating %> out of 5
+  </li>
+  <p>
+    <%= review.body %>
+  </p>
+  <%end %>
+</ul>

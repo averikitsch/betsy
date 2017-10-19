@@ -16,7 +16,7 @@ Rails.application.routes.draw do
 
   resources :orders
 
-  post '/products/:id/order', to: 'order_products#create', as: 'order_product'
+  post '/products/:id/order', to: 'order_products#create', as: 'order_products'
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

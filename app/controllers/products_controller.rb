@@ -12,7 +12,7 @@ class ProductsController < ApplicationController
   end
 
   def show
-
+    @order_product = OrderProduct.new
   end
 
   def new
