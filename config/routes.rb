@@ -4,12 +4,12 @@ Rails.application.routes.draw do
 
   # resources :order_products
 
-  resources :products do
-    resources :reviews, only: [:new, :create]
-  end
-
   resources :categories, only: [:new, :create, :index] do
     resources :products, only: [:index]
+  end
+
+  resources :products do
+    resources :reviews, only: [:new, :create]
   end
 
   resources :users

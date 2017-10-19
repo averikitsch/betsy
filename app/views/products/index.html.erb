@@ -1,6 +1,10 @@
-
 <section class="row">
-  <h1>All Products</h1>
+  <% if params[:category_id] %>
+      <h1><%= Category.find(params[:category_id]).name  %></h1>
+  <% else %>
+    <h1>All Products</h1>
+  <% end %>
+  
   <section class="all_products">
     <% @products.each do |p| %>
       <%= link_to product_path(p.id) do %>
