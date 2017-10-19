@@ -85,9 +85,15 @@
    border-top: 0.2px solid rgba(0,0,0,0.3);
  }
 
+ .all_products {
+   text-align: center;
+ }
+
  .product {
+   text-align: left;
    display: inline-block;
-   width: 250px;
+   width: 220px;
+   padding: 10px;
  }
 
  .product div {
