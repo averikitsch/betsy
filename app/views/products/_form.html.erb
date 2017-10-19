@@ -1,0 +1,40 @@
+<!-- make sure it's a merchant -->
+<!-- options for select? -->
+<!-- attach to user_id? attach to session -->
+<!-- when to add active? -->
+<!-- add categories? -->
+<section class="row">
+  <section>
+    <% if @product.errors.any? %>
+    <ul class="errors">
+      <% @product.errors.each do |column, message| %>
+      <li><strong><%= column.capitalize %></strong><%= message %></li>
+      <% end %>
+    </ul>
+    <% end %>
+  </section>
+
+  <section class="product_form">
+    <%= form_for @product do |f| %>
+      <article>
+        <%= f.label :name %>
+        <%= f.text_field :name %>
+
+        <%= f.label :price %>
+        <%= f.text_field :price %>
+
+        <%= f.label :stock, "Quantity in Stock" %>
+        <%= f.select :stock, options_for_select(1..10) %>
+
+        <%= f.label :description %>
+        <%= f.text_area :description %>
+
+        <%= f.label :image %>
+        <%= f.file_field :image %>
+
+        <%= f.submit button_name %>
+      </article>
+    <% end %>
+  </section>
+
+</section>
