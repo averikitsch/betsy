@@ -1,3 +1,32 @@
 // Place all the styles related to the Reviews controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.rating-labels {
+  display: inline-block;
+  transform: rotateY(180deg);
+}
+
+.rating input[type="radio"] {
+  display: none;
+  &:checked ~ label::before {
+    color:#4fd69e;
+  }
+}
+
+.rating-labels label {
+  display: inline-block;
+  &::before {
+    content: "\2625";
+    color: #fcfcfc;
+    text-shadow: 0px 0px 1px gray;
+    font-weight: bold;
+    font-size: 2em;
+  }
+  &:hover::before {
+    color: #ADEAD1;
+  }
+  &:hover ~ label::before {
+    color: #ADEAD1;
+  }
+}

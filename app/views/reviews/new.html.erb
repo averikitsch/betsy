@@ -1,2 +1,39 @@
-<h1>Reviews#new</h1>
-<p>Find me in app/views/reviews/new.html.erb</p>
+<section class = "row">
+  <h1>Write your review</h1>
+</section>
+<section class = "row">
+  <article class = "columns small-12 large-6">
+    <%= image_tag @product.image, alt:"product image to review" %>
+    <h3><%=@product.name%></h3>
+  </article>
+  <article class = "columns small-12 large-6">
+
+    <%= form_tag(product_reviews_path(id: @product.id), method: :post, class: 'rating') do %>
+          <%= label_tag('Boo Factor') %>
+          <div class='rating-labels'>
+            <%= radio_button_tag(:rating, 5) %>
+            <label for='rating_5'></label>
+            <%= radio_button_tag(:rating, 4) %>
+            <label for='rating_4'></label>
+            <%= radio_button_tag(:rating, 3) %>
+            <label for='rating_3'></label>
+            <%= radio_button_tag(:rating, 2) %>
+            <label for='rating_2'></label>
+            <%= radio_button_tag(:rating, 1) %>
+            <label for='rating_1'></label>
+          </div>
+
+          <%= label_tag(:body, 'Review') %>
+          <%= text_area_tag(:body) %>
+
+          <%= label_tag('Nickname') %>
+          <%= text_field_tag('Nickname') %>
+
+          <%= label_tag('Location') %>
+          <%= text_field_tag('Location') %>
+
+          <%= submit_tag('Save')%>
+        <% end %>
+
+  </article>
+</section>
