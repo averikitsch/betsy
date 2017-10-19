@@ -19,4 +19,5 @@ class Order < ApplicationRecord
       errors.add(:cc_expiry, "can't be in the past")
     end
   end
+
 end
