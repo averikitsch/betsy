@@ -1,2 +1,26 @@
 <h1>Products#create</h1>
-<p>Find me in app/views/products/create.html.erb</p>
+<p>Temp page to check on updates</p>
+
+<p>user name:
+<%= @product.user.username %>
+</p>
+<p>product id:
+<%= @product.id %>
+</p>
+<p>product name:
+<%= @product.name %>
+</p>
+<p>price:
+<%= @product.price %>
+</p>
+<p>stock:
+<%= @product.stock %>
+</p>description:
+<%= @product.description %>
+
+<p>categories:
+<% @product.categories.all.each do |category| %>
+<%= <p>category.name</p> %>
+<% end %>
+
+</p>

@@ -27,7 +27,6 @@ class ProductsController < ApplicationController
     if @product.save
       flash[:status] = :success
       flash[:result_text] = "Successfully created #{@product.name}!"
-      # ??
       redirect_to product_path(@product)
     else
       flash.now[:status] = :error
@@ -43,10 +42,16 @@ class ProductsController < ApplicationController
   def update
     @product = Product.find_by(id: params[:id])
     @product.update_attributes(product_params)
+    temp = @product.categories.map {|c| c.id }
+    params[:product][:category_ids].each do |category|
+      if !temp.include?(category) && category != ""
+        @product.categories << Category.find(category)
+      end
+    end
+
     if @product.save
       flash[:status] = :success
       flash[:result_text] = "Successfully updated #{@product.name}!"
-      # ??
       redirect_to product_path
     else
       flash.now[:status] = :error

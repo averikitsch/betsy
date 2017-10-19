@@ -1,6 +1,8 @@
 <!-- make sure it's a merchant -->
-<!-- options for select? -->
+
 <!-- attach to user_id? attach to session -->
+<!-- options for select? -->
+<!-- make sure it's set up to input or store image -->
 <!-- when to add active? -->
 <!-- add categories? -->
 <section class="row">
@@ -15,8 +17,11 @@
   </section>
 
   <section class="product_form">
-    <%= form_for @product do |f| %>
+    <!-- top of form_for is in edit.html and new.html -->
+    <!-- <%= form_for @product do |f| %> -->
+    <!-- subbing in a select form for a logged in user (temporary) -->
       <article>
+
         <%= f.label :name %>
         <%= f.text_field :name %>
 
@@ -24,7 +29,7 @@
         <%= f.text_field :price %>
 
         <%= f.label :stock, "Quantity in Stock" %>
-        <%= f.select :stock, options_for_select(1..10) %>
+        <%= f.select :stock, options_for_select(1..10), :selected => @product.stock %>
 
         <%= f.label :description %>
         <%= f.text_area :description %>
@@ -32,9 +37,12 @@
         <%= f.label :image %>
         <%= f.file_field :image %>
 
+        <%= f.label :category %>
+        <%= f.collection_select(:category_ids, Category.all, :id, :name, { prompt: "Please select" }, { multiple: true }) %>
+
         <%= f.submit button_name %>
       </article>
-    <% end %>
+    <!-- <% end %> -->
   </section>
 
 </section>
