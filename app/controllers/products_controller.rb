@@ -7,7 +7,11 @@ class ProductsController < ApplicationController
   end
 
   def index
-    @products = Product.order(:id)
+    if params[:category_id]
+      @products = Product.includes(:categories).where(categories: { id: params[:category_id]})
+    else
+      @products = Product.order(:id)
+    end
   end
 
   def show

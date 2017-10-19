@@ -1,22 +1,25 @@
 class CategoriesController < ApplicationController
   def index
-  end
-
-  def show
+    @categories = Category.all
   end
 
   def new
+    @category = Category.new
   end
 
   def create
+    @category = Category.new category_params
+
+    if @category.save
+      redirect_to categories_path
+    else
+      render :new
+    end
   end
 
-  def edit
-  end
+  private
 
-  def update
-  end
-
-  def destroy
+  def category_params
+    return params.require(:category).permit(:name)
   end
 end
