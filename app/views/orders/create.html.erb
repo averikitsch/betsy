@@ -1,2 +1,16 @@
-<h1>Orders#create</h1>
-<p>Find me in app/views/orders/create.html.erb</p>
+<section>
+<h1>Order Complete</h1>
+<h5>Thanks for shopping with Spooksy!</h5>
+
+<article class="summary">
+<h4>Order Summary</h4>
+<p><strong>Id:</strong> <%= @order.id %></p>
+<p><strong>Name:</strong> <%= @order.id %></p>
+<p><strong>Shipping Address:</strong> <%= @order.address %></p>
+<p><strong>Email:</strong> <%= @order.email %></p>
+</article>
+
+<article class="product_summary">
+Products go here
+</article>
+</section>
