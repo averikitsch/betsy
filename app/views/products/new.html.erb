@@ -1,2 +1,12 @@
-<h1>Products#new</h1>
-<p>Find me in app/views/products/new.html.erb</p>
+<section>
+<h1>Add Product</h1>
+username:
+<%= form_for @product do |f| %>
+
+<%= f.label :user_id %>
+<%= f.select :user_id, options_from_collection_for_select(User.all, :id, :username) %>
+
+
+<%= render partial: "form", locals: {button_name:"Add Product to Inventory"} %>
+<% end %>
+</section>

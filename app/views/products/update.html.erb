@@ -1,2 +1,25 @@
 <h1>Products#update</h1>
-<p>Find me in app/views/products/update.html.erb</p>
+
+<p>Temp page to check on new products</p>
+<%= params %>
+
+<p>
+<%= @product.user_id %>
+</p>
+<%= @product.user.username %>
+<p>
+<%= @product.name %>
+</p>
+<p>
+<%= @product.price %>
+</p>
+<p>
+<%= @product.stock %>
+</p>
+<%= @product.description %>
+
+<p>categories:
+<% @product.categories.each do |c| %>
+<p><%= c.name %></p>
+
+<% end %>
