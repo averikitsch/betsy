@@ -10,11 +10,23 @@ class ProductsController < ApplicationController
     @categories = Category.order(:name)
 
     if params[:category_id]
-      @products = Product.includes(:categories).where(categories: { id: params[:category_id]})
+      products = Product.includes(:categories).where(categories: { id: params[:category_id]})
+      @products = []
+      products.each do |item|
+        if item.active
+          @products << item
+        end
+      end
     elsif params[:user_id]
       @products = Product.includes(:user).where(products: {user_id: params[:user_id]})
     else
-      @products = Product.order(:id)
+      products = Product.order(:id)
+      @products = []
+      products.each do |item|
+        if item.active
+          @products << item
+        end
+      end
     end
   end
 
@@ -23,6 +35,7 @@ class ProductsController < ApplicationController
   end
 
   def new
+    #is currently set to choose user to add product to
     @product = Product.new
   end
 
@@ -74,6 +87,6 @@ class ProductsController < ApplicationController
   end
 
   def product_params
-    return params.require(:product).permit(:user_id, :name, :price, :stock, :description, :image)
+    return params.require(:product).permit(:user_id, :name, :price, :stock, :description, :image, :active)
   end
 end
