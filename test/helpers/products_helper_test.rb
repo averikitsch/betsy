@@ -2,6 +2,8 @@ require "test_helper"
 
 describe ProductsHelper do
   let(:three) { products(:three)}
+  let(:one) { categories(:one)}
+  let(:two) { categories(:two)}
 
   describe "stock method" do
     it "returns 'in stock' if stock number is more than 10" do
@@ -22,6 +24,12 @@ describe ProductsHelper do
       three.stock = -1
       three.stock.must_equal (-1)
       stock(three.stock).must_equal "out of stock"
+    end
+  end
+  describe "print categories" do
+    it "strings together a list of categories" do
+      array = [one, two]
+      puts print_categories(array)
     end
   end
 end
