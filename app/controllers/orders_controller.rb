@@ -8,13 +8,14 @@ class OrdersController < ApplicationController
   end
 
   def new
-    @order = Order.new
+    @order = Order.find(session[:order_id])
   end
 
   def create
-    @order = Order.new order_params
-    @order.status = "paid"
-    if @order.save
+    @order = Order.find(session[:order_id])
+    if @order.update_attributes(order_params, status: "paid")
+    # @order.status = "paid"
+    #  if @order.save
 
     else
       render :new
@@ -25,6 +26,7 @@ class OrdersController < ApplicationController
   end
 
   def update
+    @order = Order.find(session[:order_id])
   end
 
   def destroy
