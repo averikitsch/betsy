@@ -4,7 +4,7 @@
 
 <article class="summary">
 <h4>Order Summary</h4>
-<p><strong>Order </strong> <%= @order.id %> was verified at <%= @order.created_at %></p>
+<p><strong>Order </strong> <%= @order.id %> was purchased on <%= format_date(@order.created_at) %> at <%= format_time(@order.created_at) %></p>
 <p><strong>Name:</strong> <%= @order.id %></p>
 <p><strong>Shipping Address:</strong> <%= @order.address %></p>
 <p><strong>Email:</strong> <%= @order.email %></p>
