@@ -1,76 +1,89 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <%=favicon_link_tag 'flying-bat.png', type: 'image/png'%>
-    <title><%= content_for?(:title) ? yield(:title) : "Spooksy" %></title>
-    <link href="https://fonts.googleapis.com/css?family=Creepster|Open+Sans:300,400,700|Nosifer" rel="stylesheet">
-    <%= stylesheet_link_tag    "application" %>
-    <%= javascript_include_tag "application", 'data-turbolinks-track' => true %>
-    <%= csrf_meta_tags %>
-  </head>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <%=favicon_link_tag 'flying-bat.png', type: 'image/png'%>
+  <title><%= content_for?(:title) ? yield(:title) : "Spooksy" %></title>
+  <link href="https://fonts.googleapis.com/css?family=Creepster|Open+Sans:300,400,700|Nosifer" rel="stylesheet">
+  <%= stylesheet_link_tag    "application" %>
+  <%= javascript_include_tag "application", 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
 
-  <body>
-    <header>
-      <h1><%=link_to "Spooksy", root_path %></h1>
-      <nav>
-        <%= link_to "Products", products_path %>
-        <%= link_to "Merchants", users_path %>
-        <span class="float-right">
-          <%= link_to "Log In", users_path %>
-          <%= link_to orders_path do %>
-            <%= fa_icon "shopping-cart" %>
-          <% end %>
-        </span>
-      </nav>
-    </header>
-
-    <main>
-      <section>
-        <%= session[:user_id] %>
-      </section>
-      <%= yield %>
-    </main>
-
-    <footer>
-      <header class="row">
-        <section class="columns medium-4 small-12">
-          <ul>
-            <li><%= link_to "Contact us" %></li>
-            <li><%= link_to "Order Status" %></li>
-            <li><%= link_to "Shipping" %></li>
-            <li><%= link_to "Returns & Exchanges" %></li>
-            <li><%= link_to "International Orders" %></li>
-          </ul>
-        </section>
-
-        <section class="columns medium-4 small-12">
-          <ul>
-            <li><%= link_to "About Us" %></li>
-            <li><%= link_to "Careers" %></li>
-            <li><%= link_to "Events" %></li>
-            <li><%= link_to "Wholesale" %></li>
-          </ul>
-        </section>
-
-        <section class="columns medium-4 small-12">
-          <p class="social-links">
-            <%= fa_icon "twitter" %>
-            <%= fa_icon "facebook" %>
-            <%= fa_icon "instagram" %>
-            <%= fa_icon "tumblr" %>
-            <%= fa_icon "youtube" %>
-          </p>
-        </section>
-
-      </header>
-      <footer>
-        <p id="copyright">
-          © 2017 J'all, Inc. All Rights Reserved
+<body>
+  <header>
+    <h1><%=link_to "Spooksy", root_path %></h1>
+    <nav>
+      <%= link_to "Products", products_path %>
+      <%= link_to "Merchants", users_path %>
+      <span class="float-right">
+        <% if session[:user_id] %>
+        <p class="button">
+          Logged in as
+          <%= User.find_by(id: session[:user_id]).username %>
         </p>
-      </footer>
-    </footer>
+          <%= link_to "Log out", logout_path, method: :delete %>
+        <% else %>
+        <%= link_to "Log In", '/auth/github' %>
+        <% end %>
+        <%= link_to orders_path do %>
+        <%= fa_icon "shopping-cart" %>
+        <% end %>
+      </span>
+    </nav>
+  </header>
 
-  </body>
+  <main>
+    <section class="flash">
+      <% flash.each do |name, message| %>
+      <div class="<%= name %>"><%= message %></div>
+      <% end %>
+    </section>
+    <section>
+      <%= session[:user_id] %>
+    </section>
+    <%= yield %>
+  </main>
+
+  <footer>
+    <header class="row">
+      <section class="columns medium-4 small-12">
+        <ul>
+          <li><%= link_to "Contact us" %></li>
+          <li><%= link_to "Order Status" %></li>
+          <li><%= link_to "Shipping" %></li>
+          <li><%= link_to "Returns & Exchanges" %></li>
+          <li><%= link_to "International Orders" %></li>
+        </ul>
+      </section>
+
+      <section class="columns medium-4 small-12">
+        <ul>
+          <li><%= link_to "About Us" %></li>
+          <li><%= link_to "Careers" %></li>
+          <li><%= link_to "Events" %></li>
+          <li><%= link_to "Wholesale" %></li>
+        </ul>
+      </section>
+
+      <section class="columns medium-4 small-12">
+        <p class="social-links">
+          <%= fa_icon "twitter" %>
+          <%= fa_icon "facebook" %>
+          <%= fa_icon "instagram" %>
+          <%= fa_icon "tumblr" %>
+          <%= fa_icon "youtube" %>
+        </p>
+      </section>
+
+    </header>
+    <footer>
+      <p id="copyright">
+        © 2017 J'all, Inc. All Rights Reserved
+      </p>
+    </footer>
+  </footer>
+
+</body>
 </html>
