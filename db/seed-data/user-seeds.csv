@@ -1,4 +1,4 @@
-id,username,email
-1,tina_fang,tfang@aol.com
-2,blake_deadly,bdeadly@hotmail.com
-3,matt_demon,mdemon@gmail.com
+id,username,email,uid,provider
+1,tina_fang,tfang@aol.com,58479,github
+2,blake_deadly,bdeadly@hotmail.com,4859,github
+3,matt_demon,mdemon@gmail.com,85739,github

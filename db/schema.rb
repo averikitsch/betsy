@@ -83,6 +83,8 @@ ActiveRecord::Schema.define(version: 20171020052011) do
     t.string "email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "uid", null: false
+    t.string "provider", null: false
   end
 
   add_foreign_key "order_products", "orders"

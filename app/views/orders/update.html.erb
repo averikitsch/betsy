@@ -12,6 +12,9 @@
         <strong>Purchased On:</strong> <%= format_date(@order.created_at) %> at <%= format_time(@order.created_at) %>
       </li>
       <li>
+        <strong>Purchase Total:</strong> <%= format_price(total(subtotal(@order.order_products)))%>
+      </li>
+      <li>
         <strong>Name:</strong> <%= @order.name %>
       </li>
       <li>
@@ -33,7 +36,7 @@
           <strong><%= link_to order_product.product.name ,product_path(order_product.product_id)%></strong>
         </p>
         <p>
-          <strong>price: </strong><%= order_product.product.price %>
+          <strong>price: </strong><%= format_price(order_product.product.price) %>
         </p>
         <p>
           <strong>quantity: </strong><%= order_product.quantity %>
