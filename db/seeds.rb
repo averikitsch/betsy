@@ -104,6 +104,8 @@ CSV.foreach(REVIEW_FILE, :headers => true) do |row|
   review.rating = row['rating']
   review.product_id = row['product_id']
   review.body = row['body']
+  review.nickname = row['nickname']
+  review.location = row['location']
   puts "Created review: #{review.inspect}"
   successful = review.save
   if !successful
