@@ -36,6 +36,8 @@ class OrdersController < ApplicationController
       flash.now[:messages] = @order.errors.messages
       render :new
     end
+    reduce_inventory(@order)
+    session.delete(:order_id)
   end
 
   def destroy
@@ -45,5 +47,13 @@ class OrdersController < ApplicationController
 
   def order_params
     return params.require(:order).permit(:name, :address, :email, :cc_num, :cc_expiry, :cc_cvv, :billing_zip)
+  end
+
+  def reduce_inventory(order)
+    order.order_products.each do |order_product|
+      product = Product.find_by(id: order_product.product_id)
+      product.stock -= order_product.quantity
+      product.save
+    end
   end
 end
