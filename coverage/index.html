@@ -14,27 +14,27 @@
       <img src="./assets/0.10.2/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" style="display:none;">
-      <div class="timestamp">Generated <abbr class="timeago" title="2017-10-20T14:09:11-07:00">2017-10-20T14:09:11-07:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2017-10-20T14:35:48-07:00">2017-10-20T14:35:48-07:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
         <div class="file_list_container" id="AllFiles">
   <h2>
     <span class="group_name">All Files</span>
-    (<span class="covered_percent"><span class="yellow">80.41%</span></span>
+    (<span class="covered_percent"><span class="yellow">87.6%</span></span>
      covered at
      <span class="covered_strength">
-       <span class="red">
-         0.89
+       <span class="green">
+         1.02
        </span>
     </span> hits/line)
   </h2>
   <a name="AllFiles"></a>
   <div>
-    <b>14</b> files in total.
-    <b>97</b> relevant lines. 
-    <span class="green"><b>78</b> lines covered</span> and
-    <span class="red"><b>19</b> lines missed </span>
+    <b>15</b> files in total.
+    <b>129</b> relevant lines. 
+    <span class="green"><b>113</b> lines covered</span> and
+    <span class="red"><b>16</b> lines missed </span>
   </div>
   <table class="file_list">
     <thead>
@@ -52,12 +52,12 @@
       
       <tr>
         <td class="strong"><a href="#ff47492dd0a141b07ed91f0b9d88fb1ed8e1e933" class="src_link" title="app/helpers/application_helper.rb">app/helpers/application_helper.rb</a></td>
-        <td class="red strong">57.14 %</td>
+        <td class="green strong">100.0 %</td>
         <td>15</td>
         <td>7</td>
-        <td>4</td>
-        <td>3</td>
-        <td>0.6</td>
+        <td>7</td>
+        <td>0</td>
+        <td>1.1</td>
       </tr>
       
       <tr>
@@ -190,6 +190,16 @@
         <td>0.5</td>
       </tr>
       
+      <tr>
+        <td class="strong"><a href="#f6bf666a5b930ae78954d48725b06304eecec701" class="src_link" title="test/helpers/products_helper_test.rb">test/helpers/products_helper_test.rb</a></td>
+        <td class="green strong">100.0 %</td>
+        <td>44</td>
+        <td>32</td>
+        <td>32</td>
+        <td>0</td>
+        <td>1.3</td>
+      </tr>
+      
     </tbody>
   </table>
 </div>
@@ -209,11 +219,11 @@
         <div class="source_table" id="ff47492dd0a141b07ed91f0b9d88fb1ed8e1e933">
   <div class="header">
     <h3>app/helpers/application_helper.rb</h3>
-    <h4><span class="red">57.14 %</span> covered</h4>
+    <h4><span class="green">100.0 %</span> covered</h4>
     <div>
       <b>7</b> relevant lines. 
-      <span class="green"><b>4</b> lines covered</span> and
-      <span class="red"><b>3</b> lines missed.</span>
+      <span class="green"><b>7</b> lines covered</span> and
+      <span class="red"><b>0</b> lines missed.</span>
     </div>
   </div>
   
@@ -238,8 +248,8 @@
           <code class="ruby">  def format_price(price)</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="4">
-          
+        <li class="covered" data-hits="2" data-linenumber="4">
+          <span class="hits">2</span>
           
           <code class="ruby">    &quot;$&quot; + format(&quot;%.2f&quot;, price)</code>
         </li>
@@ -262,8 +272,8 @@
           <code class="ruby">  def format_date(date)</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="8">
-          
+        <li class="covered" data-hits="1" data-linenumber="8">
+          <span class="hits">1</span>
           
           <code class="ruby">    (&quot;&lt;span class=&#39;date&#39;&gt;&quot; + date.strftime(&quot;%A, %b %d&quot;) + &quot;&lt;/span&gt;&quot;).html_safe</code>
         </li>
@@ -286,8 +296,8 @@
           <code class="ruby">  def format_time(time)</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="12">
-          
+        <li class="covered" data-hits="1" data-linenumber="12">
+          <span class="hits">1</span>
           
           <code class="ruby">    (&quot;&lt;span class=&#39;time&#39;&gt;&quot; + time.strftime(&quot;%l:%M %P&quot;) + &quot;&lt;/span&gt;&quot;).html_safe</code>
         </li>
@@ -1398,6 +1408,289 @@
         </li>
       
         <li class="never" data-hits="" data-linenumber="15">
+          
+          
+          <code class="ruby">end</code>
+        </li>
+      
+    </ol>
+  </pre>
+</div>
+
+      
+        <div class="source_table" id="f6bf666a5b930ae78954d48725b06304eecec701">
+  <div class="header">
+    <h3>test/helpers/products_helper_test.rb</h3>
+    <h4><span class="green">100.0 %</span> covered</h4>
+    <div>
+      <b>32</b> relevant lines. 
+      <span class="green"><b>32</b> lines covered</span> and
+      <span class="red"><b>0</b> lines missed.</span>
+    </div>
+  </div>
+  
+  <pre>
+    <ol>
+      
+        <li class="covered" data-hits="1" data-linenumber="1">
+          <span class="hits">1</span>
+          
+          <code class="ruby">require &quot;test_helper&quot;</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="2">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="3">
+          <span class="hits">1</span>
+          
+          <code class="ruby">describe ProductsHelper do</code>
+        </li>
+      
+        <li class="covered" data-hits="5" data-linenumber="4">
+          <span class="hits">5</span>
+          
+          <code class="ruby">  let(:three) { products(:three)}</code>
+        </li>
+      
+        <li class="covered" data-hits="2" data-linenumber="5">
+          <span class="hits">2</span>
+          
+          <code class="ruby">  let(:one) { categories(:one)}</code>
+        </li>
+      
+        <li class="covered" data-hits="2" data-linenumber="6">
+          <span class="hits">2</span>
+          
+          <code class="ruby">  let(:two) { categories(:two)}</code>
+        </li>
+      
+        <li class="covered" data-hits="2" data-linenumber="7">
+          <span class="hits">2</span>
+          
+          <code class="ruby">  let(:review1) { reviews(:review1)}</code>
+        </li>
+      
+        <li class="covered" data-hits="2" data-linenumber="8">
+          <span class="hits">2</span>
+          
+          <code class="ruby">  let(:review2) { reviews(:review2)}</code>
+        </li>
+      
+        <li class="covered" data-hits="2" data-linenumber="9">
+          <span class="hits">2</span>
+          
+          <code class="ruby">  let(:review3) { reviews(:review3)}</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="10">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="11">
+          <span class="hits">1</span>
+          
+          <code class="ruby">  describe &quot;stock method&quot; do</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="12">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    it &quot;returns &#39;in stock&#39; if stock number is more than 10&quot; do</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="13">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      three.stock.must_equal 100</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="14">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      stock(three.stock).must_equal &quot;in stock&quot;</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="15">
+          
+          
+          <code class="ruby">    end</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="16">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    it &quot;returns &#39;limited stock&#39; if stock number is in between 0 and 10&quot; do</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="17">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      three.stock = 3</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="18">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      three.stock.must_equal 3</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="19">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      stock(three.stock).must_equal &quot;limited stock&quot;</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="20">
+          
+          
+          <code class="ruby">    end</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="21">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    it &quot;returns &#39;out of stock&#39; if stock number is 0&quot; do</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="22">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      three.stock = 0</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="23">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      three.stock.must_equal 0</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="24">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      stock(three.stock).must_equal &quot;out of stock&quot;</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="25">
+          
+          
+          <code class="ruby">    end</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="26">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    it &quot;returns &#39;out of stock&#39; if stock number is negative&quot; do</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="27">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      three.stock = -1</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="28">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      three.stock.must_equal (-1)</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="29">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      stock(three.stock).must_equal &quot;out of stock&quot;</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="30">
+          
+          
+          <code class="ruby">    end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="31">
+          
+          
+          <code class="ruby">  end</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="32">
+          <span class="hits">1</span>
+          
+          <code class="ruby">  describe &quot;print categories&quot; do</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="33">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    it &quot;strings together a list of categories&quot; do</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="34">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      array = [one, two]</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="35">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      print_categories(array).must_equal &quot;potions, accessories&quot;</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="36">
+          
+          
+          <code class="ruby">    end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="37">
+          
+          
+          <code class="ruby">  end</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="38">
+          <span class="hits">1</span>
+          
+          <code class="ruby">  describe &quot;average rating method&quot; do</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="39">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    it &quot;calculates an average rating&quot; do</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="40">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      array = [review3, review2, review1]</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="41">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      average_rating(array).must_equal &quot;2.7 out of 5&quot;</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="42">
+          
+          
+          <code class="ruby">    end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="43">
+          
+          
+          <code class="ruby">  end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="44">
           
           
           <code class="ruby">end</code>
