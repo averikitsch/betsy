@@ -40,6 +40,6 @@ class ActiveSupport::TestCase
 
   def login(user, provider)
     OmniAuth.config.mock_auth[provider] = OmniAuth::AuthHash.new(mock_auth_hash(user))
-    get auth_callback_path(provider)
+    get "/auth/#{provider}/callback"
   end
 end
