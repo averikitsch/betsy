@@ -38,7 +38,7 @@
         <%= f.file_field :image %>
 
         <%= f.label :category %>
-        <%= f.collection_select(:category_ids, Category.all, :id, :name, { prompt: "Please select" }, { multiple: true }) %>
+        <%= f.collection_select(:category_ids, Category.all, :id, :name, {include_blank: "Please select", label: false }, { multiple: true }) %>
 
         <%= f.submit button_name %>
       </article>
