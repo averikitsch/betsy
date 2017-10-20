@@ -25,6 +25,10 @@ describe CategoriesController do
       one.name.must_equal "potions"
       proc { post categories_path, params: {category: {name: "potions"}}}.must_change 'Category.count', 0
     end
+
+    it "name not be blank" do
+      proc { post categories_path, params: {category: {name: "   "}}}.must_change 'Category.count', 0
+    end
   end
 
 end
