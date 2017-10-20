@@ -24,5 +24,10 @@ Rails.application.routes.draw do
   get '/order_products/:id/edit', to: 'order_products#edit', as: 'edit_order_product'
   delete '/order_products/:id', to: 'order_products#delete', as: 'order_product'
 
+  #get '/login', to: 'users#create'
+
+  get '/auth/:provider/callback', to: 'users#login'
+  delete '/logout', to: 'users#logout'
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
