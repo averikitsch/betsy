@@ -4,20 +4,36 @@
 
   </article>
   <article class = "column small-12 large-6">
-    <h3><%=@product.name%><small class = "float-right"><%= link_to @product.user.username, user_products_path(@product.user)%></small></h3>
+    <h3><%=@product.name%></h3>
+    <small><%= link_to @product.user.username, user_products_path(@product.user)%></small>
     <h4><%=format_price(@product.price)%></h4>
     <h5><%=stock(@product.stock)%></h5>
 
+    <% if flash[:result_text] or flash[:messages] %>
+      <section class="row status <%= flash[:status] %>">
+        <h3><%= flash[:status] == :failure ? "A problem occurred: " : "" %><%= flash[:result_text] %></h3>
+        <% if flash[:messages] %>
+          <ul>
+            <% flash[:messages].each do |name, problems| %>
+              <% problems.each do |problem| %>
+                <li><%= name %>: <%= problem %></li>
+              <% end %>
+            <% end %>
+          </ul>
+        <% end %>
+      </section>
+    <% end %>
+
     <%= form_for @order_product do |f| %>
         <%= f.label :quantity %>
-        <%= f.number_field :quantity, in: 1..10, step: 1 %>
-
+        <%= f.select :quantity, options_for_select(0..10)%>
         <%= f.submit "Add to Coffin", class: "button" %>
       <% end %>
 
-    <%# link_to "Add to Coffin", order_product_path(@product.id),class:'button', method: :post%>
-    <p>
-      <%= @product.description %>
+
+
+    <p class = "description">
+      <small>DESCRIPTION: </small><%= @product.description %>
     </p>
     <p>
       <%= link_to @product.categories[0].name, category_products_path(@product.categories[0].id) %>
@@ -44,8 +60,16 @@
   <ul>
     <% @product.reviews.each do |review| %>
     <li>
-      <%= review.rating %>
+      <% review.rating.times do%>
+      <%= "🎃"  %>
+      <% end %>
     </li>
+    <section class="nickname float-right">
+      <%= review.nickname %>
+      <p>
+        <%= review.location %>
+      </p>
+    </section>
     <p>
       <%= review.body %>
     </p>

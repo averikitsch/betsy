@@ -1,3 +1,25 @@
-// Place all the styles related to the Products controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.description {
+  border-top: 1px solid;
+  border-bottom: 1px solid;
+  margin: 1em 0;
+  padding: 1em 0.5em;
+}
+
+form label, form input[type="submit"]{
+  text-transform: uppercase;
+}
+
+select {
+  width: 5em;
+  display: block;
+}
+
+h5 {
+  margin: 2em 0;
+}
+
+img {
+  width: 80%;
+  margin-top: 1em;
+}
