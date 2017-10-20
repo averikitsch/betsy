@@ -56,6 +56,19 @@
    margin-right: 15px;
  }
 
+ form label, form input[type="submit"]{
+   text-transform: uppercase;
+ }
+
+ select {
+   width: 5em;
+   display: block;
+ }
+
+ h5 {
+   margin: 2em 0;
+ }
+
  main, footer {
    padding: 30px;
  }
@@ -83,28 +96,4 @@
  footer footer {
    padding-top: 1em;
    border-top: 0.2px solid rgba(0,0,0,0.3);
- }
-
- .all_products {
-   text-align: center;
- }
-
- .product {
-   text-align: left;
-   display: inline-block;
-   width: 220px;
-   padding: 10px;
- }
-
- .product div {
-   height: 30px;
- }
-
- .promo {
-   background-color: #bf022a;
-   text-align: center;
-   padding: 1em;
-   font-family: 'Nosifer';
-   color: crimson;
-   text-shadow: 2px 2px white;
  }

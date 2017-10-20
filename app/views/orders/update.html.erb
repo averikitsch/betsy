@@ -1,2 +1,44 @@
-<h1>Orders#update</h1>
-<p>Find me in app/views/orders/update.html.erb</p>
+<section class = "row">
+  <h1>Order Complete</h1>
+  <h5>Thanks for shopping with Spooksy!</h5>
+
+  <article class="summary">
+    <h4>Order Summary</h4>
+    <ul>
+      <li>
+        <strong>Order:</strong> #<%= @order.id %>
+      </li>
+      <li>
+        <strong>Purchased On:</strong> <%= format_date(@order.created_at) %> at <%= format_time(@order.created_at) %>
+      </li>
+      <li>
+        <strong>Name:</strong> <%= @order.name %>
+      </li>
+      <li>
+        <strong>Shipping Address:</strong> <%= @order.address %>
+      </li>
+      <li>
+        <strong>Email:</strong> <%= @order.email %>
+      </li>
+    </ul>
+
+
+    <% @order.order_products.each do |order_product| %>
+    <article class="product_summary row">
+      <section class = "columns small-6 large-3">
+        <%= image_tag order_product.product.image, alt: order_product.product.name%>
+      </section>
+      <section class = "columns small-6 large-9">
+        <p>
+          <strong><%= link_to order_product.product.name ,product_path(order_product.product_id)%></strong>
+        </p>
+        <p>
+          <strong>price: </strong><%= order_product.product.price %>
+        </p>
+        <p>
+          <strong>quantity: </strong><%= order_product.quantity %>
+        </p>
+      </section>
+    </article>
+    <% end %>
+  </section>

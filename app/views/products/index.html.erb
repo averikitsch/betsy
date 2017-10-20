@@ -1,26 +1,44 @@
 <section class="row">
-  <% if params[:category_id] %>
-      <h1><%= Category.find(params[:category_id]).name  %></h1>
-  <% elsif params[:user_id]%>
-      <h1><%= User.find(params[:user_id]).username  %></h1>
-  <% else %>
-    <h1>All Products</h1>
-  <% end %>
 
-  <section class="all_products">
-    <% @products.each do |p| %>
-      <%= link_to product_path(p.id) do %>
-        <article class="product">
-          <%= image_tag p.image, alt:"product image" %>
-        <p>
-          <div><%= p.name %></div>
-        </p>
-        <p>
-          <%= format_price(p.price) %>
-        </p>
-        </article>
+
+  <aside class="columns medium-2 small-12">
+    <p>Shop by Category</p>
+    <ul>
+      <% @categories.each do |category| %>
+      <li>
+      <%= link_to category.name, category_products_path(category.id) %>
+      </li>
       <% end %>
+    </ul>
+  </aside>
+
+  <section class="columns medium-10 small-12 all_products">
+    <% if params[:category_id] %>
+        <h5>Products / <%= Category.find(params[:category_id]).name  %></h5>
+    <% elsif params[:user_id]%>
+        <h5><%= User.find(params[:user_id]).username  %>'s spooktacular shop</h5>
+    <% else %>
+      <h5>Products / All</h5>
     <% end %>
+
+    <% @products.each do |p| %>
+
+        <%= link_to product_path(p.id) do %>
+          <article class="product">
+            <%= image_tag p.image, alt:"product image" %>
+            <p><%= p.name.titleize %></p>
+            <p><%= format_price(p.price) %></p>
+
+          <!-- remove when done testing -->
+          <p>
+            <div>is item active?:<%= p.active %></div>
+          </p>
+
+          </article>
+        <% end %>
+
+    <% end %>
+
   </section>
 
 </section>

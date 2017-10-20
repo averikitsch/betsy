@@ -1,2 +1,45 @@
-<h1>Orders#index</h1>
-<p>Find me in app/views/orders/index.html.erb</p>
+<section class = "row">
+
+<h1>Your coffin</h1>
+<% if session[:order_id].nil? %>
+<p>
+  You have no items in your shopping bag.
+</p>
+</section>
+<%else%>
+
+</section>
+<% @op.each do |order_product| %>
+<section class = "row">
+  <section class = "columns small-6 large-3">
+    <%= image_tag order_product.product.image, alt: order_product.product.name%>
+  </section>
+  <section class = "columns small-3 large-5">
+    <%= link_to order_product.product.name ,product_path(order_product.product_id)%>
+
+    <p>
+      <%= link_to "Edit", edit_order_product_path(order_product.id) %> |
+      <%= link_to "Delete", order_product_path(order_product.id) %>
+    </p>
+  </section>
+  <section class = "columns small-3 large-4">
+    <%= order_product.product.price %> x <%= order_product.quantity %>
+  </section>
+</section>
+<%end%>
+<section class = "row total">
+  <section class = "columns small-9 large-8 align-right">
+    <small>subtotal</small>
+    <p>
+      TOTAL
+    </p>
+  </section>
+  <section class = "columns small-3 large-4">
+    <small><%= format_price(subtotal(@op))%></small>
+    <p>
+      <%= format_price(total(subtotal(@op)))%>
+    </p>
+    <%= link_to 'Proceed to checkout', new_order_path, class: 'button' %>
+  </section>
+</section>
+<%end%>

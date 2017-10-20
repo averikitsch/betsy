@@ -1,2 +1,10 @@
-<h1>Products#edit</h1>
-<p>Find me in app/views/products/edit.html.erb</p>
+<section>
+<h1>Edit Product</h1>
+
+<%= form_for @product do |f| %>
+username:
+<%= @product.user.username %>
+<%= render partial: "form", locals: {button_name: "Update Product" } %>
+
+<% end %>
+</section>

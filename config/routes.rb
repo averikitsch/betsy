@@ -13,12 +13,16 @@ Rails.application.routes.draw do
     resources :reviews, only: [:new, :create]
   end
 
-  resources :users
+  resources :users do
+    resources :products, only: [:index]
+  end
 
   resources :orders
 
 
   post '/products/:id/order', to: 'order_products#create', as: 'order_products'
+  get '/order_products/:id/edit', to: 'order_products#edit', as: 'edit_order_product'
+  delete '/order_products/:id', to: 'order_products#delete', as: 'order_product'
 
   #get '/login', to: 'users#create'
 

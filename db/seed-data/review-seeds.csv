@@ -1,11 +1,11 @@
-rating,product_id,body
-2,15,Only came out at night. Weird!
-1,15,Was suppose to attach my co-worker not me!
-5,15,great smile!
-1,11,too many holes :(
-4,2,Great compilation
-1,2,Played on repeat and it made me crazy!
-4,6,The perfect starter kit :D
-5,13,Great selection!
-2,18,Only about 20 spiders hatched. Looking for at least 100
-5,23,covered a full bath tub! Awesome!
+rating,product_id,body,nickname,location
+2,15,Only came out at night. Weird!,boo-ty,timbuktoo
+1,15,Was suppose to attach my co-worker not me!,,
+5,15,great smile!,Mort Ician,seattle
+1,11,too many holes :(,Tom B Stone,hell
+4,2,Great compilation,Robin Graves,down under
+1,2,Played on repeat and it made me crazy!,,
+4,6,The perfect starter kit :D,,
+5,13,Great selection!,Ima Goner,
+2,18,Only about 20 spiders hatched. Looking for at least 100,Hal,
+5,23,covered a full bath tub! Awesome!,Weenie,

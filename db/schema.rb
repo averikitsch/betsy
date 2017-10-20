@@ -10,7 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 20171019121125) do
+=======
+ActiveRecord::Schema.define(version: 20171020052011) do
+>>>>>>> 0226c76f735635e73fe4f79a23b3df6bf12ecba5
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -60,7 +64,7 @@ ActiveRecord::Schema.define(version: 20171019121125) do
     t.integer "stock"
     t.text "description"
     t.string "image"
-    t.boolean "active"
+    t.boolean "active", default: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id"
@@ -73,6 +77,8 @@ ActiveRecord::Schema.define(version: 20171019121125) do
     t.text "body"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "nickname"
+    t.string "location"
     t.index ["product_id"], name: "index_reviews_on_product_id"
   end
 
