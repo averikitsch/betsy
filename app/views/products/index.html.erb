@@ -24,12 +24,8 @@
       <%= link_to product_path(p.id) do %>
         <article class="product">
           <%= image_tag p.image, alt:"product image" %>
-        <p>
-          <div><%= p.name %></div>
-        </p>
-        <p>
-          <%= format_price(p.price) %>
-        </p>
+          <p><%= p.name.titleize %></p>
+          <p><%= format_price(p.price) %></p>
         </article>
       <% end %>
     <% end %>

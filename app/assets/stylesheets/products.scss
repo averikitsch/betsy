@@ -19,7 +19,35 @@ h5 {
   margin: 2em 0;
 }
 
-img {
-  width: 80%;
-  margin-top: 1em;
+.all_products {
+  text-align: center;
+}
+
+.product {
+  text-align: left;
+  display: inline-block;
+  width: 220px;
+  padding: 10px;
+  font-size: 0.8em;
+}
+
+.product p {
+  margin: 0;
+}
+
+.product p:nth-child(2) {
+  font-weight: 600;
+  width: 200px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.promo {
+  background-color: #bf022a;
+  text-align: center;
+  padding: 1em;
+  font-family: 'Nosifer';
+  color: crimson;
+  text-shadow: 2px 2px white;
 }
