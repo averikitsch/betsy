@@ -1,5 +1,7 @@
 class OrdersController < ApplicationController
   def index
+    @order = Order.find(session[:order_id])
+    @op = @order.order_products
   end
 
   def show
@@ -11,8 +13,9 @@ class OrdersController < ApplicationController
 
   def create
     @order = Order.new order_params
+    @order.status = "paid"
     if @order.save
-      
+
     else
       render :new
     end

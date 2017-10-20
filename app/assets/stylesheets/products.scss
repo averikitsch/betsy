@@ -6,7 +6,7 @@
   padding: 1em 0.5em;
 }
 
-form label, form input {
+form label, form input[type="submit"]{
   text-transform: uppercase;
 }
 
