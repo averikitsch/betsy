@@ -19,7 +19,7 @@
 
     <p>
       <%= link_to "Edit", edit_order_product_path(order_product.id) %> |
-      <%= link_to "Delete", order_product_path(order_product.id) %>
+      <%= link_to "Delete", order_product_path(order_product.id), method: :delete %>
     </p>
   </section>
   <section class = "columns small-3 large-4">

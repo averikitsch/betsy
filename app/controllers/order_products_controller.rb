@@ -1,4 +1,6 @@
 class OrderProductsController < ApplicationController
+  before_action :find_op, only: [:edit, :update, :destroy]
+
   def index
   end
 
@@ -17,7 +19,7 @@ class OrderProductsController < ApplicationController
     @op.product_id = params[:id]
     @op.order_id =  session[:order_id]
     if @op.save
-      flash[:success] = :success
+      flash[:status] = :success
       flash[:result_text] = "Successfully summoned to your coffin!"
       redirect_to product_path(params[:id])
     else
@@ -29,17 +31,36 @@ class OrderProductsController < ApplicationController
   end
 
   def edit
-    @order_product = OrderProduct.find_by(id: params[:id])
   end
 
   def update
+    if @order_product.update(op_params)
+      flash[:status] = :success
+      flash[:result_text] = "Quantity updated!"
+      redirect_to orders_path
+    else
+      flash.now[:status] = :failure
+      flash.now[:result_text] = "Quantity could not be updated"
+      flash.now[:messages] = @order_product.errors.messages
+      render :edit
+    end
   end
 
   def destroy
+    order = @order_product.order
+    @order_product.destroy
+    if order.order_products.empty?
+      session.delete(:order_id)
+    end
+    redirect_to orders_path
   end
 
   private
   def op_params
     params.require(:order_product).permit(:quantity)
+  end
+
+  def find_op
+    @order_product = OrderProduct.find_by(id: params[:id])
   end
 end

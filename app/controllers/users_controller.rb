@@ -34,19 +34,19 @@ class UsersController < ApplicationController
         if user.save
           session[:user_id] = user.id
           flash[:status] = :success
-          flash[:message] = "Successfully added new user #{user.username}"
+          flash[:result_text] = "Successfully added new user #{user.username}"
         else
           flash[:status] = :failure
-          flash[:message] = "New user not saved"
+          flash[:result_text] = "New user not saved"
         end
       else
         session[:user_id] = user.id
         flash[:status] = :success
-        flash[:message] = "Successfully logged in as returning user #{user.username}"
+        flash[:result_text] = "Successfully logged in as returning user #{user.username}"
       end
     else
       flash[:status] = :failure
-      flash[:message] = "Could not authenticate user information"
+      flash[:result_text] = "Could not authenticate user information"
     end
     redirect_to root_path
   end
@@ -54,7 +54,8 @@ class UsersController < ApplicationController
   def logout
     if session[:user_id]
       session.delete(:user_id)
-      flash[:success] = "You are now logged out. Goodbye!"
+      flash[:status] = :success
+      flash[:result_text] = "You are now logged out. Goodbye!"
     end
     redirect_to root_path
   end
