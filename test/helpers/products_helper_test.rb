@@ -4,6 +4,9 @@ describe ProductsHelper do
   let(:three) { products(:three)}
   let(:one) { categories(:one)}
   let(:two) { categories(:two)}
+  let(:review1) { reviews(:review1)}
+  let(:review2) { reviews(:review2)}
+  let(:review3) { reviews(:review3)}
 
   describe "stock method" do
     it "returns 'in stock' if stock number is more than 10" do
@@ -29,7 +32,13 @@ describe ProductsHelper do
   describe "print categories" do
     it "strings together a list of categories" do
       array = [one, two]
-      puts print_categories(array)
+      print_categories(array).must_equal "potions, accessories"
+    end
+  end
+  describe "average rating method" do
+    it "calculates an average rating" do
+      array = [review3, review2, review1]
+      average_rating(array).must_equal "2.7 out of 5"
     end
   end
 end
