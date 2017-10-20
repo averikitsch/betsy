@@ -23,6 +23,7 @@ class ProductsController < ApplicationController
   end
 
   def new
+    #is currently set to choose user to add product to
     @product = Product.new
   end
 
@@ -74,6 +75,6 @@ class ProductsController < ApplicationController
   end
 
   def product_params
-    return params.require(:product).permit(:user_id, :name, :price, :stock, :description, :image)
+    return params.require(:product).permit(:user_id, :name, :price, :stock, :description, :image, :active)
   end
 end
