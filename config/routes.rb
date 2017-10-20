@@ -22,7 +22,8 @@ Rails.application.routes.draw do
 
   post '/products/:id/order', to: 'order_products#create', as: 'order_products'
   get '/order_products/:id/edit', to: 'order_products#edit', as: 'edit_order_product'
-  delete '/order_products/:id', to: 'order_products#delete', as: 'order_product'
+  delete '/order_products/:id', to: 'order_products#destroy', as: 'order_product'
+  patch '/order_products/:id', to: 'order_products#update'
 
   #get '/login', to: 'users#create'
 
