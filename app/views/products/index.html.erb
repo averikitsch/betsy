@@ -22,7 +22,7 @@
     <% end %>
 
     <% @products.each do |p| %>
-      <% if p.active == true %>
+
         <%= link_to product_path(p.id) do %>
           <article class="product">
             <%# image_tag p.image, alt:"product image" %>
@@ -40,7 +40,7 @@
 
           </article>
         <% end %>
-      <% end %>
+
     <% end %>
 
   </section>
