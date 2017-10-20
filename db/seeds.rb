@@ -56,6 +56,8 @@ CSV.foreach(USER_FILE, :headers => true) do |row|
   user.id = row['id']
   user.username = row['username']
   user.email = row['email']
+  user.uid = row['uid']
+  user.provider = row['provider']
   puts "Created user: #{user.inspect}"
   successful = user.save
   if !successful
