@@ -10,7 +10,7 @@
 /.bundle
 
 ## SimpleCov
-/coverage/
+/coverage/*
 
 # Ignore all logfiles and tempfiles.
 /log/*
