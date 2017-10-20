@@ -22,7 +22,7 @@ class OrderProductsController < ApplicationController
       redirect_to product_path(params[:id])
     else
       flash[:status] = :failure
-      flash[:result_text] = "Sorry! We it disappeared!"
+      flash[:result_text] = "Oops!"
       flash[:messages] = @op.errors.messages
       redirect_to product_path(params[:id])
     end
