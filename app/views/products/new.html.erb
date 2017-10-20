@@ -6,7 +6,7 @@ username:
 <%= f.label :user_id %>
 <%= f.select :user_id, options_from_collection_for_select(User.all, :id, :username) %>
 
-
 <%= render partial: "form", locals: {button_name:"Add Product to Inventory"} %>
+
 <% end %>
 </section>
