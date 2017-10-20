@@ -1,7 +1,9 @@
 class OrdersController < ApplicationController
   def index
-    @order = Order.find(session[:order_id])
-    @op = @order.order_products
+    @order = Order.find_by(id: session[:order_id])
+    if @order
+      @op = @order.order_products
+    end
   end
 
   def show
@@ -13,12 +15,13 @@ class OrdersController < ApplicationController
 
   def create
     @order = Order.find(session[:order_id])
-    unless @order.update_attributes(order_params, status: "paid")
-      flash.now[:status] = :failure
-      flash.now[:result_text] = "Oops!"
-      flash.now[:messages] = @order.errors.messages
-      render :new
-    end
+    # @order.write_attribute(order_params)
+    # unless @order.update(status: "paid")
+    #   flash.now[:status] = :failure
+    #   flash.now[:result_text] = "Oops!"
+    #   flash.now[:messages] = @order.errors.messages
+    #   render :new
+    # end
   end
 
   def edit
@@ -26,6 +29,13 @@ class OrdersController < ApplicationController
 
   def update
     @order = Order.find(session[:order_id])
+    @order.update(order_params)
+    unless @order.update(status: "paid")
+      flash.now[:status] = :failure
+      flash.now[:result_text] = "Oops!"
+      flash.now[:messages] = @order.errors.messages
+      render :new
+    end
   end
 
   def destroy

@@ -23,7 +23,7 @@
     </p>
   </section>
   <section class = "columns small-3 large-4">
-    <%= order_product.product.price %> x <%= order_product.quantity %>
+    <%= format_price(order_product.product.price) %> x <%= order_product.quantity %>
   </section>
 </section>
 <%end%>
