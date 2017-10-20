@@ -18,7 +18,7 @@ class OrderProductsController < ApplicationController
     @op.order_id =  session[:order_id]
     if @op.save
       flash[:success] = :success
-      flash[:result_text] = "Successfully added #{Product.find(params[:id])}.name to your coffin"
+      flash[:result_text] = "Successfully summoned to your coffin!"
       redirect_to product_path(params[:id])
     else
       flash[:status] = :failure

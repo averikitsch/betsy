@@ -4,7 +4,8 @@
 
   </article>
   <article class = "column small-12 large-6">
-    <h3><%=@product.name%><small class = "float-right"><%= link_to @product.user.username, user_products_path(@product.user)%></small></h3>
+    <h3><%=@product.name%></h3>
+    <small><%= link_to @product.user.username, user_products_path(@product.user)%></small>
     <h4><%=format_price(@product.price)%></h4>
     <h5><%=stock(@product.stock)%></h5>
 
@@ -31,8 +32,8 @@
 
 
 
-    <p>
-      <%= @product.description %>
+    <p class = "description">
+      <small>DESCRIPTION: </small><%= @product.description %>
     </p>
     <p>
       <%= link_to @product.categories[0].name, category_products_path(@product.categories[0].id) %>
@@ -59,8 +60,16 @@
   <ul>
     <% @product.reviews.each do |review| %>
     <li>
-      <%= review.rating %>
+      <% review.rating.times do%>
+      <%= "🎃"  %>
+      <% end %>
     </li>
+    <section class="nickname float-right">
+      <%= review.nickname %>
+      <p>
+        <%= review.location %>
+      </p>
+    </section>
     <p>
       <%= review.body %>
     </p>
