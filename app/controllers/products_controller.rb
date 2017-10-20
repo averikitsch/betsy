@@ -41,6 +41,12 @@ class ProductsController < ApplicationController
 
   def create
     @product = Product.new(product_params)
+    temp = @product.categories.map {|c| c.id }
+    params[:product][:category_ids].each do |category|
+      if !temp.include?(category) && category != ""
+        @product.categories << Category.find(category)
+      end
+    end
     if @product.save
       flash[:status] = :success
       flash[:result_text] = "Successfully created #{@product.name}!"
