@@ -13,11 +13,10 @@ class OrdersController < ApplicationController
 
   def create
     @order = Order.find(session[:order_id])
-    if @order.update_attributes(order_params, status: "paid")
-    # @order.status = "paid"
-    #  if @order.save
-
-    else
+    unless @order.update_attributes(order_params, status: "paid")
+      flash.now[:status] = :failure
+      flash.now[:result_text] = "Oops!"
+      flash.now[:messages] = @order.errors.messages
       render :new
     end
   end
