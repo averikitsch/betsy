@@ -25,8 +25,6 @@ class UsersController < ApplicationController
       flash[:status] = :failure
       flash[:result_text] = "Active status cannot be loaded"
     end
-
-
   end
 
   def new
