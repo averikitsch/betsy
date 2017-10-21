@@ -6,8 +6,13 @@
   padding: 1em 0.5em;
 }
 
-.root-products {
-
+.categories, .categories ul {
+  padding: 0;
+  margin: 0;
+  text-transform: uppercase;
+  font-size: 0.8em;
+  letter-spacing: 0.05em;
+  line-height: 1.8em;
 }
 
 .all_products, .root-products {
@@ -23,7 +28,7 @@
   display: inline-block;
   width: 48%;
   min-width: 220px;
-  max-width: 320px;
+  max-width: 300px;
   padding: 10px;
   font-size: 0.75em;
 }
@@ -49,8 +54,18 @@
 .promo {
   background-color: #bf022a;
   text-align: center;
-  padding: 1em;
+  padding: 5em;
   font-family: 'Nosifer';
   color: crimson;
   text-shadow: 2px 2px white;
+  margin-bottom: 2em;
+}
+
+@media screen and (max-width: 520px) {
+  .product {
+    width: 100%;
+    min-width: 100%;
+    max-width: 100%;
+  }
+
 }
