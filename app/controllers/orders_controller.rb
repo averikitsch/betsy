@@ -28,7 +28,7 @@ class OrdersController < ApplicationController
   end
 
   def update
-    @order = Order.find(session[:order_id])
+    @order = Order.find_by(id: session[:order_id])
     @order.update(order_params)
     unless @order.update(status: "paid")
       flash.now[:status] = :failure
