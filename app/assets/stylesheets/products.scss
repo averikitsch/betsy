@@ -6,29 +6,30 @@
   padding: 1em 0.5em;
 }
 
-form label, form input[type="submit"]{
-  text-transform: uppercase;
+.root-products {
+
 }
 
-select {
-  width: 5em;
-  display: block;
-}
-
-h5 {
-  margin: 2em 0;
-}
-
-.all_products {
+.all_products, .root-products {
   text-align: center;
+}
+
+.all_products h5 {
+  letter-spacing: 0.05em;
 }
 
 .product {
   text-align: left;
   display: inline-block;
-  width: 220px;
+  width: 48%;
+  min-width: 220px;
+  max-width: 320px;
   padding: 10px;
-  font-size: 0.8em;
+  font-size: 0.75em;
+}
+
+.product img {
+  width: 100%;
 }
 
 .product p {
@@ -36,11 +37,13 @@ h5 {
 }
 
 .product p:nth-child(2) {
-  font-weight: 600;
-  width: 200px;
+  width: 100%;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  padding: 7px 0 0;
+  color: black;
+  letter-spacing: 0.03em;
 }
 
 .promo {

@@ -18,7 +18,7 @@
  */
 
  body {
-   background: #f2f2f2;
+   background: pink;
    font-family: 'Open Sans', sans-serif;
  }
 
@@ -38,6 +38,11 @@
    list-style: none;
  }
 
+ img {
+   max-width: 100%;
+   height: auto;
+ }
+
  header h1, #copyright {
    text-align: center;
  }
@@ -46,9 +51,9 @@
    font-family: 'Creepster', cursive;
  }
 
-  nav {
-    padding: 0 0 10px 10px;
-  }
+ nav {
+   padding: 0 0 10px 10px;
+ }
 
  nav a {
    letter-spacing: 0.05em;
@@ -66,17 +71,29 @@
  }
 
  h5 {
-   margin: 2em 0;
+   margin: 1em 0;
+   letter-spacing: 0.03em;
+   border-bottom: 0.5px solid lightgray;
+   border-bottom: 0.5px solid rgba(0,0,0,0.1);
  }
 
  main, footer {
-   padding: 30px;
+   padding: 50px 30px;
  }
 
  footer {
+   background: #212121;
    font-size: 0.65em;
    letter-spacing: 0.1em;
    text-transform: uppercase;
+ }
+
+ footer, footer a, .social-links i {
+   color: rgba(255,255,255,0.7);
+ }
+
+ footer a:hover, .social-links i:hover {
+   color: rgba(255,255,255,0.4);
  }
 
  footer ul li {
@@ -84,7 +101,6 @@
  }
 
  .social-links {
-   color: #666;
    text-align: center;
    font-size: 2.2em;
  }
@@ -94,8 +110,9 @@
  }
 
  footer footer {
+   margin-top: 30px;
    padding-top: 1em;
-   border-top: 0.2px solid rgba(0,0,0,0.3);
+   border-top: 0.2px solid rgba(255,255,255,0.5);
  }
 
  select {
