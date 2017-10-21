@@ -21,11 +21,11 @@
       <h5>Products / All</h5>
     <% end %>
 
-    <% if @products.size == 0 %>
+    <% if @products.where(active: true).count == 0 %>
       <article class="product">
       <p><em>It appears these items have disappeared on you...</em></p>
       </article>
-    <% else %>
+    <% end %>
       <% @products.each do |p| %>
         <% if p.active %>
           <%= link_to product_path(p.id) do %>
@@ -43,7 +43,7 @@
           <% end %>
         <% end %>
       <% end %>
-    <% end %>
+
 
   </section>
 
