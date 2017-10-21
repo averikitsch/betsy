@@ -9,6 +9,26 @@ class UsersController < ApplicationController
     head :not_found unless @user
   end
 
+
+  def toggle_active
+    @product = Product.find_by(id: params[:id])
+    # @product.active = params[:product][:active].to_i
+    if @product.active
+      @product.active = false
+    else
+      @product.active = true
+    end
+
+    if @product.save
+      redirect_to user_path(@product.user)
+    else
+      flash[:status] = :failure
+      flash[:result_text] = "Active status cannot be loaded"
+    end
+
+
+  end
+
   def new
   end
 

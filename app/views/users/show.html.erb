@@ -14,7 +14,7 @@
       <th>Name</th>
       <th>Stock</th>
       <th>Price</th>
-      <th></th>
+      <th>Active</th>
       <th></th>
     </tr>
   </thead>
@@ -24,9 +24,15 @@
     <tr>
       <td><%= link_to product.name, product_path(product.id) %></td>
       <td><%= product.stock %></td>
-      <td><%= product.price %></td>
+      <td><%= format_price(product.price) %></td>
+
+      <% if product.active %>
+      <td><%= link_to "Active", toggle_active_path(product.id), method: :patch %></td>
+      <% else %>
+      <td><%= link_to "Retired", toggle_active_path(product.id), method: :patch %></td>
+      <% end %>
+
       <td><%= link_to "Edit", edit_product_path(product.id) %></td>
-      <td><%= link_to "Retire" %></td>
     </tr>
     <% end %>
   </tbody>
