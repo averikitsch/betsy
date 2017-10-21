@@ -1,3 +1,4 @@
+@import '_colors';
 
 .description {
   border-top: 1px solid;
@@ -26,9 +27,7 @@
 .product {
   text-align: left;
   display: inline-block;
-  width: 48%;
-  min-width: 220px;
-  max-width: 300px;
+  width: 100%;
   padding: 10px;
   font-size: 0.75em;
 }
@@ -61,11 +60,11 @@
   margin-bottom: 2em;
 }
 
-@media screen and (max-width: 520px) {
+@media screen and (min-width: 520px) {
   .product {
-    width: 100%;
-    min-width: 100%;
-    max-width: 100%;
+    width: 48%;
+    min-width: 200px;
+    max-width: 300px;
   }
 
 }
