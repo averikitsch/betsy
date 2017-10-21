@@ -8,6 +8,13 @@
 <p><%= link_to "Order Summary" %></p>
 
 <h4>Products</h4>
+
+<% if @user.products.size == 0 %>
+  <article>
+  <p><em>It looks like you don't have any items. Care to <%= link_to "add", new_product_path %> one today?</em></p>
+  </article>
+<% else %>
+
 <table>
   <thead>
     <tr>
@@ -35,3 +42,4 @@
     <% end %>
   </tbody>
 </table>
+<% end %>

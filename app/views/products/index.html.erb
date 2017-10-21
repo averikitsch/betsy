@@ -21,7 +21,7 @@
       <h5>Products / All</h5>
     <% end %>
 
-    <% if @products.where(active: true).count == 0 %>
+    <% if @products.where(active: true).size == 0 %>
       <article class="product">
       <p><em>It appears these items have disappeared on you...</em></p>
       </article>
@@ -37,8 +37,6 @@
           <% end %>
         <% end %>
       <% end %>
-
-
-  </section>
+    </section>
 
 </section>
