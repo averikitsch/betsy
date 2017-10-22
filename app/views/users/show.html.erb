@@ -1,10 +1,10 @@
+<section class="merchant-show">
 <% if @user %>
-<h3>User Summary: <%= @user.username%></h3>
+<h1>User Summary: <%= @user.username%></h1>
 <p>Joined site <%= @user.created_at.strftime("%b %d, %Y") %></p>
 <% end %>
 
-<p><%= link_to "Add Product", new_product_path %></p>
-<p><%= link_to "Add Category", new_category_path %></p>
+<p><%= link_to "Add Product", new_product_path %> | <%= link_to "Add Category", new_category_path %></p>
 <p><%= link_to "Order Summary" %></p>
 
 <h4>Products</h4>
@@ -31,3 +31,4 @@
     <% end %>
   </tbody>
 </table>
+</section>
