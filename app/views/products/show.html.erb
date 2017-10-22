@@ -36,10 +36,14 @@
       <small>DESCRIPTION: </small><%= @product.description %>
     </p>
     <p>
-      <%= link_to @product.categories[0].name, category_products_path(@product.categories[0].id) %>
-      <% num = @product.categories.length - 1 ; (1..num).each do |c| %>
-        , <%= link_to @product.categories[c].name, category_products_path(@product.categories[c].id) %>
+      <% if @product.categories.map {|c| c.id } == [] %>
+        <p>This product current has no categories</p>
+      <% else %>
+        <%= link_to @product.categories[0].name, category_products_path(@product.categories[0].id) %>
+        <% num = @product.categories.length - 1 ; (1..num).each do |c| %>
+          , <%= link_to @product.categories[c].name, category_products_path(@product.categories[c].id) %>
         <% end %>
+      <% end %>
     </p>
 
   </article>
