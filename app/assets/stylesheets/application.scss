@@ -24,14 +24,15 @@
 body {
   background: $charcoal;
   font-family: 'Open Sans', sans-serif;
+  color: $white;
 }
 
 a {
-  color: $darkgray;
+  color: rgba($white, 0.8);
 }
 
 a:hover {
-  color: $black;
+  color: rgba($white, 0.6);
 }
 
 li {
@@ -45,14 +46,26 @@ img {
 
 h5 {
   letter-spacing: 0.03em;
-  border-bottom: 0.5px solid rgba($black, 0.1);
+  padding-bottom: 1em;
+  border-bottom: 0.5px solid rgba($white, 0.1);
 }
 
 /*---------------------- HEADER ----------------------------*/
 
-header h1, #copyright {
+.top_header {
+  padding-top: 25px;
+  background: $white;
+}
+
+.top_header a {
+  color: $charcoal;
+}
+
+.logo {
   text-align: center;
   font-family: 'Creepster', cursive;
+  font-size: 1.8em;
+  letter-spacing: 0.1em;
 }
 
 /*---------------------- NAV ----------------------------*/
@@ -70,31 +83,37 @@ nav a {
 /*---------------------- MAIN ----------------------------*/
 
 main {
-  background: $white;
-}
-
-main, footer {
   padding: 50px 30px;
 }
 
 /*---------------------- FOOTER ----------------------------*/
 
 footer {
+  padding: 100px 30px 5px;
+  background: image-url("smoke.jpg") no-repeat center center fixed;
+  background-size: cover;
   font-size: 0.65em;
   letter-spacing: 0.1em;
   text-transform: uppercase;
+  color: rgba($white, 0.5);
+  position: relative;
+  z-index: 1;
+
+  &:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 50px;
+    left: 0;
+    background-image: linear-gradient($charcoal 30%,rgba($charcoal, 0));
+    opacity: 1;
+    z-index: -1;
+  }
 }
 
 footer ul li {
   line-height: 2.4em;
-}
-
-footer, footer a, .social-links i {
-  color: rgba($white, 0.7);
-}
-
-footer a:hover, .social-links i:hover {
-  color: rgba($white, 0.4);
 }
 
 .social-links {
@@ -106,25 +125,74 @@ footer a:hover, .social-links i:hover {
   padding: 4px;
 }
 
+#copyright, h1 {
+  text-align: center;
+}
+
 footer footer {
   margin-top: 30px;
   padding-top: 1em;
-  border-top: 0.2px solid rgba($white, 0.5);
+  border-top: 0.2px solid rgba($white, 0.3);
+  background-image: none;
+
+  &:before {
+    background-image: none;
+  }
 }
 
 /*---------------------- FORMS ----------------------------*/
 
-select {
-  height: auto;
-  background-image: none;
-  width: 30%;
+.forms {
+  margin: 0 auto;
+  max-width: 550px;
 }
 
-select {
-  width: 5em;
+[type='text']:focus, [type='number']:focus, [type='collection-select']:focus,
+textarea:focus, select:focus {
+  background: rgba($white, 0.15);
+  box-shadow: 0 0 15px $black;
+  border-color: rgba($bloodred, 0.5);
+  color: $white;
+}
+
+form input[type="text"], textarea, select, form input[type="submit"] {
+  border-radius: 5px;
+  border-width: 0;
   display: block;
+  color: $white;
 }
 
 form label, form input[type="submit"]{
   text-transform: uppercase;
+}
+
+form label {
+  color: rgba($white, 0.6);
+  margin-bottom: 5px;
+  margin-top: 20px;
+}
+
+form input[type="text"], textarea, select{
+  background: rgba($white, 0.05);
+}
+
+form input[type="submit"] {
+  background: $black;
+  color: $white;
+  margin: 3em auto 0;
+  padding: 15px;
+  font-size: 0.7em;
+  letter-spacing: 0.15em;
+  opacity: 0.6;
+}
+
+form input[type="submit"]:hover {
+  transition: opacity 0.3s ease;
+  opacity: 1;
+}
+
+/*---------------------- BUTTON ----------------------------*/
+
+.button {
+  color: $charcoal;
 }

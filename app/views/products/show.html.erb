@@ -1,9 +1,9 @@
 <section class = "row">
-  <article class = "column small-12 large-6">
+  <article class = "column small-12 medium-6">
     <%= image_tag @product.image, alt:@product.name, class:"product" %>
-
   </article>
-  <article class = "column small-12 large-6">
+
+  <article class = "column small-12 medium-6">
     <h3><%=@product.name%></h3>
     <small><%= link_to @product.user.username, user_products_path(@product.user)%></small>
     <h4><%=format_price(@product.price)%></h4>
@@ -26,11 +26,9 @@
 
     <%= form_for @order_product do |f| %>
         <%= f.label :quantity %>
-        <%= f.select :quantity, options_for_select(0..10)%>
+        <%= f.select :quantity, options_for_select(1..10)%>
         <%= f.submit "Add to Coffin", class: "button" %>
       <% end %>
-
-
 
     <p class = "description">
       <small>DESCRIPTION: </small><%= @product.description %>
@@ -41,15 +39,16 @@
         , <%= link_to @product.categories[c].name, category_products_path(@product.categories[c].id) %>
         <% end %>
     </p>
-
   </article>
 </section>
+
 <section class = "row">
-<h4>Ratings Summary</h4>
-<p>
-  <%= average_rating(@product.reviews) %>
-</p>
+  <h4>Ratings Summary</h4>
+  <p>
+    <%= average_rating(@product.reviews) %>
+  </p>
 </section>
+
 <section class = "row">
   <h4>Reviews</h4>
   <% if @product.reviews.empty? %>
@@ -76,4 +75,5 @@
     <%end %>
   </ul>
   <% end %>
-<%=link_to "review now!", new_product_review_path(@product.id), class: 'button' %>
+  <%=link_to "review now!", new_product_review_path(@product.id), class: 'button' %>
+</section>

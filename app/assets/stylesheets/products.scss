@@ -20,6 +20,10 @@
   text-align: center;
 }
 
+.all_products {
+  border-bottom: 0.5px solid rgba($white, 0.1);
+}
+
 .all_products h5 {
   letter-spacing: 0.05em;
 }
@@ -29,7 +33,13 @@
   display: inline-block;
   width: 100%;
   padding: 10px;
+  margin-bottom: 20px;
   font-size: 0.75em;
+}
+
+.product:hover {
+  transition: opacity 0.3s ease;
+  opacity: 0.7;
 }
 
 .product img {
@@ -46,7 +56,6 @@
   overflow: hidden;
   text-overflow: ellipsis;
   padding: 7px 0 0;
-  color: black;
   letter-spacing: 0.03em;
 }
 

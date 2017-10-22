@@ -19,14 +19,14 @@
   display: inline-block;
   &::before {
     content: "\2625";
-    color: rgba($black, 0.4);
+    color: rgba($white, 0.4);
     font-weight: 700;
     font-size: 2em;
   }
   &:hover::before {
-    color: rgba($black, 1);
+    color: rgba($white, 1);
   }
   &:hover ~ label::before {
-    color: rgba($black, 1);
+    color: rgba($white, 1);
   }
 }
