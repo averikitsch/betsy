@@ -1,34 +1,33 @@
+@import '_colors';
 
-.description {
-  border-top: 1px solid;
-  border-bottom: 1px solid;
-  margin: 1em 0;
-  padding: 1em 0.5em;
-}
-
-form label, form input[type="submit"]{
-  text-transform: uppercase;
-}
-
-select {
-  width: 5em;
-  display: block;
-}
-
-h5 {
-  margin: 2em 0;
+.all_products, .root-products {
+  text-align: center;
 }
 
 .all_products {
-  text-align: center;
+  border-bottom: 0.5px solid rgba($white, 0.1);
+}
+
+.all_products h5 {
+  letter-spacing: 0.05em;
 }
 
 .product {
   text-align: left;
   display: inline-block;
-  width: 220px;
+  width: 100%;
   padding: 10px;
-  font-size: 0.8em;
+  margin-bottom: 20px;
+  font-size: 0.75em;
+}
+
+.product:hover {
+  transition: opacity 0.3s ease;
+  opacity: 0.7;
+}
+
+.product img {
+  width: 100%;
 }
 
 .product p {
@@ -36,18 +35,87 @@ h5 {
 }
 
 .product p:nth-child(2) {
-  font-weight: 600;
-  width: 200px;
+  width: 100%;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  padding: 7px 0 0;
+  letter-spacing: 0.03em;
+}
+
+.categories, .categories ul, .nickname {
+  padding: 0;
+  margin: 0;
+  text-transform: uppercase;
+  font-size: 0.8em;
+  letter-spacing: 0.05em;
+  line-height: 1.8em;
 }
 
 .promo {
   background-color: #bf022a;
   text-align: center;
-  padding: 1em;
+  padding: 5em;
   font-family: 'Nosifer';
   color: crimson;
   text-shadow: 2px 2px white;
+  margin-bottom: 2em;
+}
+
+@media screen and (min-width: 520px) {
+  .product {
+    width: 48%;
+    min-width: 200px;
+    max-width: 300px;
+  }
+
+}
+
+/*---------------------- SHOW PAGES ----------------------------*/
+
+.product-show h3, .description, .rating article {
+  border-bottom: 1px solid rgba($white, 0.1);
+}
+
+.description, .rating-average, .rating article {
+  margin: 1em 0;
+  padding: 1em 0;
+}
+
+.rating-average {
+  margin-top: 3em;
+}
+
+.product-show h3{
+  font-size: 1.5em;
+  text-transform: uppercase;
+  padding-bottom: 0.5em;
+}
+
+.product-show .button {
+  width: 100%;
+  margin-bottom: 2em;
+}
+
+#shipping {
+  line-height: 1em;
+  color: rgba($white, 0.5);
+}
+
+.description {
+  border-top: 1px solid rgba($white, 0.1);
+}
+
+.rating-average h4, .rating h4 {
+  font-size: 1em;
+  text-transform: uppercase;
+}
+
+.nickname {
+  color: rgba($white, 0.3);
+  margin-top: -8px;
+}
+
+.rating p:last-child {
+  text-align: center;
 }

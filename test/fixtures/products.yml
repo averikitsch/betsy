@@ -4,7 +4,7 @@ one:
   name: MyString
   price: 9.99
   user: one
-  stock: 1
+  stock: 6
   description: MyText
   image: MyString
   active: false
@@ -13,7 +13,7 @@ two:
   name: MyString
   price: 9.99
   user: two
-  stock: 1
+  stock: 3
   description: MyText
   image: MyString
   active: false

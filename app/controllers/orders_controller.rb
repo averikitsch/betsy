@@ -1,6 +1,7 @@
 class OrdersController < ApplicationController
+  before_action :find_order, only: [:index, :new, :create, :update, :destroy]
+
   def index
-    @order = Order.find_by(id: session[:order_id])
     if @order
       @op = @order.order_products
     end
@@ -10,11 +11,9 @@ class OrdersController < ApplicationController
   end
 
   def new
-    @order = Order.find(session[:order_id])
   end
 
   def create
-    @order = Order.find(session[:order_id])
     # @order.write_attribute(order_params)
     # unless @order.update(status: "paid")
     #   flash.now[:status] = :failure
@@ -28,7 +27,6 @@ class OrdersController < ApplicationController
   end
 
   def update
-    @order = Order.find_by(id: session[:order_id])
     @order.update(order_params)
     unless @order.update(status: "paid")
       flash.now[:status] = :failure
@@ -41,12 +39,18 @@ class OrdersController < ApplicationController
   end
 
   def destroy
+    @order.destroy
+    session.delete(:order_id)
   end
 
   private
 
   def order_params
     return params.require(:order).permit(:name, :address, :email, :cc_num, :cc_expiry, :cc_cvv, :billing_zip)
+  end
+
+  def find_order
+    @order = Order.find_by(id: session[:order_id])
   end
 
   def reduce_inventory(order)

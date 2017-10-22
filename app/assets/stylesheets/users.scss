@@ -1,3 +1,44 @@
 // Place all the styles related to the Users controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+@import '_colors';
+
+.merchant-show, .merchant-show td, .merchant-show th {
+  text-align: center;
+}
+
+.merchant-show p {
+  margin: 0;
+}
+
+.merchant-show h4 {
+  margin-top: 2em;
+}
+
+.merchant-show table{
+  border-width: 0;
+}
+
+.merchant-show thead {
+  background: rgba($black, 0.8);
+  border-width: 0;
+  color: $white;
+}
+
+.merchant-show tbody {
+  border-width: 0;
+  background: rgba($black, 0.5);
+}
+
+.merchant-show tr:nth-child(even) {
+  background: rgba($black, 0.3);
+}
+
+.merchant-show td, .merchant-show th {
+  padding: 20px 0;
+}
+
+.merchant-show td:first-child, .merchant-show th:first-child {
+  padding-left:20px;
+  text-align: left;
+}
