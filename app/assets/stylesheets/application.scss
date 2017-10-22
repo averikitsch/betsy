@@ -86,6 +86,13 @@ main {
   padding: 50px 30px;
 }
 
+main h1 {
+  font-size: 1.2em;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 1em;
+}
+
 /*---------------------- FOOTER ----------------------------*/
 
 footer {
@@ -186,11 +193,12 @@ form input[type="submit"], .button {
   opacity: 0.5;
 }
 
-form input[type="submit"]:hover, .button:hover {
+form input[type="submit"]:hover, .button:hover, .button:focus {
   background: $black;
   color: $white;
   transition: opacity 0.3s ease;
   opacity: 1;
+  box-sizing: 0 0 0 $black;
 }
 
 /*---------------------- BUTTON ----------------------------*/
@@ -199,3 +207,5 @@ form input[type="submit"]:hover, .button:hover {
   text-transform: uppercase;
   border-radius: 5px;
 }
+
+.button:focus{outline-style: none;}

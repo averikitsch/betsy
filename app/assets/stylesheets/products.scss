@@ -1,21 +1,5 @@
 @import '_colors';
 
-.description {
-  border-top: 1px solid;
-  border-bottom: 1px solid;
-  margin: 1em 0;
-  padding: 1em 0.5em;
-}
-
-.categories, .categories ul {
-  padding: 0;
-  margin: 0;
-  text-transform: uppercase;
-  font-size: 0.8em;
-  letter-spacing: 0.05em;
-  line-height: 1.8em;
-}
-
 .all_products, .root-products {
   text-align: center;
 }
@@ -59,6 +43,15 @@
   letter-spacing: 0.03em;
 }
 
+.categories, .categories ul, .nickname {
+  padding: 0;
+  margin: 0;
+  text-transform: uppercase;
+  font-size: 0.8em;
+  letter-spacing: 0.05em;
+  line-height: 1.8em;
+}
+
 .promo {
   background-color: #bf022a;
   text-align: center;
@@ -76,4 +69,53 @@
     max-width: 300px;
   }
 
+}
+
+/*---------------------- SHOW PAGES ----------------------------*/
+
+.product-show h3, .description, .rating article {
+  border-bottom: 1px solid rgba($white, 0.1);
+}
+
+.description, .rating-average, .rating article {
+  margin: 1em 0;
+  padding: 1em 0;
+}
+
+.rating-average {
+  margin-top: 3em;
+}
+
+.product-show h3{
+  font-size: 1.5em;
+  text-transform: uppercase;
+  padding-bottom: 0.5em;
+}
+
+.product-show .button {
+  width: 100%;
+  margin-bottom: 2em;
+}
+
+#shipping {
+  line-height: 1em;
+  color: rgba($white, 0.5);
+}
+
+.description {
+  border-top: 1px solid rgba($white, 0.1);
+}
+
+.rating-average h4, .rating h4 {
+  font-size: 1em;
+  text-transform: uppercase;
+}
+
+.nickname {
+  color: rgba($white, 0.3);
+  margin-top: -8px;
+}
+
+.rating p:last-child {
+  text-align: center;
 }
