@@ -1,5 +1,5 @@
 class ProductsController < ApplicationController
-  before_action :find_product , only: [:show]
+  before_action :find_product , only: [:show, :edit, :update]
   def root
     @top_products =  Product.select("products.id, avg(reviews.rating) as average_rating").joins("LEFT JOIN reviews ON products.id = reviews.product_id").group("products.id").order("average_rating DESC NULLS LAST").limit(6)
     #Product.joins("LEFT JOIN order_products ON products.id = order_products.product_id").group(:id).order("count(order_products.id)  DESC").limit(10)
@@ -47,18 +47,16 @@ class ProductsController < ApplicationController
   end
 
   def edit
-    @product = Product.find_by(id: params[:id])
   end
 
   def update
-    @product = Product.find_by(id: params[:id])
-    @product.update_attributes(product_params)
-    temp = @product.categories.map {|c| c.id }
+    @product.categories = []
     params[:product][:category_ids].each do |category|
-      if !temp.include?(category) && category != ""
+      unless category == ""
         @product.categories << Category.find(category)
       end
     end
+    @product.update_attributes(product_params)
 
     if @product.save
       flash[:status] = :success
