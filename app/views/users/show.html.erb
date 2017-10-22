@@ -8,13 +8,20 @@
 <p><%= link_to "Order Summary" %></p>
 
 <h4>Products</h4>
+
+<% if @user.products.size == 0 %>
+  <article>
+  <p><em>It looks like you don't have any items. Care to <%= link_to "add", new_product_path %> one today?</em></p>
+  </article>
+<% else %>
+
 <table>
   <thead>
     <tr>
       <th>Name</th>
       <th>Stock</th>
       <th>Price</th>
-      <th></th>
+      <th>Active</th>
       <th></th>
     </tr>
   </thead>
@@ -24,10 +31,15 @@
     <tr>
       <td><%= link_to product.name, product_path(product.id) %></td>
       <td><%= product.stock %></td>
-      <td><%= product.price %></td>
+      <td><%= format_price(product.price) %></td>
+      <% if product.active %>
+      <td><%= link_to "Active", toggle_active_path(product.id), method: :patch %></td>
+      <% else %>
+      <td><%= link_to "Retired", toggle_active_path(product.id), method: :patch %></td>
+      <% end %>
       <td><%= link_to "Edit", edit_product_path(product.id) %></td>
-      <td><%= link_to "Retire" %></td>
     </tr>
     <% end %>
   </tbody>
 </table>
+<% end %>

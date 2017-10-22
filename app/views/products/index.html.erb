@@ -21,24 +21,22 @@
       <h5>Products / All</h5>
     <% end %>
 
-    <% @products.each do |p| %>
-
-        <%= link_to product_path(p.id) do %>
-          <article class="product">
-            <%= image_tag p.image, alt:"product image" %>
-            <p><%= p.name.titleize %></p>
-            <p><%= format_price(p.price) %></p>
-
-          <!-- remove when done testing -->
-          <p>
-            <div>is item active?:<%= p.active %></div>
-          </p>
-
-          </article>
-        <% end %>
-
+    <% if @products.where(active: true).size == 0 %>
+      <article class="product">
+      <p><em>It appears these items have disappeared on you...</em></p>
+      </article>
     <% end %>
-
-  </section>
+      <% @products.each do |p| %>
+        <% if p.active %>
+          <%= link_to product_path(p.id) do %>
+            <article class="product">
+              <%= image_tag p.image, alt:"product image" %>
+              <p><%= p.name.titleize %></p>
+              <p><%= format_price(p.price) %></p>
+            </article>
+          <% end %>
+        <% end %>
+      <% end %>
+    </section>
 
 </section>

@@ -1,6 +1,16 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
+review1:
   rating: 1
+  product: one
+  body: MyText
+
+review2:
+  rating: 3
+  product: one
+  body: MyText
+
+review3:
+  rating: 4
   product: one
   body: MyText

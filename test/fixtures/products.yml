@@ -21,3 +21,12 @@ two:
 valid_product:
   name: shoe
   price: 10.01
+
+three:
+  name: MyString
+  price: 9.99
+  user: two
+  stock: 100
+  description: MyText
+  image: MyString
+  active: false

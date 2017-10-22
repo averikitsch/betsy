@@ -15,6 +15,9 @@
         <strong>Purchase Total:</strong> <%= format_price(total(subtotal(@order.order_products)))%>
       </li>
       <li>
+        <strong>Purchase Status:</strong> <%= @order.status%>
+      </li>
+      <li>
         <strong>Name:</strong> <%= @order.name %>
       </li>
       <li>
