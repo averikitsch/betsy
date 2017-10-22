@@ -1,9 +1,9 @@
 <section class= "row">
   <h3 class = "columns small-12 promo">Promo Banner goes here</h3>
 </section>
-<section class = "row">
+<section class = "row root-products">
   <section class = "columns large-6 small-12">
-    <h4>Trending</h4>
+    <h5>Trending</h5>
     <% @top_products.each do |product|%>
       <%p = Product.find(product.id)%>
       <%= link_to product_path(p.id) do %>
@@ -16,7 +16,7 @@
     <%end %>
   </section>
   <section class = "columns large-6 small-12">
-    <h4>Recently Added</h4>
+    <h5>Recently Added</h5>
     <% @recent_products.each do |p|%>
     <%= link_to product_path(p.id) do %>
     <article class="product">

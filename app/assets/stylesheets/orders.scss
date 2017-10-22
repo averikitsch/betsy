@@ -1,11 +1,59 @@
 // Place all the styles related to the Orders controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+@import '_colors';
 
 .align-right {
   text-align: right;
 }
 
 .total {
-  border-top: 1px solid;
+  padding-top: 30px;
+  border-top: 1px solid rgba($white, 0.5);
+}
+
+.total section:last-child {
+  font-weight: bold;
+}
+
+.total .button {
+  float: right;
+}
+
+.checkout {
+  padding: 30px 0;
+  border-bottom: 1px solid rgba($white, 0.1);
+}
+
+.checkout section:first-child img{
+  max-height: 100px;
+  width: auto;
+}
+
+.checkout section:nth-child(2) {
+  padding-top: 20px;
+}
+
+.checkout section:nth-child(3){
+  padding-top: 30px;
+  text-align: right;
+}
+
+@media screen and (max-width: 640px) {
+  .checkout section:first-child img{
+    max-height: 200px;
+  }
+
+  .checkout section{
+    text-align: center;
+  }
+
+  .checkout section:nth-child(3){
+    padding-top: 0;
+    text-align: center;
+  }
+
+  .total .button {
+    float: right;
+  }
 }

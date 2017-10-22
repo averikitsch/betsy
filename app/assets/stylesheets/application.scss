@@ -1,0 +1,210 @@
+/*
+* This is a manifest file that'll be compiled into application.css, which will include all the files
+* listed below.
+*
+* Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+* vendor/assets/stylesheets directory can be referenced here using a relative path.
+*
+* You're free to add application-wide styles to this file and they'll appear at the bottom of the
+* compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+* files in this directory. Styles in this file should be added after the last require_* statement.
+* It is generally better to create a new file per style scope.
+*
+*= require_tree .
+*= require_self
+*= require foundation_and_overrides
+*= require font-awesome
+
+*/
+@import '_colors';
+
+
+/*---------------------- GENERAL ----------------------------*/
+
+body {
+  background: $charcoal;
+  font-family: 'Open Sans', sans-serif;
+  color: $white;
+}
+
+a {
+  color: rgba($white, 0.8);
+}
+
+a:hover {
+  color: rgba($white, 0.6);
+}
+
+li {
+  list-style: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+h5 {
+  letter-spacing: 0.03em;
+  padding-bottom: 1em;
+  border-bottom: 0.5px solid rgba($white, 0.1);
+}
+
+/*---------------------- HEADER ----------------------------*/
+
+.top_header {
+  padding-top: 25px;
+  background: $white;
+}
+
+.top_header a {
+  color: $charcoal;
+}
+
+.logo {
+  text-align: center;
+  font-family: 'Creepster', cursive;
+  letter-spacing: 0.1em;
+}
+
+/*---------------------- NAV ----------------------------*/
+
+nav {
+  padding: 0 0 10px 10px;
+}
+
+nav a {
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin-right: 15px;
+}
+
+/*---------------------- MAIN ----------------------------*/
+
+main {
+  padding: 50px 30px;
+}
+
+main h1 {
+  font-size: 1.2em;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 1em;
+}
+
+/*---------------------- FOOTER ----------------------------*/
+
+footer {
+  padding: 100px 30px 5px;
+  background: image-url("smoke.jpg") no-repeat center center fixed;
+  background-size: cover;
+  font-size: 0.65em;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba($white, 0.5);
+  position: relative;
+  z-index: 1;
+
+  &:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 50px;
+    left: 0;
+    background-image: linear-gradient($charcoal 30%,rgba($charcoal, 0));
+    opacity: 1;
+    z-index: -1;
+  }
+}
+
+footer ul li {
+  line-height: 2.4em;
+}
+
+.social-links {
+  text-align: center;
+  font-size: 2.2em;
+}
+
+.social-links i {
+  padding: 4px;
+}
+
+#copyright, h1 {
+  text-align: center;
+}
+
+footer footer {
+  margin-top: 30px;
+  padding-top: 1em;
+  border-top: 0.2px solid rgba($white, 0.3);
+  background-image: none;
+
+  &:before {
+    background-image: none;
+  }
+}
+
+/*---------------------- FORMS ----------------------------*/
+
+.forms {
+  margin: 0 auto;
+  max-width: 550px;
+}
+
+[type='text']:focus, [type='number']:focus, [type='collection-select']:focus,
+textarea:focus, select:focus {
+  background: rgba($white, 0.15);
+  box-shadow: 0 0 15px $black;
+  border-color: rgba($bloodred, 0.5);
+  color: $white;
+}
+
+form input[type="text"], textarea, select, form input[type="submit"] {
+  border-radius: 5px;
+  border-width: 0;
+  display: block;
+  color: $white;
+}
+
+form label, form input[type="submit"]{
+  text-transform: uppercase;
+}
+
+form label {
+  color: rgba($white, 0.6);
+  margin-bottom: 5px;
+  margin-top: 20px;
+}
+
+form input[type="text"], textarea, select{
+  background: rgba($white, 0.05);
+}
+
+form input[type="submit"], .button {
+  background: $black;
+  color: $white;
+  margin: 3em auto 0;
+  padding: 15px;
+  font-size: 0.7em;
+  letter-spacing: 0.15em;
+  opacity: 0.5;
+}
+
+form input[type="submit"]:hover, .button:hover, .button:focus {
+  background: $black;
+  color: $white;
+  transition: opacity 0.3s ease;
+  opacity: 1;
+  box-sizing: 0 0 0 $black;
+}
+
+/*---------------------- BUTTON ----------------------------*/
+
+.button {
+  text-transform: uppercase;
+  border-radius: 5px;
+}
+
+.button:focus{outline-style: none;}
