@@ -1,45 +1,46 @@
 <section class="merchant-show">
-<% if @user %>
-<h1>User Summary: <%= @user.username%></h1>
-<p>Joined site <%= @user.created_at.strftime("%b %d, %Y") %></p>
-<% end %>
+  <% if @user %>
+  <h1>User Summary: <%= @user.username%></h1>
+  <p>Joined site <%= @user.created_at.strftime("%b %d, %Y") %></p>
+  <% end %>
 
-<p><%= link_to "Add Product", new_product_path %> | <%= link_to "Add Category", new_category_path %></p>
-<p><%= link_to "Order Summary" %></p>
+  <p><%= link_to "Add Product", new_product_path %> | <%= link_to "Add Category", new_category_path %></p>
+  <p><%= link_to "Order Summary" %></p>
 
-<h4>Products</h4>
+  <h4>Products</h4>
 
-<% if @user.products.size == 0 %>
-  <article>
-  <p><em>It looks like you don't have any items. Care to <%= link_to "add", new_product_path %> one today?</em></p>
-  </article>
-<% else %>
+  <% if @user.products.size == 0 %>
+    <article>
+    <p><em>It looks like you don't have any items. Care to <%= link_to "add", new_product_path %> one today?</em></p>
+    </article>
+  <% else %>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Stock</th>
-      <th>Price</th>
-      <th>Active</th>
-      <th></th>
-    </tr>
-  </thead>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Stock</th>
+        <th>Price</th>
+        <th>Active</th>
+        <th></th>
+      </tr>
+    </thead>
 
-  <tbody>
-    <% @user.products.each do |product| %>
-    <tr>
-      <td><%= link_to product.name, product_path(product.id) %></td>
-      <td><%= product.stock %></td>
-      <td><%= format_price(product.price) %></td>
-      <% if product.active %>
-      <td><%= link_to "Active", toggle_active_path(product.id), method: :patch %></td>
-      <% else %>
-      <td><%= link_to "Retired", toggle_active_path(product.id), method: :patch %></td>
+    <tbody>
+      <% @user.products.each do |product| %>
+      <tr>
+        <td><%= link_to product.name, product_path(product.id) %></td>
+        <td><%= product.stock %></td>
+        <td><%= format_price(product.price) %></td>
+        <% if product.active %>
+        <td><%= link_to "Active", toggle_active_path(product.id), method: :patch %></td>
+        <% else %>
+        <td><%= link_to "Retired", toggle_active_path(product.id), method: :patch %></td>
+        <% end %>
+        <td><%= link_to "Edit", edit_product_path(product.id) %></td>
+      </tr>
       <% end %>
-      <td><%= link_to "Edit", edit_product_path(product.id) %></td>
-    </tr>
-    <% end %>
-  </tbody>
-</table>
+    </tbody>
+  </table>
+  <% end %>
 </section>
