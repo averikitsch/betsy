@@ -14,10 +14,17 @@ class OrderProductsController < ApplicationController
     if session[:order_id].nil?
       @order = Order.create(status: "pending")
       session[:order_id] = @order.id
+    else
+      @order = Order.find_by(id: session[:order_id])
     end
-    @op = OrderProduct.new(op_params)
-    @op.product_id = params[:id]
-    @op.order_id =  session[:order_id]
+    @op = @order.order_products.find_by(product_id: params[:id])
+    if @op
+      @op.quantity += params[:order_product][:quantity].to_i
+    else
+      @op = OrderProduct.new(op_params)
+      @op.product_id = params[:id]
+      @op.order_id =  session[:order_id]
+    end
     if @op.save
       flash[:status] = :success
       flash[:result_text] = "Successfully summoned to your coffin!"
