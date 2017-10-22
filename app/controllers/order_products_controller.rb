@@ -50,7 +50,7 @@ class OrderProductsController < ApplicationController
     order = @order_product.order
     @order_product.destroy
     if order.order_products.empty?
-      session.delete(:order_id)
+      order.destroy    
     end
     redirect_to orders_path
   end
