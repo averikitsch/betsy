@@ -176,17 +176,19 @@ form input[type="text"], textarea, select{
   background: rgba($white, 0.05);
 }
 
-form input[type="submit"] {
+form input[type="submit"], .button {
   background: $black;
   color: $white;
   margin: 3em auto 0;
   padding: 15px;
   font-size: 0.7em;
   letter-spacing: 0.15em;
-  opacity: 0.6;
+  opacity: 0.5;
 }
 
-form input[type="submit"]:hover {
+form input[type="submit"]:hover, .button:hover {
+  background: $black;
+  color: $white;
   transition: opacity 0.3s ease;
   opacity: 1;
 }
@@ -194,5 +196,6 @@ form input[type="submit"]:hover {
 /*---------------------- BUTTON ----------------------------*/
 
 .button {
-  color: $charcoal;
+  text-transform: uppercase;
+  border-radius: 5px;
 }
