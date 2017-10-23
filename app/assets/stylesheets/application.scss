@@ -161,7 +161,7 @@ textarea:focus, select:focus {
   color: $white;
 }
 
-form input[type="text"], textarea, select, form input[type="submit"] {
+form input[type="text"], textarea, select, form input[type="submit"], form input[type="number"] {
   border-radius: 5px;
   border-width: 0;
   display: block;
@@ -178,7 +178,7 @@ form label {
   margin-top: 20px;
 }
 
-form input[type="text"], textarea, select{
+form input[type="text"], textarea, select, form input[type="number"]{
   background: rgba($white, 0.05);
 }
 
