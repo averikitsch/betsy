@@ -39,12 +39,28 @@ describe OrdersController do
       end
 
       Order.last.status.must_equal 'paid'
-
     end
 
-    # it "reduces inventory for an order" do
-    #
-    # end
+    it "order status doesn't change until all inputs entered" do
+      new_order
+      Order.last.status.must_equal 'pending'
+
+      put order_path(Order.last), params: {order: {name: "name"}}
+      must_respond_with :success
+      Order.last.status.must_equal 'pending'
+    end
+
+    it "reduces inventory for an order" do
+      new_order
+      products(:three).stock.must_equal 100
+
+      put order_path(Order.last), params: {order:
+        {name: "name", email: "email@email.com", address: "address",
+          cc_num: "1111222233334444", cc_expiry: "10/20", cc_cvv: "666", billing_zip: "98101" }}
+
+      Order.last.status.must_equal 'paid'
+      products(:three).stock.must_equal 99
+    end
   end
 
   describe "order destroy" do
@@ -61,7 +77,7 @@ describe OrdersController do
       session[:order_id].must_equal Order.last.id
 
       delete_product
-      # session[:order_id].must_equal nil
+      session[:order_id].must_equal nil
     end
   end
 
