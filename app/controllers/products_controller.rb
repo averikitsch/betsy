@@ -1,9 +1,9 @@
 class ProductsController < ApplicationController
   before_action :find_product , only: [:show, :edit, :update]
   def root
-    @top_products =  Product.select("products.id, avg(reviews.rating) as average_rating").joins("LEFT JOIN reviews ON products.id = reviews.product_id").group("products.id").order("average_rating DESC NULLS LAST").limit(6)
+    @top_products =  Product.select("products.id, avg(reviews.rating) as average_rating").where(active: true).joins("LEFT JOIN reviews ON products.id = reviews.product_id").group("products.id").order("average_rating DESC NULLS LAST").limit(6)
     #Product.joins("LEFT JOIN order_products ON products.id = order_products.product_id").group(:id).order("count(order_products.id)  DESC").limit(10)
-    @recent_products =  Product.order(created_at: :desc).limit(6)
+    @recent_products =  Product.where(active: true).order(created_at: :desc).limit(6)
   end
 
   def index
@@ -13,16 +13,16 @@ class ProductsController < ApplicationController
       if Category.find_by(id: params[:category_id]) == nil
         render_404
       else
-        @products = Product.includes(:categories).where(categories: { id: params[:category_id]})
+        @products = Product.includes(:categories).where(active: true, categories: { id: params[:category_id]})
       end
     elsif params[:user_id]
       if User.find_by(id: params[:user_id]) == nil
         render_404
       else
-        @products = Product.includes(:user).where(products: {user_id: params[:user_id]})
+        @products = Product.includes(:user).where(active: true, products: {user_id: params[:user_id]})
       end
     else
-      @products = Product.order(:id)
+      @products = Product.where(active: true).order(:id)
     end
   end
 
