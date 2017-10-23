@@ -7,6 +7,7 @@ class ReviewsController < ApplicationController
 
   def new
     @product = Product.find_by(id: params[:product_id])
+    render_404 unless @product
     @review = Review.new
   end
 
@@ -20,7 +21,7 @@ class ReviewsController < ApplicationController
       flash[:status] = :failure
       flash[:result_text] = "Sorry! We lost your review...oops!"
       flash[:messages] = @review.errors.messages
-      render :new, status: :bad_request
+      redirect_to new_product_review_path( params[:product_id]), status: :bad_request
     end
   end
 

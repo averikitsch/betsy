@@ -1,39 +1,33 @@
 require "test_helper"
 
 describe ReviewsController do
-  it "should get index" do
-    get reviews_index_url
-    value(response).must_be :success?
+  it "should get a new form" do
+    get new_product_review_path(products(:one))
+    must_respond_with :success
   end
 
-  it "should get show" do
-    get reviews_show_url
-    value(response).must_be :success?
+  it "renders 404 not_found " do
+    assert_raises(ActionController::RoutingError) do
+    get new_product_review_path(-1)
+  end
+    # must_respond_with :not_found
   end
 
-  it "should get new" do
-    get reviews_new_url
-    value(response).must_be :success?
+  it "should be able to create a review" do
+    product = products(:two)
+    start = product.reviews.count
+    post product_reviews_path(product.id), params: {rating: 5, body: "la la la"}
+    product.reviews.count.must_equal start+1
+    must_respond_with :redirect
+    must_redirect_to product_path(product.id)
   end
 
-  it "should get create" do
-    get reviews_create_url
-    value(response).must_be :success?
+  it "it won't create a review with bad data" do
+    product = Product.create(name:"kitty",price: 10, user: users(:one))
+    puts product.id
+    start = product.reviews.count
+    post product_reviews_path(product.id), params: {review:{rating: 15, body: "la la la"}}
+    product.reviews.count.must_equal start
+    must_respond_with :bad_request
   end
-
-  it "should get edit" do
-    get reviews_edit_url
-    value(response).must_be :success?
-  end
-
-  it "should get update" do
-    get reviews_update_url
-    value(response).must_be :success?
-  end
-
-  it "should get destroy" do
-    get reviews_destroy_url
-    value(response).must_be :success?
-  end
-
 end

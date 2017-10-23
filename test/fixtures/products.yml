@@ -1,21 +1,21 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  name: MyString
+  name: sheet
   price: 9.99
   user: one
   stock: 6
   description: MyText
-  image: MyString
+  image: "smoke.jpg"
   active: false
 
 two:
-  name: MyString
+  name: cat
   price: 9.99
   user: two
   stock: 3
   description: MyText
-  image: MyString
+  image: tombstone.png
   active: false
 
 valid_product:
@@ -23,7 +23,7 @@ valid_product:
   price: 10.01
 
 three:
-  name: MyString
+  name: tomb
   price: 9.99
   user: two
   stock: 100
