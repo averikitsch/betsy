@@ -34,7 +34,7 @@ describe OrdersController do
 
       must_respond_with :success
 
-      variables.zip values.each do |variable, value|
+      variables.zip(values).each do |variable, value|
         Order.last[variable].must_equal value
       end
 
@@ -59,7 +59,9 @@ describe OrdersController do
           cc_num: "1111222233334444", cc_expiry: "10/20", cc_cvv: "666", billing_zip: "98101" }}
 
       Order.last.status.must_equal 'paid'
-      products(:three).stock.must_equal 99
+      session[:order_id].must_equal nil
+      Product.find_by(name: "tomb").stock.must_equal 99
+
     end
   end
 
@@ -73,10 +75,7 @@ describe OrdersController do
     end
 
     it "removes session with deletion" do
-      new_order
-      session[:order_id].must_equal Order.last.id
-
-      delete_product
+      delete order_product_path(order_products(:one))
       session[:order_id].must_equal nil
     end
   end
