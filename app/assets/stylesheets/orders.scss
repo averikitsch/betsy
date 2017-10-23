@@ -57,3 +57,19 @@
     float: right;
   }
 }
+
+/*---------------------- Order complete ----------------------------*/
+
+.order_complete {
+  text-align: center;
+  max-width: 800px;
+}
+
+.order_complete h1, .order_complete p{
+  margin-bottom: 0;
+}
+
+.summary, .product_summary {
+  margin-top: 2em;
+  text-align: left;
+}
