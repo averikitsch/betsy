@@ -28,5 +28,5 @@ three:
   user: two
   stock: 100
   description: MyText
-  image: MyString
+  image: smoke
   active: false
