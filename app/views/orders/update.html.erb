@@ -1,50 +1,48 @@
-<section class = "row">
+<section class = "row order_complete">
+  <h1>Thanks for shopping with Spooksy!</h1>
   <h1>Order Complete</h1>
-  <h5>Thanks for shopping with Spooksy!</h5>
 
-  <article class="summary">
-    <h4>Order Summary</h4>
-    <ul>
-      <li>
-        <strong>Order:</strong> #<%= @order.id %>
-      </li>
-      <li>
-        <strong>Purchased On:</strong> <%= format_date(@order.created_at) %> at <%= format_time(@order.created_at) %>
-      </li>
-      <li>
-        <strong>Purchase Total:</strong> <%= format_price(total(subtotal(@order.order_products)))%>
-      </li>
-      <li>
-        <strong>Purchase Status:</strong> <%= @order.status%>
-      </li>
-      <li>
-        <strong>Name:</strong> <%= @order.name %>
-      </li>
-      <li>
-        <strong>Shipping Address:</strong> <%= @order.address %>
-      </li>
-      <li>
-        <strong>Email:</strong> <%= @order.email %>
-      </li>
-    </ul>
+  <p>Hi <%= @order.name %>, we've recieved order #<%= @order.id %> and are working on it now.</p>
+  <p>We'll email you an update when we've shipped it.</p>
+
+  <article class="summary row">
+    <h4>Order Details</h4>
+    <section class = "columns small-6">
+      <ul>
+        <li><strong>Order:</strong> #<%= @order.id %></li>
+        <li><strong>Purchased On:</strong> <%= format_date(@order.created_at) %> at <%= format_time(@order.created_at) %></li>
+        <li><strong>Purchase Status:</strong> <%= @order.status%></li>
+        <li><strong>Shipping Method:</strong> Standard</li>
+      </ul>
+    </section>
+    <section class = "columns small-6">
+      <ul>
+        <li><strong>Name:</strong> <%= @order.name %></li>
+        <li><strong>Shipping Address:</strong> <%= @order.address %></li>
+        <li><strong>Email:</strong> <%= @order.email %></li>
+      </ul>
+    </section>
+  </article>
 
 
+  <article class="product_summary row">
+    <h4>Products</h4>
     <% @order.order_products.each do |order_product| %>
-    <article class="product_summary row">
-      <section class = "columns small-6 large-3">
+    <section class="row checkout">
+      <section class = "columns small-12 medium-3">
         <%= image_tag order_product.product.image, alt: order_product.product.name%>
       </section>
-      <section class = "columns small-6 large-9">
-        <p>
-          <strong><%= link_to order_product.product.name ,product_path(order_product.product_id)%></strong>
-        </p>
-        <p>
-          <strong>price: </strong><%= format_price(order_product.product.price) %>
-        </p>
-        <p>
-          <strong>quantity: </strong><%= order_product.quantity %>
-        </p>
+
+      <section class = "columns small-12 medium-9 align-right">
+        <p><strong><%= link_to order_product.product.name.titleize ,product_path(order_product.product_id)%></strong></p>
+        <p><strong>price: </strong><%= format_price(order_product.product.price) %></p>
+        <p><strong>quantity: </strong><%= order_product.quantity %></p>
       </section>
-    </article>
+    </section>
     <% end %>
-  </section>
+
+    <section class = "row total align-right">
+      <p><strong>Purchase Total:</strong> <%= format_price(total(subtotal(@order.order_products)))%></p>
+    </section>
+  </article>
+</section>
