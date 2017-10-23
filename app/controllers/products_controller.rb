@@ -62,8 +62,8 @@ class ProductsController < ApplicationController
 
   def update
     @product.categories = []
-    # temp_params = []
-    # temp_params << params[:product][:category_ids]
+    # note: clears categories
+    
     store_params = params[:product][:category_ids]
     if store_params
       store_params.each do |category|

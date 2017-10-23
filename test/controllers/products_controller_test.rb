@@ -117,7 +117,10 @@ describe ProductsController do
             product = Product.find_by(name: "shoelace")
 
             patch product_path(product.id), params: {product: { category_ids: c_i}}
-            product.categories.length.must_equal 2
+            product.categories.count.must_equal 2
+
+            patch product_path(product.id), params: {product: { category_ids: c_i}}
+            product.categories.count.must_equal 2
           end
         end
 
