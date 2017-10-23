@@ -1,14 +1,14 @@
 class OrderProductsController < ApplicationController
   before_action :find_op, only: [:edit, :update, :destroy]
 
-  def index
-  end
-
-  def show
-  end
-
-  def new
-  end
+  # def index
+  # end
+  #
+  # def show
+  # end
+  #
+  # def new
+  # end
 
   def create
     if session[:order_id].nil?
@@ -33,7 +33,7 @@ class OrderProductsController < ApplicationController
       flash[:status] = :failure
       flash[:result_text] = "Oops!"
       flash[:messages] = @op.errors.messages
-      redirect_to product_path(params[:id])
+      redirect_to product_path(params[:id]), status: :bad_request
     end
   end
 
@@ -57,7 +57,8 @@ class OrderProductsController < ApplicationController
     order = @order_product.order
     @order_product.destroy
     if order.order_products.empty?
-      order.destroy    
+      order.destroy
+      session.delete(:order_id)
     end
     redirect_to orders_path
   end

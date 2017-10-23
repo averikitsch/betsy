@@ -46,7 +46,7 @@ describe OrdersController do
       Order.last.status.must_equal 'pending'
 
       put order_path(Order.last), params: {order: {name: "name"}}
-      must_respond_with :success
+      must_respond_with :bad_request
       Order.last.status.must_equal 'pending'
     end
 

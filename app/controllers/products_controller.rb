@@ -46,56 +46,59 @@ class ProductsController < ApplicationController
         end
       end
     end
-      if @product.save
-        flash[:status] = :success
-        flash[:result_text] = "Successfully created #{@product.name}!"
-        redirect_to product_path(@product)
-      else
-        flash.now[:status] = :error
-        flash.now[:result_text] = "#{@product.name} could not be created"
-        render :new
-      end
+    if @product.save
+      flash[:status] = :success
+      flash[:result_text] = "Successfully created #{@product.name}!"
+      redirect_to product_path(@product)
+    else
+      flash.now[:status] = :error
+      flash.now[:result_text] = "#{@product.name} could not be created"
+      render :new, status: :bad_request
     end
+  end
 
-    def edit
-    end
+  def edit
+  end
 
-    def update
-      @product.categories = []
-      # temp_params = []
-      # temp_params << params[:product][:category_ids]
-      params[:product][:category_ids].each do |category|
+  def update
+    @product.categories = []
+    # temp_params = []
+    # temp_params << params[:product][:category_ids]
+    store_params = params[:product][:category_ids]
+    if store_params
+      store_params.each do |category|
         unless category == ""
           @product.categories << Category.find(category)
         end
       end
-      @product.update_attributes(product_params)
-
-      if @product.save
-        flash[:status] = :success
-        flash[:result_text] = "Successfully updated #{@product.name}!"
-        redirect_to product_path
-      else
-        flash.now[:status] = :error
-        flash.now[:result_text] = "#{@product.name} could not be updated"
-        render :edit
-      end
     end
+    @product.update_attributes(product_params)
 
-    def destroy
-    end
-
-    private
-    def find_product
-      @product = Product.find_by(id: params[:id])
-      render_404 unless @product
-    end
-
-    def product_params
-      return params.require(:product).permit(:user_id, :name, :price, :stock, :description, :image, :active)
-    end
-
-    def render_404
-      render file: "/public/404.html", status: 404
+    if @product.save
+      flash[:status] = :success
+      flash[:result_text] = "Successfully updated #{@product.name}!"
+      redirect_to product_path
+    else
+      flash.now[:status] = :error
+      flash.now[:result_text] = "#{@product.name} could not be updated"
+      render :edit, status: :bad_request
     end
   end
+
+  def destroy
+  end
+
+  private
+  def find_product
+    @product = Product.find_by(id: params[:id])
+    render_404 unless @product
+  end
+
+  def product_params
+    return params.require(:product).permit(:user_id, :name, :price, :stock, :description, :image, :active)
+  end
+
+  def render_404
+    render file: "/public/404.html", status: 404
+  end
+end

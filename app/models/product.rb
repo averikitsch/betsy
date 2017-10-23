@@ -1,8 +1,8 @@
 class Product < ApplicationRecord
   has_and_belongs_to_many :categories
   belongs_to :user
-  has_many :order_products
-  has_many :reviews
+  has_many :order_products, dependent: :destroy
+  has_many :reviews, dependent: :destroy
 
   validates :name, presence: true
   validates :name, uniqueness: true

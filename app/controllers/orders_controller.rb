@@ -7,24 +7,24 @@ class OrdersController < ApplicationController
     end
   end
 
-  def show
-  end
-
+  # def show
+  # end
+  #
   def new
   end
 
-  def create
-    # @order.write_attribute(order_params)
-    # unless @order.update(status: "paid")
-    #   flash.now[:status] = :failure
-    #   flash.now[:result_text] = "Oops!"
-    #   flash.now[:messages] = @order.errors.messages
-    #   render :new
-    # end
-  end
+  # def create
+  #   # @order.write_attribute(order_params)
+  #   # unless @order.update(status: "paid")
+  #   #   flash.now[:status] = :failure
+  #   #   flash.now[:result_text] = "Oops!"
+  #   #   flash.now[:messages] = @order.errors.messages
+  #   #   render :new
+  #   # end
+  # end
 
-  def edit
-  end
+  # def edit
+  # end
 
   def update
     @order.update(order_params)
@@ -32,16 +32,17 @@ class OrdersController < ApplicationController
       flash.now[:status] = :failure
       flash.now[:result_text] = "Oops!"
       flash.now[:messages] = @order.errors.messages
-      render :new
+      render :new, status: :bad_request
+    else
+      reduce_inventory(@order)
+      session.delete(:order_id)
     end
-    reduce_inventory(@order)
-    session.delete(:order_id)
   end
 
-  def destroy
-    @order.destroy
-    session.delete(:order_id)
-  end
+  # def destroy
+  #   @order.destroy
+  #   session.delete(:order_id)
+  # end
 
   private
 
