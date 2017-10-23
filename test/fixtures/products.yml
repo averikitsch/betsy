@@ -6,7 +6,7 @@ one:
   user: one
   stock: 1
   description: MyText
-  image: MyString
+  image: "http://placebeyonce.com/450-300"
   active: false
 
 two:

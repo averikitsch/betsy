@@ -10,9 +10,17 @@ class ProductsController < ApplicationController
     @categories = Category.order(:name)
 
     if params[:category_id]
-      @products = Product.includes(:categories).where(categories: { id: params[:category_id]})
+      if Category.find_by(id: params[:category_id]) == nil
+        render_404
+      else
+        @products = Product.includes(:categories).where(categories: { id: params[:category_id]})
+      end
     elsif params[:user_id]
-      @products = Product.includes(:user).where(products: {user_id: params[:user_id]})
+      if User.find_by(id: params[:user_id]) == nil
+        render_404
+      else
+        @products = Product.includes(:user).where(products: {user_id: params[:user_id]})
+      end
     else
       @products = Product.order(:id)
     end
@@ -30,11 +38,14 @@ class ProductsController < ApplicationController
   def create
     @product = Product.new(product_params)
     temp = @product.categories.map {|c| c.id }
-    params[:product][:category_ids].each do |category|
-      if !temp.include?(category) && category != ""
-        @product.categories << Category.find(category)
+    store_params = params[:product][:category_ids]
+
+      store_params.each do |category|
+        if !temp.include?(category) && category != ""
+          @product.categories << Category.find(category)
+        end
       end
-    end
+
     if @product.save
       flash[:status] = :success
       flash[:result_text] = "Successfully created #{@product.name}!"
@@ -51,6 +62,8 @@ class ProductsController < ApplicationController
 
   def update
     @product.categories = []
+    # temp_params = []
+    # temp_params << params[:product][:category_ids]
     params[:product][:category_ids].each do |category|
       unless category == ""
         @product.categories << Category.find(category)
@@ -80,5 +93,9 @@ class ProductsController < ApplicationController
 
   def product_params
     return params.require(:product).permit(:user_id, :name, :price, :stock, :description, :image, :active)
+  end
+
+  def render_404
+    render file: "/public/404.html", status: 404
   end
 end

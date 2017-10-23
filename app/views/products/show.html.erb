@@ -1,6 +1,6 @@
 <section class = "row">
   <article class = "column small-12 large-6">
-    <%= image_tag @product.image, alt:@product.name, class:"product" %>
+    <%= image_tag @product.image, alt:@product.name, class:"product" unless @product.image.blank? %>
 
   </article>
   <article class = "column small-12 large-6">
