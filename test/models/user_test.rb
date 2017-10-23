@@ -18,10 +18,10 @@ describe User do
   end
 
 
-  it "must be unique" do
-    one.username.must_equal "MyString"
+  it "username must be unique" do
+    one.username.must_equal "ghost"
     user.email = "email2"
-    user.username = "MyString"
+    user.username = "ghost"
     user.valid?.must_equal false
   end
 
@@ -35,10 +35,10 @@ describe User do
   end
 
 
-  it "must be unique" do
-    one.email.must_equal "MyString"
+  it "email must be unique" do
+    one.email.must_equal "ghost@paranormal.com"
     user.username = "name2"
-    user.username = "MyString"
+    user.username = "ghost@paranormal.com"
     user.valid?.must_equal false
   end
 end
