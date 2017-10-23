@@ -59,6 +59,8 @@ describe Order do
       @order.valid?.must_equal true
       @order.cc_expiry = "09/17"
       @order.valid?.must_equal false
+      @order.cc_expiry = "09,17"
+      @order.valid?.must_equal false
       @order.cc_expiry = "11/19"
       @order.valid?.must_equal true
     end

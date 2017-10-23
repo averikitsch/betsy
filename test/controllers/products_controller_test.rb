@@ -41,10 +41,20 @@ describe ProductsController do
   end
 
   describe "create product" do
-    it "should be able to create a new product" do
+    it "should be able to create a new product with no categories" do
       proc {
         post products_path, params: {product: {
           name: "shoelace", price: 9.9, user_id: ghost.id
+          }}
+        }.must_change "Product.count", 1
+      must_respond_with :redirect
+    end
+
+    it "should be able to create a new product with categories" do
+      c_i = [categories(:one).id,categories(:two).id]
+      proc {
+        post products_path, params: {product: {
+          name: "shoelace", price: 9.9, user_id: ghost.id, category_ids: c_i
           }}
         }.must_change "Product.count", 1
       must_respond_with :redirect
