@@ -10,6 +10,16 @@ describe ProductsController do
       get root_path
       must_respond_with :success
     end
+    it "should not error if there is no image" do
+      one.image = nil
+      one.save
+      Product.create!(name: "averi", price:10,stock:100,user: users(:one))
+      p Product.find_by(name: "averi")
+      get root_path
+      must_respond_with :success
+      get products_path
+      must_respond_with :success
+    end
 
     it "succeeds with no products" do
       Product.destroy_all
@@ -101,7 +111,7 @@ describe ProductsController do
         it "should update categories" do
           c_i = [categories(:one).id,categories(:two).id]
             post products_path, params: {product: {
-              name: "shoelace", price: 9.9, user_id: ghost.id, category_ids: c_i, stock: 20
+              name: "shoelace", price: 9.9, user_id: ghost.id, stock: 20
               }}
             must_respond_with :redirect
             product = Product.find_by(name: "shoelace")
@@ -111,4 +121,13 @@ describe ProductsController do
           end
         end
 
+        it "remove a category" do
+          c_i = [categories(:one).id,categories(:two).id]
+          post products_path, params: {product: {
+              name: "shoelace", price: 9.9, user_id: ghost.id, stock: 20, category_ids: c_i
+              }}
+          product = Product.find_by(name: "shoelace")
+          patch product_path(product.id), params: {product: { category_ids: []}}
+              product.categories.length.must_equal 0
+        end
       end
