@@ -79,6 +79,6 @@ class UsersController < ApplicationController
   end
 
   def order_fulfillment
-    
+    @user = User.find_by(id: params[:user_id].to_i)
   end
 end

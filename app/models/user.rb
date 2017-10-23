@@ -12,4 +12,8 @@ class User < ApplicationRecord
 
     return user
   end
+
+  def orders
+    Order.joins(:products).where('products.user_id = ?', id).distinct
+  end
 end
