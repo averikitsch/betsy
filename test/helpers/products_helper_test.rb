@@ -40,5 +40,10 @@ describe ProductsHelper do
       array = [review3, review2, review1]
       average_rating(array).must_equal "2.7 out of 5"
     end
+
+    it "it returns a message with no reviews" do
+      array = []
+      average_rating(array).must_equal "The reviews were too scared and ran away"
+    end
   end
 end

@@ -18,12 +18,12 @@ describe Order do
     #   @order.status.must_equal "pending"
     # end
 
-    it "must have at least one OrderProduct" do
-      @order.order_products = []
-      @order.valid?.must_equal false
-      @order.order_products << order_products(:one)
-      @order.valid?.must_equal true
-    end
+    # it "must have at least one OrderProduct" do
+    #   @order.order_products = []
+    #   @order.valid?.must_equal false
+    #   @order.order_products << order_products(:one)
+    #   @order.valid?.must_equal true
+    # end
 
     it "must have a name corresponding with the credit card" do
       @order.name = nil
