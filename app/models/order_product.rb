@@ -2,7 +2,7 @@ class OrderProduct < ApplicationRecord
   belongs_to :order
   belongs_to :product
 
-  validates :quantity, numericality: { only_integer: true, greater_than: 0 }
+  validates :quantity, presence: true, numericality: { only_integer: true, greater_than: 0 }
   validate :stock_quantity
   validate :must_be_in_stock
 
@@ -14,7 +14,8 @@ class OrderProduct < ApplicationRecord
   end
 
   def stock_quantity
-    if self.quantity > self.product.stock
+    quantity = self.quantity.to_i
+    if quantity > self.product.stock
       errors.add(:stock, "product stock is #{self.product.stock}")
     end
   end

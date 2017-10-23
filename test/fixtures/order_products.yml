@@ -3,11 +3,11 @@
 one:
   order: one
   product: one
-  quantity: 1
+  quantity: 10
   shipped: false
 
 two:
   order: two
   product: two
-  quantity: 1
+  quantity: 5
   shipped: false
