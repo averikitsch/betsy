@@ -19,7 +19,7 @@ Rails.application.routes.draw do
 
   resources :orders
 
-  patch 'users/:id/toggle_active', to: 'users#toggle_active', as: 'toggle_active'
+  patch 'products/:id/toggle_active', to: 'products#toggle_active', as: 'toggle_active'
   post '/products/:id/order', to: 'order_products#create', as: 'order_products'
   get '/order_products/:id/edit', to: 'order_products#edit', as: 'edit_order_product'
   delete '/order_products/:id', to: 'order_products#destroy', as: 'order_product'

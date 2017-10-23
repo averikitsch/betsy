@@ -2,15 +2,21 @@ require "test_helper"
 
 describe UsersController do
   let(:user) { users(:one) }
-  # it "should get index" do
-  #   get users_path
-  #   value(response).must_be :success?
-  # end
-  #
-  # it "should get show" do
-  #   get user_path(users(:two))
-  #   value(response).must_be :success?
-  # end
+  it "should get index" do
+    get users_path
+    must_respond_with :success
+  end
+
+  it "should get show" do
+    get user_path(users(:two))
+    must_respond_with :success
+  end
+
+  it "should render 404 if user not found" do
+    get user_path(-1)
+    must_respond_with :not_found
+  end
+
 
   describe "auth_callback" do
     it "should not create a new user on repeat logins" do
@@ -42,6 +48,20 @@ describe UsersController do
       session[:user_id].must_equal user.id
       delete logout_path
       session[:user_id].must_equal nil
+      must_redirect_to root_path
+    end
+
+    it "should not create a new user with bogus data" do
+      proc {
+        login(User.new(username: "", uid: '1234'), :github)
+      }.wont_change "User.count"
+      must_redirect_to root_path
+    end
+
+    it "redirects to root when it can't log in an existing user" do
+      proc {
+        login(User.new(username: "averi", uid: ''), :github)
+      }.wont_change "User.count"
       must_redirect_to root_path
     end
   end

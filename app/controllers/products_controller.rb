@@ -63,7 +63,7 @@ class ProductsController < ApplicationController
   def update
     @product.categories = []
     # note: clears categories
-    
+
     store_params = params[:product][:category_ids]
     if store_params
       store_params.each do |category|
@@ -86,6 +86,23 @@ class ProductsController < ApplicationController
   end
 
   def destroy
+  end
+
+  def toggle_active
+    @product = Product.find_by(id: params[:id])
+    # @product.active = params[:product][:active].to_i
+    if @product.active
+      @product.active = false
+    else
+      @product.active = true
+    end
+
+    @product.save
+      redirect_to user_path(@product.user)
+    # else
+    #   flash[:status] = :failure
+    #   flash[:result_text] = "Active status cannot be loaded"
+    # end
   end
 
   private

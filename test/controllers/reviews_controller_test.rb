@@ -7,9 +7,8 @@ describe ReviewsController do
   end
 
   it "renders 404 not_found " do
-    assert_raises(ActionController::RoutingError) do
     get new_product_review_path(-1)
-  end
+    must_respond_with :not_found
     # must_respond_with :not_found
   end
 
@@ -23,8 +22,7 @@ describe ReviewsController do
   end
 
   it "it won't create a review with bad data" do
-    product = Product.create(name:"kitty",price: 10, user: users(:one))
-    puts product.id
+    product = Product.create(name:"kitty",price: 10, user: users(:one), stock: 10)
     start = product.reviews.count
     post product_reviews_path(product.id), params: {review:{rating: 15, body: "la la la"}}
     product.reviews.count.must_equal start

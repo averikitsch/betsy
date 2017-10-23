@@ -133,4 +133,28 @@ describe ProductsController do
           patch product_path(product.id), params: {product: { category_ids: []}}
               product.categories.length.must_equal 0
         end
+
+        it "can toggle active" do
+          product = products(:one)
+          start = product.active
+
+          patch toggle_active_path(product.id)
+          must_respond_with :redirect
+          product = Product.find_by(name: "sheet")
+          product.active.must_equal !start
+        end
+
+        it "can toggle retired" do
+          product = products(:one)
+          product.active = true
+          product.save
+          start = product.active
+
+          patch toggle_active_path(product.id)
+          must_respond_with :redirect
+          product = Product.find_by(name: "sheet")
+          product.active.must_equal !start
+        end
+
+      
       end
