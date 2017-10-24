@@ -2,8 +2,6 @@
 <h1>Edit Product</h1>
 
 <%= form_for @product do |f| %>
-username:
-<%= @product.user.username %>
 <%= render partial: "form", locals: {button_name: "Update Product" } %>
 
 <% end %>

@@ -65,30 +65,36 @@ class ProductsController < ApplicationController
   end
 
   def update
-    # note: clears categories, will keep categories if categories is not updated
-    @product.categories = []
-    #appends categories into @products.categories
-    if params[:product][:category_ids]
-      params[:product][:category_ids].each do |category|
-        unless category == ""
-          @product.categories << Category.find(category)
+    if find_user && @user.id != @product.user.id
+      flash[:status] = :failure
+      flash[:result_text] = "Oops..This isn't your product!"
+      redirect_to product_path(@product.id)
+    else
+      # note: clears categories, will keep categories if categories is not updated
+      @product.categories = []
+      #appends categories into @products.categories
+      if params[:product][:category_ids]
+        params[:product][:category_ids].each do |category|
+          unless category == ""
+            @product.categories << Category.find(category)
+          end
         end
       end
-    end
-    @product.update_attributes(product_params)
-    #replaces empty string with default image
-    if @product.image.length == 0
-      @product.image = valid_image
-    end
+      @product.update_attributes(product_params)
+      #replaces empty string with default image
+      if @product.image.length == 0
+        @product.image = valid_image
+      end
 
-    if @product.save
-      flash[:status] = :success
-      flash[:result_text] = "Successfully updated #{@product.name}!"
-      redirect_to product_path
-    else
-      flash.now[:status] = :error
-      flash.now[:result_text] = "#{@product.name} could not be updated"
-      render :edit, status: :bad_request
+      if @product.save
+        flash[:status] = :success
+        flash[:result_text] = "Successfully updated #{@product.name}!"
+        redirect_to product_path
+      else
+        flash.now[:status] = :error
+        flash.now[:result_text] = "#{@product.name} could not be updated"
+        render :edit, status: :bad_request
+      end
     end
   end
 
