@@ -35,28 +35,34 @@ class ProductsController < ApplicationController
   end
 
   def create
-    @product = Product.new(product_params)
-    #appends categories into @products.categories
-    temp = @product.categories.map {|c| c.id }
-    if params[:product][:category_ids]
-      params[:product][:category_ids].each do |category|
-        if !temp.include?(category) && category != ""
-          @product.categories << Category.find(category)
+    if find_user && @user.id != @product.user.id
+      flash[:status] = :failure
+      flash[:result_text] = "Oops..You can't create a product for someone else!"
+      redirect_to product_path(@product.id)
+    else
+      @product = Product.new(product_params)
+      #appends categories into @products.categories
+      temp = @product.categories.map {|c| c.id }
+      if params[:product][:category_ids]
+        params[:product][:category_ids].each do |category|
+          if !temp.include?(category) && category != ""
+            @product.categories << Category.find(category)
+          end
         end
       end
-    end
-    #replaces empty string with default image
-    if params[:product][:image] == ""
-      @product.image = valid_image
-    end
-    if @product.save
-      flash[:status] = :success
-      flash[:result_text] = "Successfully created #{@product.name}!"
-      redirect_to product_path(@product)
-    else
-      flash.now[:status] = :error
-      flash.now[:result_text] = "#{@product.name} could not be created"
-      render :new, status: :bad_request
+      #replaces empty string with default image
+      if params[:product][:image] == ""
+        @product.image = valid_image
+      end
+      if @product.save
+        flash[:status] = :success
+        flash[:result_text] = "Successfully created #{@product.name}!"
+        redirect_to product_path(@product)
+      else
+        flash.now[:status] = :error
+        flash.now[:result_text] = "#{@product.name} could not be created"
+        render :new, status: :bad_request
+      end
     end
   end
 
