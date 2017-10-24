@@ -7,11 +7,16 @@ class ApplicationController < ActionController::Base
   end
 
   before_action :find_user
+  before_action :categories_all
 
   private
   def find_user
     if session[:user_id]
       @user = User.find_by(id: session[:user_id])
     end
+  end
+
+  def categories_all
+    @categories = Category.all
   end
 end
