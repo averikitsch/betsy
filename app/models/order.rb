@@ -7,7 +7,7 @@ class Order < ApplicationRecord
   validates :name, presence: true, :if => :confirm_payment?
   validates :address, presence: true, :if => :confirm_payment?
   validates :email, presence: true, :if => :confirm_payment?
-  validates :cc_num, presence: true,  numericality: { only_integer: true }, length: { minimum: 16 }, :if => :confirm_payment?
+  validates :cc_num, presence: true,  numericality: { only_integer: true }, length: { is: 16 }, :if => :confirm_payment?
   validates :cc_expiry, presence: true, :if => :confirm_payment?
   validate :card_expiry_checks, :if => :confirm_payment?
   validates :cc_cvv, numericality: { only_integer: true }, length: { is: 3}, :if => :confirm_payment?
