@@ -35,8 +35,11 @@
         <li>
           <%= link_to "Products", products_path %>
           <ul class="hidden">
-            <li><a href="#">Category1</a></li>
-            <li><a href="#">Category2</a></li>
+            <% @categories.each do |category| %>
+            <li>
+            <%= link_to category.name, category_products_path(category.id) %>
+            </li>
+            <% end %>
           </ul>
         </li>
 
