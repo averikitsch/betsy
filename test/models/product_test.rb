@@ -30,22 +30,24 @@ describe Product do
     product.price = 0
     product.valid?.must_equal false
   end
-  # it "must have a numerical price value" do
-  #   product.user_id = two.id
-  #   product.price = 10
-  #   product.name = "unique name"
-  #   product.valid?.must_equal true
-  #   product.price = "clearly not a number"
-  #   product.valid?.must_equal false
-  # end
-  # it "must have a price value greater than 0" do
-  #   product.user_id = two.id
-  #   product.price = 10
-  #   product.name = "unique name"
-  #   product.valid?.must_equal true
-  #   product.price = -5
-  #   product.valid?.must_equal false
-  # end
+  it "must have a numerical price value" do
+    product.price = 10
+    product.name = "unique name"
+    product.user_id = two.id
+    product.stock = 5
+    product.valid?.must_equal true
+    product.price = "clearly not a number"
+    product.valid?.must_equal false
+  end
+  it "must have a price value greater than 0" do
+    product.user_id = two.id
+    product.price = 10
+    product.name = "unique name"
+    product.stock = 1
+    product.valid?.must_equal true
+    product.price = -5
+    product.valid?.must_equal false
+  end
   it "has stock to be valid" do
     product = products(:two)
     product.valid?.must_equal true
