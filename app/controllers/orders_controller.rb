@@ -9,7 +9,6 @@ class OrdersController < ApplicationController
 
   def show
     @order = Order.find_by(id: params[:id])
-    puts @order
     unless @order
       render_404
     else
