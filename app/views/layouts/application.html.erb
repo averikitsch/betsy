@@ -15,22 +15,46 @@
   <header class="top_header">
     <h1 class="logo"><%=link_to "Spooksy", root_path %></h1>
     <nav>
-      <%= link_to "Products", products_path %>
-      <%= link_to "Merchants", users_path %>
       <span class="float-right">
-        <% if session[:user_id] && User.find_by(id: session[:user_id])%>
-        <p class="button">
-          Logged in as
-          <%= User.find_by(id: session[:user_id]).username %>
-        </p>
+        <span class="display_full">
+          <% if session[:user_id] %>
+          <%= link_to "My Account", user_path(User.find_by(id: session[:user_id]).id) %>
           <%= link_to "Log out", logout_path, method: :delete %>
-        <% else %>
-        <%= link_to "Log In", '/auth/github' %>
-        <% end %>
+          <% else %>
+            <%= link_to "Log In", '/auth/github' %>
+          <% end %>
+        </span>
         <%= link_to orders_path do %>
         <%= fa_icon "shopping-cart" %>
         <% end %>
       </span>
+
+      <label for="show-menu" class="show-menu"><%= fa_icon "bars" %></label>
+      <input type="checkbox" id="show-menu" role="button">
+      <ul id="menu">
+        <li>
+          <%= link_to "Products", products_path %>
+          <ul class="hidden">
+            <% @categories.each do |category| %>
+            <li>
+            <%= link_to category.name, category_products_path(category.id) %>
+            </li>
+            <% end %>
+          </ul>
+        </li>
+
+        <li><%= link_to "Merchants", users_path %></li>
+
+        <span class="no_display_full">
+        <% if session[:user_id] %>
+        <li><%= link_to "My Account", user_path(User.find_by(id: session[:user_id]).id) %></li>
+        <li><%= link_to "Log out", logout_path, method: :delete %></li>
+        <% else %>
+        <li><%= link_to "Log In", '/auth/github' %></li>
+        <% end %>
+        </span>
+      </ul>
+
     </nav>
   </header>
 
