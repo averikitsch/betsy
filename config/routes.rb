@@ -20,6 +20,8 @@ Rails.application.routes.draw do
 
   resources :orders
 
+  patch '/order_products/:id/cancel', to: 'order_products#cancel', as: 'cancel_order_product'
+  patch '/order_products/:id/shipped', to: 'order_products#shipped', as: 'ship_order_product'
   patch 'products/:id/toggle_active', to: 'products#toggle_active', as: 'toggle_active'
   post '/products/:id/order', to: 'order_products#create', as: 'order_products'
   get '/order_products/:id/edit', to: 'order_products#edit', as: 'edit_order_product'

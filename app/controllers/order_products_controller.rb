@@ -69,6 +69,15 @@ class OrderProductsController < ApplicationController
     redirect_to orders_path
   end
 
+  def shipped
+    @order_product.update(shipped: @order_product.shipped ? false : true)
+    # redirect_to user_orders()
+  end
+
+  def cancel
+    # @order_product.update(cancelled: @order_product.cancelled ? false : true)
+  end
+
   private
   def op_params
     params.require(:order_product).permit(:quantity)
