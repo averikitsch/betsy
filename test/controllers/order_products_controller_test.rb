@@ -74,4 +74,15 @@ describe OrderProductsController do
     OrderProduct.last.quantity.must_equal start_op
   end
 
+  it "should toggle shipped" do
+
+  end
+
+  it "should mark order as complete if all items are shipped" do
+
+  end
+
+  it "should cancel an order-product" do
+    
+  end
 end

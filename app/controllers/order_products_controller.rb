@@ -71,11 +71,19 @@ class OrderProductsController < ApplicationController
 
   def shipped
     @order_product.update(shipped: @order_product.shipped ? false : true)
+    order = @order_product.order
+    ops = order.order_products
+    all_op = ops.map { |op| op.shipped }
+    unless all_op.include?(false)
+      #if all op are shipped mark order as complete
+      order.update(status: "complete")
+    end
+
     # redirect_to user_orders()
   end
 
   def cancel
-    # @order_product.update(cancelled: @order_product.cancelled ? false : true)
+    @order_product.update(cancelled: @order_product.cancelled ? false : true)
   end
 
   private
