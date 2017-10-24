@@ -16,6 +16,27 @@ describe OrdersController do
     end
   end
 
+  describe "order show" do
+    it "should get show if logged in" do
+      login(users(:one),"github")
+      get order_path(orders(:two))
+      must_respond_with :redirect
+
+      get order_path(orders(:one))
+      must_respond_with :found
+      order_id = orders(:one).id
+      orders(:one).destroy
+
+      get order_path(order_id)
+      must_respond_with :not_found
+
+    end
+    it "should get show" do
+      get order_path(orders(:one))
+      must_respond_with :redirect
+    end
+  end
+
   describe "order update" do
     it "can update an order" do
       new_order
@@ -34,7 +55,7 @@ describe OrdersController do
 
       must_respond_with :success
 
-      variables.zip values.each do |variable, value|
+      variables.zip(values).each do |variable, value|
         Order.last[variable].must_equal value
       end
 
@@ -46,7 +67,7 @@ describe OrdersController do
       Order.last.status.must_equal 'pending'
 
       put order_path(Order.last), params: {order: {name: "name"}}
-      must_respond_with :success
+      must_respond_with :bad_request
       Order.last.status.must_equal 'pending'
     end
 
@@ -59,7 +80,9 @@ describe OrdersController do
           cc_num: "1111222233334444", cc_expiry: "10/20", cc_cvv: "666", billing_zip: "98101" }}
 
       Order.last.status.must_equal 'paid'
-      products(:three).stock.must_equal 99
+      session[:order_id].must_equal nil
+      Product.find_by(name: "tomb").stock.must_equal 99
+
     end
   end
 
@@ -73,10 +96,7 @@ describe OrdersController do
     end
 
     it "removes session with deletion" do
-      new_order
-      session[:order_id].must_equal Order.last.id
-
-      delete_product
+      delete order_product_path(order_products(:one))
       session[:order_id].must_equal nil
     end
   end

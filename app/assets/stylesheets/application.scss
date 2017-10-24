@@ -54,11 +54,10 @@ h5 {
 
 .top_header {
   padding-top: 25px;
-  background: $white;
 }
 
 .top_header a {
-  color: $charcoal;
+  color: $white;
 }
 
 .logo {
@@ -70,13 +69,129 @@ h5 {
 /*---------------------- NAV ----------------------------*/
 
 nav {
-  padding: 0 0 10px 10px;
+  padding: 0 20px;
+  font-size: 0.75em;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
 }
 
-nav a {
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  margin-right: 15px;
+.top_header nav a, .top_header nav li a {
+  margin-right: 5px;
+}
+
+nav ul {
+  list-style-type:none;
+  margin:0;
+  padding:0;
+  position: absolute;
+}
+
+nav li {
+  display:inline-block;
+  float: left;
+  margin-right: 1px;
+}
+
+nav li a {
+  display:block;
+  text-align: center;
+  padding: 0 10px;
+  height: 30px;
+  line-height: 30px;
+}
+
+/*Hover state for top level links*/
+nav li:hover a, nav li:hover ul a:hover {
+  color: rgba($white, 0.8);
+}
+
+nav li:hover ul a {
+  background: $charcoal;
+  color: $white;
+  height: 40px;
+  line-height: 40px;
+}
+
+/*----- Hide dropdown links -----*/
+nav li ul, .no_display_full, nav input[type=checkbox] {
+  display: none;
+  -webkit-appearance: none;
+}
+
+nav li ul li {
+  display: block;
+  float: none;
+}
+
+nav li ul li a {
+  width: auto;
+  min-width: 100px;
+  padding: 0 20px;
+}
+
+/*----- Dropdown on hover -----*/
+nav ul li a:hover + .hidden, .hidden:hover, nav input[type=checkbox]:checked ~ #menu {
+  display: block;
+}
+
+.show-menu {
+  text-decoration: none;
+  text-align: left;
+  padding: 0 5px;
+  display: none;
+}
+
+nav .fa {
+  font-size: 2em;
+  color: $white;
+}
+
+
+/*----- Responsive Styles -----*/
+
+@media screen and (max-width : 639px){
+  nav {
+    margin-top: -35px;
+  }
+
+  nav ul li a:hover + .hidden, .hidden:hover, .display_full, nav ul {
+  	display: none;
+  }
+
+	nav ul {
+		position: static;
+	}
+
+	nav li{
+    border-bottom: 1px solid rgba($white,0.1);
+	}
+
+  nav li:hover a {
+    background: rgba($black, 0);
+  }
+
+  .top_header nav a, .no_display_full {
+    text-align: left;
+    display: block;
+  }
+
+  .top_header span a {
+    padding-left: 0;
+  }
+
+	nav ul li, nav li a {
+		width: 100%;
+	}
+
+  nav li a {
+    height: 50px;
+    line-height: 50px;
+    padding: 0;
+  }
+
+	.show-menu {
+		display:inline-block;
+	}
 }
 
 /*---------------------- MAIN ----------------------------*/
@@ -91,6 +206,28 @@ main h1 {
   text-transform: uppercase;
   letter-spacing: 0.1em;
   margin-bottom: 1em;
+}
+
+/*---------------------- FLASH ----------------------------*/
+.status {
+  margin: 10px auto 20px;
+  text-align: center;
+  background: rgba($white,0.01);
+  border-bottom: 0.5px solid rgba($bloodred, 0.7);
+  border-top: 0.5px solid rgba($bloodred, 0.7);
+  padding-top: 8px;
+  color:$bloodred;
+}
+
+.status h3 {
+  font-size: 0.9em;
+  font-style: italic;
+}
+
+.success {
+}
+
+.failure {
 }
 
 /*---------------------- FOOTER ----------------------------*/

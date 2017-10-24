@@ -11,30 +11,30 @@ describe Product do
     valid_product.errors.keys.must_include :user
   end
   it "must have a name to be valid" do
-    two.valid?.must_equal true
-    valid_product.user_id = two.id
-    valid_product.valid?.must_equal true
+    one.valid?.must_equal true
+    one.name = ""
+    one.valid?.must_equal false
   end
   it "must have a unique name" do
-    product.user_id = two.id
-    product.price = 10
-    product.name = "unique name"
-    product.valid?.must_equal true
-    product.name = products(:valid_product).name
+    product = products(:two)
+    product.name = products(:one).name
     product.valid?.must_equal false
   end
   it "must have a price" do
-    product.user_id = two.id
-    product.price = 10
-    product.name = "unique name"
+    product = products(:two)
     product.valid?.must_equal true
     product.price = nil
     product.valid?.must_equal false
+    product.price = "hello"
+    product.valid?.must_equal false
+    product.price = 0
+    product.valid?.must_equal false
   end
   it "must have a numerical price value" do
-    product.user_id = two.id
     product.price = 10
     product.name = "unique name"
+    product.user_id = two.id
+    product.stock = 5
     product.valid?.must_equal true
     product.price = "clearly not a number"
     product.valid?.must_equal false
@@ -43,8 +43,21 @@ describe Product do
     product.user_id = two.id
     product.price = 10
     product.name = "unique name"
+    product.stock = 1
     product.valid?.must_equal true
     product.price = -5
+    product.valid?.must_equal false
+  end
+  it "has stock to be valid" do
+    product = products(:two)
+    product.valid?.must_equal true
+    product.stock = 0
+    product.valid?.must_equal true
+    product.stock = ""
+    product.valid?.must_equal false
+    product.stock = nil
+    product.valid?.must_equal false
+    product.stock = -10
     product.valid?.must_equal false
   end
 end

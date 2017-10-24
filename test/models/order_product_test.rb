@@ -5,32 +5,62 @@ describe OrderProduct do
 
   describe "order product validations" do
   it "must have a positive integer quantity" do
-    order_product.quantity = nil
+    [nil, "eight", -3, "", 0].each do |num|
+      order_product.quantity = num
+      order_product.valid?.must_equal false
+    end
+    (1..5).each do |num|
+      order_product.quantity = num
+      order_product.valid?.must_equal true
+    end
+  end
+  it "must be in stock" do
+    order_product.quantity = 100
     order_product.valid?.must_equal false
-    order_product.quantity = "eight"
-    order_product.valid?.must_equal false
-    order_product.quantity = -3
-    order_product.valid?.must_equal false
-    order_product.quantity = 6
-    order_product.valid?.must_equal true
+  end
+  it "can't make an order product from out of stock product" do
+    product = products(:one)
+    product.stock = 0
+    product.save
+    op = OrderProduct.new(order: orders(:one), product: products(:one), quantity: 7)
+    op.valid?.must_equal false
+  end
+
+  describe "relations" do
+    it "has an associated product" do
+      op = order_products(:one)
+      op.product.must_equal products(:one)
+      op.product_id = products(:two).id
+      op.product.must_equal products(:two)
+    end
+
+    it "has associated order" do
+      op = order_products(:one)
+      op.order.must_equal orders(:one)
+      op.order_id = orders(:two).id
+      op.order.must_equal orders(:two)
+    end
   end
 
   # it "must have a default shipped value of false" do
   #   order_product.shipped.must_equal false
   # end
 
-  it "must have an associated order" do
-    order_product.order_id = nil
-    order_product.valid?.must_equal false
-    order_product.order_id = orders(:one).id
-    order_product.valid?.must_equal true
-  end
 
-  it "must have an associated product" do
-    order_product.product_id = nil
-    order_product.valid?.must_equal false
-    order_product.product_id = products(:one).id
-    order_product.valid?.must_equal true
-  end
+
+  # it "must have an associated order" do
+  #   puts order_product.valid?
+  #   order_product.valid?.must_equal true
+  #   order_product.order_id = nil
+  #   order_product.valid?.must_equal false
+  #
+  # end
+  #
+  # it "must have an associated product" do
+  #   order_product.product_id = nil
+  #   order_product.valid?.must_equal false
+  #   order_product.product_id = products(:one).id
+  #   order_product.valid?.must_equal true
+  # end
 end
 end

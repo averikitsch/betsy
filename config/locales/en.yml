@@ -30,4 +30,10 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  activerecord:
+    attributes:
+      order:
+        cc_expiry: "Expiration Date"
+        cc_num: "Credit Card Number"
+        cc_cvv: "CVV"
+        billing_zip: "Billing ZIP code"

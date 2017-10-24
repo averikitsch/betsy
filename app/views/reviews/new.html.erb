@@ -3,7 +3,7 @@
 </section>
 <section class = "row">
   <article class = "columns small-12 large-6">
-    <%= image_tag @product.image, alt:"product image to review" %>
+    <%= image_tag @product.image, alt:"product image to review" unless @product.image.blank?%>
     <h3><%=@product.name%></h3>
   </article>
   <article class = "columns small-12 large-6">

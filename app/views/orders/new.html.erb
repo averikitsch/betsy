@@ -1,18 +1,5 @@
 <section class="forms row">
 <h1>Checkout</h1>
-<!-- <% if flash[:result_text] or flash[:messages] %>
-  <section class="row status <%= flash[:status] %>">
-    <h3><%= flash[:status] == :failure ? "A problem occurred: " : "" %><%= flash[:result_text] %></h3>
-    <% if flash[:messages] %>
-      <ul>
-        <% flash[:messages].each do |name, problems| %>
-          <% problems.each do |problem| %>
-            <li><%= name %>: <%= problem %></li>
-          <% end %>
-        <% end %>
-      </ul>
-    <% end %>
-  </section>
-<% end %> -->
+
 <%= render partial: "form", locals: { action_name: "Complete Order" } %>
 </section>

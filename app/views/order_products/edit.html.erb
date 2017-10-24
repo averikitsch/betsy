@@ -1,8 +1,16 @@
 <section class="forms">
 <h1>Update Product Quantity</h1>
-<%= form_for @order_product do |f| %>
-<%= f.label :quantity %>
-<%= f.select :quantity, options_for_select(1..10, @order_product.quantity) %>
-<%= f.submit "Update Quantity", class: "button" %>
-<% end %>
+<section class = "row">
+  <article class = "columns small-12 large-4">
+    <%= image_tag @order_product.product.image, alt: @order_product.product.name%>
+  </article>
+  <article class = "columns small-12 large-8">
+  <%= link_to @order_product.product.name.titleize ,product_path(@order_product.product_id)%>
+  <%= form_for @order_product do |f| %>
+  <%= f.label :quantity %>
+  <%= f.select :quantity, options_for_select(1..10, @order_product.quantity) %>
+  <%= f.submit "Update Quantity", class: "button" %>
+  <% end %>
+  </article>
+</section>
 </section>

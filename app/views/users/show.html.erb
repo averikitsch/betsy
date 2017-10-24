@@ -27,7 +27,7 @@
     </thead>
 
     <tbody>
-      <% @user.products.each do |product| %>
+      <% @user.products.order("name").each do |product| %>
       <tr>
         <td data-label='Product'><%= link_to product.name, product_path(product.id) %></td>
         <td data-label='Stock'><%= product.stock %></td>

@@ -6,7 +6,7 @@ one:
   user: one
   stock: 6
   description: MyText
-  image: "smoke.jpg"
+  image: smoke
   active: false
 
 two:
@@ -15,12 +15,13 @@ two:
   user: two
   stock: 3
   description: MyText
-  image: tombstone.png
+  image: tombstone
   active: false
 
 valid_product:
   name: shoe
   price: 10.01
+  image: tombstone
 
 three:
   name: tomb

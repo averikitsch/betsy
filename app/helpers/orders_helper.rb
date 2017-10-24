@@ -7,4 +7,15 @@ module OrdersHelper
   def total(subtotal)
     return (subtotal*1.10)
   end
+
+  def hide_num(num)
+    length_to_hide = num.length - 4
+    length_to_hide.times do |n|
+      unless num[n] == " "
+        num[n] = "*"
+      end
+    end
+    return num
+  end
+
 end

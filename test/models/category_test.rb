@@ -20,6 +20,10 @@ describe Category do
       new_category = Category.new(name: 'decorations')
       new_category.valid?.must_equal false
     end
+
+    it "doesn't create a new category with different capitalization" do
+      proc {Category.new(name: "PoTions")}.must_change 'Category.count', 0
+    end
   end
   describe "relations " do
     it "has relations to product" do

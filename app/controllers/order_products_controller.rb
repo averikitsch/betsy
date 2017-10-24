@@ -1,14 +1,14 @@
 class OrderProductsController < ApplicationController
   before_action :find_op, only: [:edit, :update, :destroy]
 
-  def index
-  end
-
-  def show
-  end
-
-  def new
-  end
+  # def index
+  # end
+  #
+  # def show
+  # end
+  #
+  # def new
+  # end
 
   def create
     if session[:order_id].nil?
@@ -16,6 +16,10 @@ class OrderProductsController < ApplicationController
       session[:order_id] = @order.id
     else
       @order = Order.find_by(id: session[:order_id])
+      if @order.nil? # broken session (ie no cart but session still in browser cache)
+        @order = Order.create(status: "pending")
+        session[:order_id] = @order.id
+      end
     end
     @op = @order.order_products.find_by(product_id: params[:id])
     if @op
@@ -27,13 +31,13 @@ class OrderProductsController < ApplicationController
     end
     if @op.save
       flash[:status] = :success
-      flash[:result_text] = "Successfully summoned to your coffin!"
+      flash[:result_text] = "Successfully summoned to your treat bag!"
       redirect_to product_path(params[:id])
     else
       flash[:status] = :failure
-      flash[:result_text] = "Oops!"
+      flash[:result_text] = "Boo!"
       flash[:messages] = @op.errors.messages
-      redirect_to product_path(params[:id])
+      redirect_to product_path(params[:id]), status: :bad_request
     end
   end
 
@@ -43,11 +47,11 @@ class OrderProductsController < ApplicationController
   def update
     if @order_product.update(op_params)
       flash[:status] = :success
-      flash[:result_text] = "Quantity updated!"
+      flash[:result_text] = "Scares updated!"
       redirect_to orders_path
     else
       flash.now[:status] = :failure
-      flash.now[:result_text] = "Quantity could not be updated"
+      flash.now[:result_text] = "Scares could not be updated"
       flash.now[:messages] = @order_product.errors.messages
       render :edit
     end
@@ -57,8 +61,11 @@ class OrderProductsController < ApplicationController
     order = @order_product.order
     @order_product.destroy
     if order.order_products.empty?
-      order.destroy    
+      order.destroy
+      session.delete(:order_id)
     end
+    flash[:status] = :success
+    flash[:result_text] = "Successfully disappeared from your coffin!"
     redirect_to orders_path
   end
 

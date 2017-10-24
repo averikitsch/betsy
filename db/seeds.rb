@@ -172,6 +172,9 @@ prd = Product.find(23);	cat=Category.find(2);	prd.categories << cat
 prd = Product.find(4);	cat=Category.find(2);	prd.categories << cat
 prd = Product.find(22);	cat=Category.find(2);	prd.categories << cat
 prd = Product.find(27);	cat=Category.find(2);	prd.categories << cat
+prd = Product.find(31);	cat=Category.find(3);	prd.categories << cat
+prd = Product.find(32);	cat=Category.find(3);	prd.categories << cat
+prd = Product.find(28);	cat=Category.find(3);	prd.categories << cat
 prd = Product.find(27);	cat=Category.find(3);	prd.categories << cat
 prd = Product.find(8);	cat=Category.find(3);	prd.categories << cat
 prd = Product.find(18);	cat=Category.find(3);	prd.categories << cat
@@ -179,6 +182,7 @@ prd = Product.find(23);	cat=Category.find(3);	prd.categories << cat
 prd = Product.find(8);	cat=Category.find(4);	prd.categories << cat
 prd = Product.find(15);	cat=Category.find(4);	prd.categories << cat
 prd = Product.find(19);	cat=Category.find(4);	prd.categories << cat
+prd = Product.find(30);	cat=Category.find(4);	prd.categories << cat
 prd = Product.find(15);	cat=Category.find(5);	prd.categories << cat
 prd = Product.find(6);	cat=Category.find(5);	prd.categories << cat
 prd = Product.find(20);	cat=Category.find(5);	prd.categories << cat
@@ -194,6 +198,7 @@ prd = Product.find(22);	cat=Category.find(6);	prd.categories << cat
 prd = Product.find(10);	cat=Category.find(6);	prd.categories << cat
 prd = Product.find(18);	cat=Category.find(6);	prd.categories << cat
 prd = Product.find(20);	cat=Category.find(7);	prd.categories << cat
+prd = Product.find(29);	cat=Category.find(7);	prd.categories << cat
 prd = Product.find(1);	cat=Category.find(7);	prd.categories << cat
 prd = Product.find(2);	cat=Category.find(8);	prd.categories << cat
 prd = Product.find(3);	cat=Category.find(8);	prd.categories << cat

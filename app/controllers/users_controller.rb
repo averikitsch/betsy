@@ -4,34 +4,32 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find_by(id: params[:id].to_i)
-
-    head :not_found unless @user
-  end
-
-
-  def toggle_active
-    @product = Product.find_by(id: params[:id])
-    # @product.active = params[:product][:active].to_i
-    if @product.active
-      @product.active = false
+    if @user.nil?
+      # if User.find_by(id: params[:id])
+        flash[:status] = :failure
+        flash[:result_text] = "Dear Paranormal Ally: We regret to inform you that accesss to this page is restricted."
+        redirect_to users_path
+      # else
+      #   render_404
+      # end
+    elsif session[:user_id].to_i != params[:id].to_i
+      # if User.find_by(id: params[:id])
+        flash[:status] = :failure
+        flash[:result_text] = "Dear Spooker: You cannot view another spooky's page! #{params}"
+        redirect_to users_path
+      # else
+      #   render_404
+      # end
     else
-      @product.active = true
-    end
-
-    if @product.save
-      redirect_to user_path(@product.user)
-    else
-      flash[:status] = :failure
-      flash[:result_text] = "Active status cannot be loaded"
+      render_404 unless @user
     end
   end
 
-  def new
-  end
-
-  def create
-  end
+  # def new
+  # end
+  #
+  # def create
+  # end
 
   def edit
   end
@@ -52,19 +50,19 @@ class UsersController < ApplicationController
         if user.save
           session[:user_id] = user.id
           flash[:status] = :success
-          flash[:result_text] = "Successfully added new user #{user.username}"
+          flash[:result_text] = "Successfully added new ghoul, #{user.username}"
         else
           flash[:status] = :failure
-          flash[:result_text] = "New user not saved"
+          flash[:result_text] = "New ghoul could not be saved"
         end
       else
         session[:user_id] = user.id
         flash[:status] = :success
-        flash[:result_text] = "Successfully logged in as returning user #{user.username}"
+        flash[:result_text] = "Successfully summoned returning ghoul, #{user.username}"
       end
     else
       flash[:status] = :failure
-      flash[:result_text] = "Could not authenticate user information"
+      flash[:result_text] = "Could not authenticate your ghoul information"
     end
     redirect_to root_path
   end
@@ -73,7 +71,7 @@ class UsersController < ApplicationController
     if session[:user_id]
       session.delete(:user_id)
       flash[:status] = :success
-      flash[:result_text] = "You are now logged out. Goodbye!"
+      flash[:result_text] = "Your trip to the underworld has ended! Goodbye!"
     end
     redirect_to root_path
   end

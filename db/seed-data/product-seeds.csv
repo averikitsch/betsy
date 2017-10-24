@@ -1,28 +1,33 @@
 id,name,price,stock,description,image,active,user_id
-1,wort enhancer lotion,37,10,"bloody, puss-filled, you name it","http://placebeyonce.com/200-200",TRUE,2
-2,distant children laughing soundtrack,20,30,hahaha hahahaha,"http://placebeyonce.com/200-200",TRUE,3
-3,creaky floor soundtrack,46,5,,"http://placebeyonce.com/200-200",TRUE,1
-4,flickering lightbulbs,39,31,,"http://placebeyonce.com/200-200",TRUE,2
-5,fog machine,52,28,,"http://placebeyonce.com/200-200",TRUE,1
-6,occult altars,10,5,,"http://placebeyonce.com/200-200",TRUE,2
-7,black candles,36,26,pack of three,"http://placebeyonce.com/200-200",TRUE,1
-8,disappearing wall paint,52,38,for bloody messages,"http://placebeyonce.com/200-200",TRUE,3
-9,one-way mirrors,24,6,,"http://placebeyonce.com/200-200",TRUE,1
-10,spy paintings,12,38,painting with eye holes cut out,"http://placebeyonce.com/200-200",TRUE,3
-11,tattered dress,52,34,,"http://placebeyonce.com/200-200",TRUE,2
-12,shackles,49,17,,"http://placebeyonce.com/200-200",TRUE,3
-13,bag of body parts,43,14,,"http://placebeyonce.com/200-200",TRUE,1
-14,pint of blood,52,7,A+ blood,"http://placebeyonce.com/200-200",FALSE,1
-15,haunted doll,12,23,comes with curse,"http://placebeyonce.com/200-200",TRUE,2
-16,leftover innards,20,32,,"http://placebeyonce.com/200-200",TRUE,2
-17,blood stained towel,23,22,,"http://placebeyonce.com/200-200",FALSE,1
-18,spider egg sacks,52,24,will hack in 3-5 days,"http://placebeyonce.com/200-200",TRUE,2
-19,severed hand,20,28,,"http://placebeyonce.com/200-200",TRUE,2
-20,book of potions,40,5,,"http://placebeyonce.com/200-200",TRUE,3
-21,mask,25,25,replica Jason Mask,"http://placebeyonce.com/200-200",TRUE,3
-22,pre-bloodied knives,30,40,,"http://placebeyonce.com/200-200",TRUE,1
-23,buckets-o-blood,23,22,,"http://placebeyonce.com/200-200",TRUE,3
-24,pitchforks,54,28,,"http://placebeyonce.com/200-200",TRUE,1
-25,voice modulator,56,30,choose from three settings,"http://placebeyonce.com/200-200",TRUE,2
-26,projector,40,20,,"http://placebeyonce.com/200-200",TRUE,2
-27,flash paper,24,40,,"http://placebeyonce.com/200-200",TRUE,1
+1,wort enhancer lotion,37,10,"bloody, puss-filled, you name it","s7",TRUE,2
+2,distant children laughing soundtrack,20,30,hahaha hahahaha,"s9",TRUE,3
+3,creaky floor soundtrack,46,5,,"http://placebeyonce.com/200-300",FALSE,1
+4,flickering lightbulbs,39,31,,"s10",TRUE,2
+5,fog machine,52,28,,"s3",TRUE,1
+6,occult altars,10,5,,"s11",TRUE,2
+7,black candles,36,26,pack of three,"s12",TRUE,1
+8,disappearing wall paint,52,38,for bloody messages,"s13",TRUE,3
+9,one-way mirrors,24,6,,"s14",TRUE,1
+10,spy paintings,12,38,painting with eye holes cut out,"s15",TRUE,3
+11,tattered dress,52,34,,"s17",TRUE,2
+12,shackles,49,17,,"s18",TRUE,3
+13,bag of body parts,43,14,,"s19",TRUE,1
+14,pint of blood,52,7,A+ blood,"s28",FALSE,1
+15,haunted doll,12,23,comes with curse,"s20",TRUE,2
+16,leftover innards,20,32,,"s21",TRUE,2
+17,blood stained towel,23,22,,"http://placebeyonce.com/200-300",FALSE,1
+18,spider egg sacks,52,24,will hack in 3-5 days,"s1",TRUE,2
+19,severed hand,20,28,,"s22",TRUE,2
+20,book of potions,40,5,,"s23",TRUE,3
+21,mask,25,25,replica Jason Mask,"s24",TRUE,3
+22,pre-bloodied knives,30,40,,"s27",TRUE,1
+23,buckets-o-blood,23,22,,"s28",TRUE,3
+24,pitchforks,54,28,,"s29",TRUE,1
+25,voice modulator,56,30,choose from three settings,"s30",TRUE,2
+26,projector,40,20,,"s32",TRUE,2
+27,flash paper,24,40,,"s33",TRUE,1
+28,teeth blackener,23,22,,"s4",TRUE,3
+29,black lemonade,54,28,when your haunting needs a pick me up,"s5",TRUE,1
+30,creepy puppet,56,30,more dynamic than a haunted doll,"s8",TRUE,2
+31,eye brightener,40,20,make those eyes glow,"s2",TRUE,2
+32,bloody sleep mask,24,40,it's a real product,"s6",TRUE,1
