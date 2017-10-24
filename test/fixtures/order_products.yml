@@ -11,3 +11,9 @@ two:
   product: two
   quantity: 5
   shipped: false
+
+three:
+  order: one
+  product: three
+  quantity: 3
+  shipped: false

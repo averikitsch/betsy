@@ -76,5 +76,7 @@ class UsersController < ApplicationController
     redirect_to root_path
   end
 
-
+  def order_fulfillment
+    @user = User.find_by(id: params[:user_id].to_i)
+  end
 end

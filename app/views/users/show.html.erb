@@ -5,7 +5,7 @@
   <% end %>
 
   <p><%= link_to "Add Product", new_product_path %> | <%= link_to "Add Category", new_category_path %></p>
-  <p><%= link_to "Order Summary" %></p>
+  <p><%= link_to "Order Summary", user_orders_path(@user.id) %></p>
 
   <h4>Products</h4>
 

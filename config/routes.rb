@@ -4,6 +4,7 @@ Rails.application.routes.draw do
 
   # resources :order_products
   get '/users/:user_id/products', to: 'products#index', as: 'user_products'
+  get '/users/:user_id/orders', to: 'users#order_fulfillment', as: 'user_orders'
 
   resources :categories, only: [:new, :create, :index] do
     resources :products, only: [:index]
