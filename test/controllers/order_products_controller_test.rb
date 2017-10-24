@@ -13,6 +13,15 @@ describe OrderProductsController do
     proc{post order_products_path(products(:one), order_product: {quantity: ""})}.must_change 'OrderProduct.count', 0
   end
 
+  it "should make a new order if session is broken" do
+    session[:order_id] = 1234
+
+    order_count = Order.count
+    post order_products_path(products(:one), order_product: {quantity: 1})
+    session[:order_id].must_equal Order.last.id
+    Order.count.must_equal order_count + 1
+  end
+
   it "edit should get the edit form" do
     get edit_order_product_path(order_products(:one))
     must_respond_with :success

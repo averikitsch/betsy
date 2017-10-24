@@ -115,7 +115,7 @@ class ProductsController < ApplicationController
     return params.require(:product).permit(:user_id, :name, :price, :stock, :description, :image, :active)
   end
 
-  def render_404
-    render file: "/public/404.html", status: 404
-  end
+  # def render_404
+  #   render file: "/public/404.html", status: 404
+  # end
 end

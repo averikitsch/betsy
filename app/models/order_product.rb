@@ -16,7 +16,7 @@ class OrderProduct < ApplicationRecord
   def stock_quantity
     quantity = self.quantity.to_i
     if quantity > self.product.stock
-      errors.add(:stock, "product stock is #{self.product.stock}")
+      errors.add(:stock, "is #{self.product.stock}")
     end
   end
 end

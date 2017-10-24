@@ -34,19 +34,19 @@ class UsersController < ApplicationController
         if user.save
           session[:user_id] = user.id
           flash[:status] = :success
-          flash[:result_text] = "Successfully added new user #{user.username}"
+          flash[:result_text] = "Successfully added new ghoul, #{user.username}"
         else
           flash[:status] = :failure
-          flash[:result_text] = "New user not saved"
+          flash[:result_text] = "New ghoul could not be saved"
         end
       else
         session[:user_id] = user.id
         flash[:status] = :success
-        flash[:result_text] = "Successfully logged in as returning user #{user.username}"
+        flash[:result_text] = "Successfully summoned returning ghoul, #{user.username}"
       end
     else
       flash[:status] = :failure
-      flash[:result_text] = "Could not authenticate user information"
+      flash[:result_text] = "Could not authenticate your ghoul information"
     end
     redirect_to root_path
   end
@@ -55,7 +55,7 @@ class UsersController < ApplicationController
     if session[:user_id]
       session.delete(:user_id)
       flash[:status] = :success
-      flash[:result_text] = "You are now logged out. Goodbye!"
+      flash[:result_text] = "Your trip to the underworld has ended! Goodbye!"
     end
     redirect_to root_path
   end

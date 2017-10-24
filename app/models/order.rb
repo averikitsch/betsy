@@ -20,7 +20,7 @@ class Order < ApplicationRecord
     if !(cc_expiry.nil? || cc_expiry.empty?)
       begin
         if Date.strptime(cc_expiry, '%m/%y') < Date.today
-          errors.add(:cc_expiry, "can't be in the past")
+          errors.add(:cc_expiry, "can't be expired")
         end
       rescue ArgumentError
         errors.add(:cc_expiry, "in wrong format")

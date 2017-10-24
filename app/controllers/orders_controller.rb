@@ -30,8 +30,8 @@ class OrdersController < ApplicationController
     @order.update(order_params)
     unless @order.update(status: "paid")
       flash.now[:status] = :failure
-      flash.now[:result_text] = "Oops!"
-      flash.now[:messages] = @order.errors.messages
+      flash.now[:result_text] = "Boo!"
+      flash.now[:messages] = humanize(@order.errors.messages)
       render :new, status: :bad_request
     else
       reduce_inventory(@order)
@@ -60,5 +60,12 @@ class OrdersController < ApplicationController
       product.stock -= order_product.quantity
       product.save
     end
+  end
+  def humanize(hash)
+    new_hash = {}
+    hash.each do |k,v|
+      new_hash[Order.human_attribute_name(k)] = hash[k]
+    end
+    return new_hash
   end
 end
