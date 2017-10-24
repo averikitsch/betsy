@@ -26,3 +26,8 @@ id,name,price,stock,description,image,active,user_id
 25,voice modulator,56,30,choose from three settings,"s30",TRUE,2
 26,projector,40,20,,"s32",TRUE,2
 27,flash paper,24,40,,"s33",TRUE,1
+28,teeth blackener,23,22,,"s4",TRUE,3
+29,black lemonade,54,28,when your haunting needs a pick me up,"s5",TRUE,1
+30,creepy puppet,56,30,more dynamic than a haunted doll,"s8",TRUE,2
+31,eye brightener,40,20,make those eyes glow,"s2",TRUE,2
+32,bloody sleep mask,24,40,it's a real product,"s6",TRUE,1
