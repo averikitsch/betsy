@@ -7,16 +7,26 @@ describe UsersController do
     must_respond_with :success
   end
 
-  it "should get show" do
-    get user_path(users(:two))
-    must_respond_with :success
+  # it "should get show" do
+  #   get user_path(users(:two))
+  #   must_respond_with :success
+  # end
+
+  it "should redirect to the users index if user is not logged in" do
+    get user_path(user.id)
+    must_respond_with :redirect
+  end
+
+  it "should redirect if logged in user tries to access someone else's show page" do
+    login(user, :github)
+    get user_path(users(:two).id)
+    must_respond_with :redirect
   end
 
   it "should render 404 if user not found" do
     get user_path(-1)
     must_respond_with :not_found
   end
-
 
   describe "auth_callback" do
     it "should not create a new user on repeat logins" do
