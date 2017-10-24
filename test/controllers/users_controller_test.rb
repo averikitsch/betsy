@@ -2,30 +2,35 @@ require "test_helper"
 
 describe UsersController do
   let(:user) { users(:one) }
+
   it "should get index" do
     get users_path
     must_respond_with :success
   end
 
-  # it "should get show" do
-  #   get user_path(users(:two))
-  #   must_respond_with :success
-  # end
+  describe "show page" do
 
-  it "should redirect to the users index if user is not logged in" do
-    get user_path(user.id)
-    must_respond_with :redirect
-  end
+    describe "guest access" do
+      it "should redirect if guest is not logged in" do
+        get user_path(user.id)
+        must_respond_with :redirect
+      end
+      it "should render a 404 if user show page does not exist" do
+        get users_path(-100)
+        must_respond_with render_404
+      end
+    end
 
-  it "should redirect if logged in user tries to access someone else's show page" do
-    login(user, :github)
-    get user_path(users(:two).id)
-    must_respond_with :redirect
-  end
+    it "should redirect if logged in user tries to access someone else's show page" do
+      login(user, :github)
+      get user_path(users(:two).id)
+      must_respond_with :redirect
+    end
 
-  it "should render 404 if user not found" do
-    get user_path(-1)
-    must_respond_with :not_found
+    it "should render 404 if user not found" do
+      get user_path(-1)
+      must_respond_with :not_found
+    end
   end
 
   describe "auth_callback" do

@@ -5,24 +5,23 @@ class UsersController < ApplicationController
 
   def show
     if @user.nil?
-      if User.find_by(id: params[:id])
+      # if User.find_by(id: params[:id])
         flash[:status] = :failure
         flash[:result_text] = "Dear Paranormal Ally: We regret to inform you that accesss to this page is restricted."
         redirect_to users_path
-      else
-        render_404
-      end
+      # else
+      #   render_404
+      # end
     elsif session[:user_id].to_i != params[:id].to_i
-      if User.find_by(id: params[:id])
+      # if User.find_by(id: params[:id])
         flash[:status] = :failure
         flash[:result_text] = "Dear Spooker: You cannot view another spooky's page! #{params}"
         redirect_to users_path
-      else
-        render_404
-      end
+      # else
+      #   render_404
+      # end
     else
-      render_404
-      # unless @user
+      render_404 unless @user
     end
   end
 
