@@ -11,26 +11,34 @@ describe UsersController do
   describe "show page" do
 
     describe "guest access" do
-      it "should redirect if guest is not logged in" do
+      it "should redirect if trying to access anyone's show page" do
         get user_path(user.id)
         must_respond_with :redirect
       end
-      it "should render a 404 if user show page does not exist" do
-        get users_path(-100)
-        must_respond_with render_404
+      it "should render 404 if user show page does not exist" do
+        get user_path(-100)
+        must_respond_with :not_found
       end
     end
 
-    it "should redirect if logged in user tries to access someone else's show page" do
-      login(user, :github)
-      get user_path(users(:two).id)
-      must_respond_with :redirect
+    describe "user access" do
+      it "should render user's product page" do
+        login(user, :github)
+        get user_path(user.id)
+        must_respond_with :success
+      end
+      it "should redirect if trying to access someone else's show page" do
+        login(user, :github)
+        get user_path(users(:two).id)
+        must_respond_with :redirect
+      end
+      it "should render 404 if user not found" do
+        login(user, :github)
+        get user_path(-100)
+        must_respond_with :not_found
+      end
     end
 
-    it "should render 404 if user not found" do
-      get user_path(-1)
-      must_respond_with :not_found
-    end
   end
 
   describe "auth_callback" do
