@@ -1,5 +1,5 @@
 class OrdersController < ApplicationController
-  before_action :find_order, only: [:index, :new, :create, :update, :destroy]
+  before_action :find_order, only: [:index, :new, :show, :create, :update, :destroy]
 
   def index
     if @order
@@ -7,9 +7,10 @@ class OrdersController < ApplicationController
     end
   end
 
-  # def show
-  # end
-  #
+  def show
+    @order = Order.find_by(id: params[:id])
+  end
+
   def new
   end
 
