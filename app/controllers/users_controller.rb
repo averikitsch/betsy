@@ -15,7 +15,7 @@ class UsersController < ApplicationController
     elsif session[:user_id].to_i != params[:id].to_i
       # if User.find_by(id: params[:id])
         flash[:status] = :failure
-        flash[:result_text] = "Dear Spooker: You cannot view another spooky's page! #{params}"
+        flash[:result_text] = "Dear Spooker: You cannot view another spooky's page!"
         redirect_to users_path
       # else
       #   render_404
