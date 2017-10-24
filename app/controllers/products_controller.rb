@@ -31,7 +31,6 @@ class ProductsController < ApplicationController
   end
 
   def new
-    #is currently set to choose user to add product to
     @product = Product.new
   end
 
