@@ -1,6 +1,6 @@
 class Order < ApplicationRecord
   STATUS = %w(pending paid complete cancelled)
-  has_many :order_products, dependent: :delete_all
+  has_many :order_products, dependent: :destroy
   has_many :products, :through => :order_products
 
   # validates :order_products, :presence => true, :if => :confirm_payment?

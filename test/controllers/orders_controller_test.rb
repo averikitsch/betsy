@@ -80,7 +80,7 @@ describe OrdersController do
           cc_num: "1111222233334444", cc_expiry: "10/20", cc_cvv: "666", billing_zip: "98101" }}
 
       Order.last.status.must_equal 'paid'
-      session[:order_id].must_equal nil
+      session[:order_id].must_be_nil
       Product.find_by(name: "tomb").stock.must_equal 99
 
     end
