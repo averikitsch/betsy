@@ -37,14 +37,18 @@ class ProductsController < ApplicationController
 
   def create
     @product = Product.new(product_params)
+    #appends categories into @products.categories
     temp = @product.categories.map {|c| c.id }
-    store_params = params[:product][:category_ids]
-    if store_params
-      store_params.each do |category|
+    if params[:product][:category_ids]
+      params[:product][:category_ids].each do |category|
         if !temp.include?(category) && category != ""
           @product.categories << Category.find(category)
         end
       end
+    end
+    #replaces empty string with default image
+    if params[:product][:image] == ""
+      @product.image = valid_image
     end
     if @product.save
       flash[:status] = :success
@@ -61,17 +65,21 @@ class ProductsController < ApplicationController
   end
 
   def update
+    # note: clears categories, will keep categories if categories is not updated
     @product.categories = []
-    # note: clears categories
-
-    store_params = params[:product][:category_ids]
-    if store_params
-      store_params.each do |category|
+    #appends categories into @products.categories
+    if params[:product][:category_ids]
+      params[:product][:category_ids].each do |category|
         unless category == ""
           @product.categories << Category.find(category)
         end
       end
     end
+    #replaces empty string with default image
+    if params[:product][:image] == ""
+      params[:product][:image] = valid_image
+    end
+
     @product.update_attributes(product_params)
 
     if @product.save
@@ -117,5 +125,9 @@ class ProductsController < ApplicationController
 
   def render_404
     render file: "/public/404.html", status: 404
+  end
+
+  def valid_image
+    "http://placebeyonce.com/200-300"
   end
 end
