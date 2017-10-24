@@ -31,15 +31,17 @@ class ProductsController < ApplicationController
   end
 
   def new
-    @product = Product.new
+    if find_user
+      @product = Product.new
+    else
+      flash[:status] = :failure
+      flash[:result_text] = "Oops..You need to be logged in to add a product!"
+      redirect_to products_path
+    end
   end
 
   def create
-    if find_user && @user.id != @product.user.id
-      flash[:status] = :failure
-      flash[:result_text] = "Oops..You can't create a product for someone else!"
-      redirect_to product_path(@product.id)
-    else
+    if find_user
       @product = Product.new(product_params)
       #appends categories into @products.categories
       temp = @product.categories.map {|c| c.id }
@@ -50,10 +52,12 @@ class ProductsController < ApplicationController
           end
         end
       end
+
       #replaces empty string with default image
       if params[:product][:image] == ""
         @product.image = valid_image
       end
+
       if @product.save
         flash[:status] = :success
         flash[:result_text] = "Successfully created #{@product.name}!"
@@ -63,19 +67,29 @@ class ProductsController < ApplicationController
         flash.now[:result_text] = "#{@product.name} could not be created"
         render :new, status: :bad_request
       end
+    else
+      flash[:status] = :failure
+      flash[:result_text] = "Oops..You can't create a product for someone else!"
+      redirect_to products_path
     end
   end
 
   def edit
-    if find_user && @user.id != @product.user.id
+    if find_user
+      if @user.id != @product.user.id
+        flash[:status] = :failure
+        flash[:result_text] = "Oops..This isn't your product!"
+        redirect_to product_path(@product.id)
+      end
+    else
       flash[:status] = :failure
-      flash[:result_text] = "Oops..This isn't your product!"
+      flash[:result_text] = "Oops..You're not logged in!"
       redirect_to product_path(@product.id)
     end
   end
 
   def update
-    if find_user && @user.id != @product.user.id
+    if find_user && (@user.id != @product.user.id)
       flash[:status] = :failure
       flash[:result_text] = "Oops..This isn't your product!"
       redirect_to product_path(@product.id)
@@ -120,12 +134,9 @@ class ProductsController < ApplicationController
       @product.active = true
     end
 
-    @product.save
+    if @product.save
       redirect_to user_path(@product.user)
-    # else
-    #   flash[:status] = :failure
-    #   flash[:result_text] = "Active status cannot be loaded"
-    # end
+    end
   end
 
   private
