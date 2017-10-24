@@ -18,7 +18,7 @@
       <%= link_to "Products", products_path %>
       <%= link_to "Merchants", users_path %>
       <span class="float-right">
-        <% if session[:user_id] %>
+        <% if session[:user_id] && User.find_by(id: session[:user_id])%>
         <p class="button">
           Logged in as
           <%= User.find_by(id: session[:user_id]).username %>
