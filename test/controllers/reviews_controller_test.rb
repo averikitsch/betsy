@@ -6,12 +6,18 @@ describe ReviewsController do
       login(users(:one), :github)
       get new_product_review_path(products(:one))
       must_respond_with :redirect
+
+      post product_reviews_path(products(:one)), params: {rating: 5}
+      must_respond_with :redirect
     end
 
     it "will let other users vote for a product" do
       login(users(:one), :github)
       get new_product_review_path(products(:two))
       must_respond_with :success
+
+      proc{post product_reviews_path(products(:two)), params: {rating: 5}}.must_change 'Review.count', 1
+      must_respond_with :redirect
     end
 
   end
