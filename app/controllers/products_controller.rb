@@ -75,12 +75,11 @@ class ProductsController < ApplicationController
         end
       end
     end
-    #replaces empty string with default image
-    if params[:product][:image] == ""
-      params[:product][:image] = valid_image
-    end
-
     @product.update_attributes(product_params)
+    #replaces empty string with default image
+    if @product.image.length == 0
+      @product.image = valid_image
+    end
 
     if @product.save
       flash[:status] = :success
