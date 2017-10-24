@@ -62,6 +62,11 @@ class ProductsController < ApplicationController
   end
 
   def edit
+    if find_user && @user.id != @product.user.id
+      flash[:status] = :failure
+      flash[:result_text] = "Oops..This isn't your product!"
+      redirect_to product_path(@product.id)
+    end
   end
 
   def update
