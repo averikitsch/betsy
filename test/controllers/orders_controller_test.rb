@@ -16,6 +16,27 @@ describe OrdersController do
     end
   end
 
+  describe "order show" do
+    it "should get show if logged in" do
+      login(users(:one),"github")
+      get order_path(orders(:two))
+      must_respond_with :redirect
+
+      get order_path(orders(:one))
+      must_respond_with :found
+      order_id = orders(:one).id
+      orders(:one).destroy
+
+      get order_path(order_id)
+      must_respond_with :not_found
+
+    end
+    it "should get show" do
+      get order_path(orders(:one))
+      must_respond_with :redirect
+    end
+  end
+
   describe "order update" do
     it "can update an order" do
       new_order

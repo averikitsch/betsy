@@ -9,6 +9,17 @@ class OrdersController < ApplicationController
 
   def show
     @order = Order.find_by(id: params[:id])
+    puts @order
+    unless @order
+      render_404
+    else
+      users = @order.products.map{ |p| p.user}
+      if !users.include?(@user)
+        flash[:status] = :failure
+        flash[:result_text] = "You can't view this page!"
+        redirect_to users_path
+      end
+    end
   end
 
   def new
