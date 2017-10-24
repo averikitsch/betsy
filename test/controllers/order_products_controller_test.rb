@@ -14,12 +14,17 @@ describe OrderProductsController do
   end
 
   it "should make a new order if session is broken" do
-    session[:order_id] = 1234
-
-    order_count = Order.count
+    login(users(:one), :github)
     post order_products_path(products(:one), order_product: {quantity: 1})
-    session[:order_id].must_equal Order.last.id
-    Order.count.must_equal order_count + 1
+    startID = session[:order_id]
+
+
+    Order.destroy_all
+
+    post order_products_path(products(:one), order_product: {quantity: 1})
+
+    session[:order_id].wont_equal startID
+    Order.count.must_equal 1
   end
 
   it "edit should get the edit form" do
