@@ -4,9 +4,17 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find_by(id: params[:id].to_i)
-
-    render_404 unless @user
+    if @user.nil?
+      flash[:status] = :failure
+      flash[:result_text] = "Dear Paranormal Ally: We regretfully inform you that accesss to this page is restricted."
+      redirect_to users_path
+    elsif session[:user_id].to_i != params[:id].to_i
+      flash[:status] = :failure
+      flash[:result_text] = "You cannot view another user's page! "
+      redirect_to users_path
+    else
+      render_404 unless @user
+    end
   end
 
   # def new
