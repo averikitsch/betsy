@@ -121,10 +121,6 @@ header h1 {
   margin: 0 auto;
 }
 
-.search-bar form input[type="text"]{
-  width: 10rem;
-}
-
 .search-bar input::placeholder {
   transform: rotate(-30deg);
   transform-origin: left center;
@@ -147,6 +143,7 @@ nav li ul li a {
   min-width: 100px;
   padding: 0 20px;
 }
+
 
 /*----- Dropdown on hover -----*/
 nav ul li a:hover + .hidden, .hidden:hover, nav input[type=checkbox]:checked ~ #menu {
