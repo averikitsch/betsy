@@ -18,3 +18,22 @@
     </ul>
   </section>
 </article>
+
+<% if session[:user_id] %>
+<article class="products row">
+  <table>
+    <tr>
+      <th>Product</th>
+      <th>Quantity</th>
+      <th>Status</th>
+    </tr>
+    <% @user.order_products.where("order_id = ?", @order.id).each do |order_product| %>
+    <tr>
+      <td><%= Product.find_by(id: order_product.product_id).name %></td>
+      <td><%= order_product.quantity %></td>
+      <td><%= order_product.shipped %></td>
+    </tr>
+    <% end %>
+  </table>
+</article>
+<% end %>
