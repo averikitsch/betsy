@@ -18,3 +18,10 @@ three:
   product: three
   quantity: 3
   shipped: false
+
+four:
+  order: three
+  product: two
+  quantity: 2
+  shipped: false
+  

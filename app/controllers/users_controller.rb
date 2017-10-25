@@ -30,19 +30,37 @@ class UsersController < ApplicationController
     end
   end
 
-  # def new
-  # end
-  #
-  # def create
-  # end
+  def new
+    flash[:status] = :failure
+    flash[:result_text] = "This page isn't available"
+    redirect_to root_path
+  end
+
+  def create
+    # not functional
+    flash[:status] = :failure
+    flash[:result_text] = "This page isn't available"
+    redirect_to root_path
+  end
 
   def edit
+    flash[:status] = :failure
+    flash[:result_text] = "This page isn't available"
+    redirect_to root_path
   end
 
   def update
+    # not functional
+    flash[:status] = :failure
+    flash[:result_text] = "This page isn't available"
+    redirect_to root_path
   end
 
   def destroy
+    # not functional
+    flash[:status] = :failure
+    flash[:result_text] = "This page isn't available"
+    redirect_to root_path
   end
 
   def login
