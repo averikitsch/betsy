@@ -13,15 +13,17 @@
 
 <body>
   <header class="top_header">
+    <span class="search-bar float-right display_full">
+    <%= form_tag(products_path, :method => "get", id: "search-form") do %>
+      <%= text_field_tag :search, params[:search], placeholder: raw("&#9906;") %>
+      <%# submit_tag "Search", :name => nil %>
+    <% end %>
+    </span>
+
     <h1 class="logo"><%=link_to "Spooksy", root_path %></h1>
     <nav>
       <span class="float-right">
-        <span class="search-bar">
-        <%= form_tag(products_path, :method => "get", id: "search-form") do %>
-          <%= text_field_tag :search, params[:search], placeholder: "Search Products" %>
-          <%= submit_tag "Search", :name => nil %>
-        <% end %>
-      </span>
+
         <span class="display_full">
           <% if session[:user_id] %>
           <%= link_to "My Account", user_path(User.find_by(id: session[:user_id]).id) %>
@@ -58,6 +60,11 @@
         <% else %>
         <li><%= link_to "Log In", '/auth/github' %></li>
         <% end %>
+        <li>
+          <%= form_tag(products_path, :method => "get", id: "search-form") do %>
+            <%= text_field_tag :search, params[:search], placeholder: raw("&#9906;") %>
+          <% end %>
+        </li>
         </span>
       </ul>
 
