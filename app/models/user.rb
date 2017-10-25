@@ -20,7 +20,9 @@ class User < ApplicationRecord
   def order_products
     product_ids = products.collect { |product| product.id }
     order_products = OrderProduct.where(:product_id => product_ids)
-    order_products = order_products.select { |order_product| Order.find_by(id: order_product.order_id).status == "paid" || Order.find_by(id: order_product.order_id).status == "complete" }
+    order_products = order_products.select do |order_product|
+      order = Order.find_by(id: order_product.order_id)
+      order.status == "paid" || order.status == "complete" end
   end
 
   def total_revenue

@@ -1,7 +1,7 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  status: MyString
+  status: paid
   email: MyString
   address: MyString
   name: MyString
@@ -11,7 +11,7 @@ one:
   billing_zip: MyString
 
 two:
-  status: MyString
+  status: complete
   email: MyString
   address: MyString
   name: MyString
@@ -19,3 +19,13 @@ two:
   cc_expiry: MyString
   cc_cvv: MyString
   billing_zip: MyString
+
+three:
+  status: pending
+  email: itsemail@me.com
+  address: 123 Main Street
+  name: Shoppy McShoperson
+  cc_num: 123456789012345
+  cc_expiry: 10/19
+  cc_cvv: 123
+  billing_zip: 98101
