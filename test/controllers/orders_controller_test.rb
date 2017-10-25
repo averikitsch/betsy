@@ -82,7 +82,6 @@ describe OrdersController do
       Order.last.status.must_equal 'paid'
       session[:order_id].must_be_nil
       Product.find_by(name: "tomb").stock.must_equal 99
-
     end
   end
 
@@ -98,6 +97,30 @@ describe OrdersController do
     it "removes session with deletion" do
       delete order_product_path(order_products(:one))
       session[:order_id].must_equal nil
+    end
+
+    it "can 'cancel' and order" do
+      new_order
+      put order_path(Order.last), params: {order:
+        {name: "name", email: "email@email.com", address: "address",
+          cc_num: "1111222233334444", cc_expiry: "10/20", cc_cvv: "666", billing_zip: "98101" }}
+      Order.last.status.must_equal 'paid'
+
+      delete order_path(Order.last)
+      Order.last.status.must_equal 'cancelled'
+    end
+
+    it "adds inventory back to a cancelled order" do
+      new_order
+      products(:three).stock.must_equal 100
+
+      put order_path(Order.last), params: {order:
+        {name: "name", email: "email@email.com", address: "address",
+          cc_num: "1111222233334444", cc_expiry: "10/20", cc_cvv: "666", billing_zip: "98101" }}
+      Product.find_by(name: "tomb").stock.must_equal 99
+
+      delete order_path(Order.last)
+      Product.find_by(name: "tomb").stock.must_equal 100
     end
   end
 
