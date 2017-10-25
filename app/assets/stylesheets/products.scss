@@ -54,14 +54,40 @@
 
 .promo {
   background-color: #bf022a;
-  background: image-url(promo) top center;
+  background: image-url(promo);
   background-size: cover;
-  text-align: center;
-  padding: 5em;
-  font-family: 'Nosifer';
-  color: crimson;
-  text-shadow: 2px 2px white;
+  background-position: 50% 10%;
+  text-align: left;
+  padding: 8em;
+  // font-family: 'Nosifer';
+  // color: crimson;
+  // text-shadow: 2px 2px white;
   margin-bottom: 2em;
+}
+
+.promo h2, .promo small, .promo h4, .promo .button {
+  text-transform: uppercase;
+  font-weight: bold;
+  margin: 0;
+}
+
+.promo h2 {
+  margin-top: 15px;
+  line-height: 0.9em;
+}
+
+.promo h4 {
+  font-size: 1.2em;
+  letter-spacing: 0.1em;
+}
+
+.promo small {
+  font-size: 0.7em;
+  letter-spacing: 0.8em;
+}
+
+.promo p {
+  margin-top: 20px;
 }
 
 @media screen and (min-width: 520px) {
