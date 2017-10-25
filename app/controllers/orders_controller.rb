@@ -46,14 +46,25 @@ class OrdersController < ApplicationController
       render :new, status: :bad_request
     else
       reduce_inventory(@order)
+      session[:prev_order] = session[:order_id]
       session.delete(:order_id)
     end
   end
 
-  # def destroy
-  #   @order.destroy
-  #   session.delete(:order_id)
-  # end
+  def destroy
+    @order = Order.find_by(id: session[:prev_order])
+    unless @order.update(status: "cancelled")
+      flash.now[:status] = :failure
+      flash.now[:result_text] = "Boo! This cart couldn't be unsummoned!"
+      flash.now[:messages] = humanize(@order.errors.messages)
+      render :new, status: :bad_request
+    else
+      add_inventory(@order)
+      # @order.destroy # if we choose to delete the order
+      session.delete(:prev_order)
+      redirect_to root_path
+    end
+  end
 
   private
 
@@ -72,6 +83,15 @@ class OrdersController < ApplicationController
       product.save
     end
   end
+
+  def add_inventory(order)
+    order.order_products.each do |order_product|
+      product = Product.find_by(id: order_product.product_id)
+      product.stock += order_product.quantity
+      product.save
+    end
+  end
+
   def humanize(hash)
     new_hash = {}
     hash.each do |k,v|

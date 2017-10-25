@@ -60,16 +60,15 @@ describe Order do
         @order.cc_expiry = num
         @order.valid?.must_equal true
       end
-    
+
     end
 
     it "must have a three-digit credit card CVV number" do
-      @order.cc_cvv = nil
-      @order.valid?.must_equal false
-      @order.cc_cvv = "18294673"
-      @order.valid?.must_equal false
-      @order.cc_cvv = "fuw"
-      @order.valid?.must_equal false
+      [nil,"18294673","fuw"].each do |num|
+        @order.cc_cvv = num
+        @order.valid?.must_equal false
+      end
+      
       @order.cc_cvv = "345"
       @order.valid?.must_equal true
     end

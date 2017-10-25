@@ -31,5 +31,4 @@ class Order < ApplicationRecord
   def confirm_payment?
     self.status == "paid"
   end
-
 end
