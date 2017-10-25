@@ -43,7 +43,9 @@
 
     <section class = "row total align-right">
       <p><strong>Purchase Total:</strong> <%= format_price(total(subtotal(@order.order_products)))%></p>
+      <p>
+        <%= link_to "Cancel Order", order_path(@order.id), method: :delete, class: "alert button", data: { confirm: "Are you sure?" } %>
+      </p>
     </section>
-    <%= link_to "Delete", order_path(@order.id), method: :delete, class: "alert button", data: { confirm: "Are you sure?" } %>
   </article>
 </section>

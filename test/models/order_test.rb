@@ -68,9 +68,11 @@ describe Order do
         @order.cc_cvv = num
         @order.valid?.must_equal false
       end
-      
-      @order.cc_cvv = "345"
-      @order.valid?.must_equal true
+
+      ["345","182","666"].each do |num|
+        @order.cc_cvv = num
+        @order.valid?.must_equal true
+      end
     end
 
     it "must have a billing zip code that is numerical" do
