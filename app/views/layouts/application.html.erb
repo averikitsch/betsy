@@ -13,7 +13,7 @@
 
 <body>
   <header class="top_header">
-    <span class="search-bar float-right">
+    <span class="search-bar float-right display_full">
     <%= form_tag(products_path, :method => "get", id: "search-form") do %>
       <%= text_field_tag :search, params[:search], placeholder: raw("&#9906;") %>
       <%# submit_tag "Search", :name => nil %>
@@ -60,6 +60,11 @@
         <% else %>
         <li><%= link_to "Log In", '/auth/github' %></li>
         <% end %>
+        <li>
+          <%= form_tag(products_path, :method => "get", id: "search-form") do %>
+            <%= text_field_tag :search, params[:search], placeholder: raw("&#9906;") %>
+          <% end %>
+        </li>
         </span>
       </ul>
 
