@@ -35,14 +35,14 @@
     <td colspan="2"><%= format_datetime(order.created_at) %></td>
     <td colspan="2"><%= order.status %></td>
   </tr>
-  <% order.order_products.each do |order_product| %>
+  <% order.order_products.order(:product_id).each do |order_product| %>
   <tr>
     <td width="250">&emsp;<%= link_to order_product.product.name, product_path(order_product.product_id) %></td>
     <td width="50"><%=format_price(order_product.product.price) %></td>
     <td width="100">x <%=order_product.quantity %></td>
     <td width="100"><%=format_price(order_product.product.price * order_product.quantity) %></td>
-    <td width="100"><%= link_to (order_product.shipped ? "NOT SHIPPED" : "SHIP"), ship_order_product_path(order_product.id) %></td>
-    <td width="100"><%= link_to (order_product.cancelled ? "UNCANCEL" : "CANCEL"), cancel_order_product_path(order_product.id) %></td>
+    <td width="100"><%= link_to (order_product.shipped ? "SHIPPED" : "SHIP"), ship_order_product_path(order_product.id), method: :patch %></td>
+    <td width="100"><%= link_to (order_product.cancelled ? "CANCELLED" : "CANCEL"), cancel_order_product_path(order_product.id), method: :patch %></td>
   </tr>
   <% end %>
   <% end %>
