@@ -37,6 +37,7 @@ describe UsersController do
         get user_path(-100)
         must_respond_with :not_found
       end
+
     end
 
   end

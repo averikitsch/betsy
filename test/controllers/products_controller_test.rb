@@ -5,6 +5,7 @@ describe ProductsController do
   let(:three) {products(:three)}
   let(:two) {categories(:two)}
   let(:ghost) {users(:one)}
+  let(:ghoul) {users(:two)}
 
   before do
     login(ghost, :github)
@@ -107,6 +108,7 @@ describe ProductsController do
       proc { post products_path, params: {product: {name: "shoelace"}}}.must_change "Product.count", 0
       must_respond_with :bad_request
     end
+
   end
 
   describe "update product" do
@@ -161,7 +163,7 @@ describe ProductsController do
     end
   end
 
-  it "remove a category" do
+  it "removes a category" do
     c_i = [categories(:one).id,categories(:two).id]
     post products_path, params: {product: {name: "shoelace", price: 9.9, user_id: ghost.id, stock: 20, category_ids: c_i}}
     product = Product.find_by(name: "shoelace")
@@ -169,25 +171,68 @@ describe ProductsController do
     product.categories.length.must_equal 0
   end
 
-  it "can toggle active" do
-    product = products(:one)
-    start = product.active
+  describe "it can toggle a retired or active product" do
 
-    patch toggle_active_path(product.id)
-    must_respond_with :redirect
-    product = Product.find_by(name: "sheet")
-    product.active.must_equal !start
+    describe "user functionality" do
+      it "can toggle active" do
+        product = products(:one)
+        product.active.must_equal false
+        patch toggle_active_path(product.id)
+        must_respond_with :redirect
+        product = Product.find_by(name: "sheet")
+        product.active.must_equal true
+      end
+      it "can toggle retired" do
+        product = products(:one)
+        product.active.must_equal false
+        product.active = true
+        product.active.must_equal true
+        product.save
+        patch toggle_active_path(product.id)
+        must_respond_with :redirect
+        product = Product.find_by(name: "sheet")
+        product.active.must_equal false
+      end
+      it "won't allow a user to toggle another user's product" do
+        #product belongs to user one, called ghost in these tests
+        #ghost is currently logged in
+        #product2 belongs to user two
+        product = products(:one)
+        product2 = products(:three)
+        # product.active.must_equal false
+        product2.active.must_equal false
+        patch toggle_active_path(product2.id)
+        must_respond_with :bad_request
+        product = Product.find_by(name: "tomb")
+        product.active.must_equal false
+      end
+    end
+
+    describe "guest functionality" do
+      it "will not toggle active" do
+        product = products(:one)
+        product.active.must_equal false
+        delete logout_path
+
+        patch toggle_active_path(product.id)
+        must_respond_with :bad_request
+        product = Product.find_by(name: "sheet")
+        product.active.must_equal false
+      end
+      it "will not toggle retire" do
+        product = products(:one)
+        product.active.must_equal false
+        product.active = true
+        product.save
+        product.active.must_equal true
+        delete logout_path
+
+        patch toggle_active_path(product.id)
+        must_respond_with :bad_request
+        product = Product.find_by(name: "sheet")
+        product.active.must_equal true
+      end
+    end
   end
 
-  it "can toggle retired" do
-    product = products(:one)
-    product.active = true
-    product.save
-    start = product.active
-
-    patch toggle_active_path(product.id)
-    must_respond_with :redirect
-    product = Product.find_by(name: "sheet")
-    product.active.must_equal !start
-  end
 end
