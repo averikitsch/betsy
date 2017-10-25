@@ -69,9 +69,10 @@ class ProductsController < ApplicationController
         flash.now[:result_text] = "#{@product.name} could not be created"
         render :new, status: :bad_request
       end
+
     else
       flash[:status] = :failure
-      flash[:result_text] = "Oops..You can't create a product for someone else!"
+      flash[:result_text] = "Oops..You can't create a product"
       redirect_to products_path
     end
   end
@@ -128,17 +129,66 @@ class ProductsController < ApplicationController
   end
 
   def toggle_active
-    @product = Product.find_by(id: params[:id])
-    # @product.active = params[:product][:active].to_i
-    if @product.active
-      @product.active = false
+    if @user.nil?
+      if User.find_by(id: params[:id])
+        flash[:status] = :failure
+        flash[:result_text] = "You must be logged in to do that!"
+        redirect_to users_path, status: :bad_request
+      else
+        # render_404
+        redirect_to users_path, status: :bad_request
+      end
+    elsif @user.id.to_i != Product.find_by(id: params[:id].to_i).user_id
+      if User.find_by(id: @user.id)
+        flash[:status] = :failure
+        flash[:result_text] = "Dear Spooker: You cannot view another spooky's page!"
+        redirect_to users_path, status: :bad_request
+      else
+        flash[:status] = :failure
+        flash[:result_text] = "Dear Spooker: You cannot view another spooky's page!"
+        render_404
+      end
     else
-      @product.active = true
+      @product = Product.find_by(id: params[:id])
+      # @product.active = params[:product][:active].to_i
+      if @product.active
+        @product.active = false
+      else
+        @product.active = true
+      end
+      if @product.save
+        redirect_to user_path(@product.user)
+      end
     end
 
-    if @product.save
-      redirect_to user_path(@product.user)
-    end
+
+      ###
+    # if find_user
+    #   if @user.id.to_i != Product.find_by(id: params[:id].to_i).user_id
+    #     if User.find_by(id: params[:id])
+    #       flash[:status] = :failure
+    #       flash[:result_text] = "Dear Spooker: You cannot view another spooky's page!"
+    #       redirect_to users_path
+    #     else
+    #       render_404
+    #     end
+    #   else
+    #     @product = Product.find_by(id: params[:id])
+    #     # @product.active = params[:product][:active].to_i
+    #     if @product.active
+    #       @product.active = false
+    #     else
+    #       @product.active = true
+    #     end
+    #     if @product.save
+    #       redirect_to user_path(@product.user)
+    #     end
+    #   end
+    # else
+    #   flash[:status] = :failure
+    #   flash[:result_text] = "You must be logged in to do that!"
+    #   redirect_to user_path(@product.user)
+    # end
   end
 
   private
