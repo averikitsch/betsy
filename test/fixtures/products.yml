@@ -4,7 +4,7 @@ one:
   name: sheet
   price: 9.99
   user: one
-  stock: 6
+  stock: 16
   description: MyText
   image: smoke
   active: false

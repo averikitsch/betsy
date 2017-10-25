@@ -5,6 +5,7 @@ one:
   product: one
   quantity: 10
   shipped: false
+  cancelled: false
 
 two:
   order: two

@@ -1,5 +1,5 @@
 class OrderProductsController < ApplicationController
-  before_action :find_op, only: [:edit, :update, :destroy]
+  before_action :find_op, only: [:edit, :update, :destroy, :shipped, :cancel]
 
   # def index
   # end
@@ -70,7 +70,8 @@ class OrderProductsController < ApplicationController
   end
 
   def shipped
-    @order_product.update(shipped: @order_product.shipped ? false : true)
+    @order_product.update_attributes(shipped: @order_product.shipped ? false : true)
+
     order = @order_product.order
     ops = order.order_products
     all_op = ops.map { |op| op.shipped }
@@ -79,11 +80,21 @@ class OrderProductsController < ApplicationController
       order.update(status: "complete")
     end
 
-    # redirect_to user_orders()
+    redirect_to user_orders_path(session[:user_id])
+
   end
 
   def cancel
-    @order_product.update(cancelled: @order_product.cancelled ? false : true)
+    @order_product.update_attributes(cancelled: @order_product.cancelled ? false : true)
+    order = @order_product.order
+    ops = order.order_products
+    all_op = ops.map { |op| op.shipped }
+    unless all_op.include?(false)
+      #if all op are shipped mark order as complete
+      order.update(status: "complete")
+    end
+
+    redirect_to user_orders_path(session[:user_id])
   end
 
   private

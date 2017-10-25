@@ -61,8 +61,9 @@ describe OrderProductsController do
   it "should clear the session and delete the order if all order_products are deleted" do
     order_count = Order.count
     delete order_product_path(order_products(:one))
-    Order.count.must_equal order_count - 1
+    delete order_product_path(order_products(:three))
     session[:order_id].must_be_nil
+    Order.count.must_equal order_count - 1
   end
 
   it "won't update cart quantity with bad data" do
@@ -74,15 +75,36 @@ describe OrderProductsController do
     OrderProduct.last.quantity.must_equal start_op
   end
 
-  it "should toggle shipped" do
+  it "should mark order as complete if all items are shipped" do
+    login(users(:one), :github)
+    one = order_products(:one)
+    three = order_products(:three)
 
+    patch ship_order_product_path(one.id)
+    patch ship_order_product_path(three.id)
+
+    OrderProduct.find(three.id).shipped.must_equal true
+    one.order.status.must_equal "complete"
+    must_respond_with :redirect
   end
 
-  it "should mark order as complete if all items are shipped" do
+  it "should toggle shipped" do
+    login(users(:one), :github)
+    one = order_products(:one)
+    start = one.shipped
 
+    patch ship_order_product_path(one.id)
+
+    OrderProduct.find(one.id).shipped.must_equal !start
   end
 
   it "should cancel an order-product" do
-    
+    login(users(:one), :github)
+    one = order_products(:one)
+    start = one.cancelled
+
+    patch cancel_order_product_path(one.id)
+
+    OrderProduct.find(one.id).cancelled.must_equal !start
   end
 end
