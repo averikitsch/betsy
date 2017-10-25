@@ -1,0 +1,65 @@
+<section class="row merchant-show">
+
+  <h1>Shipping Timeline</h1>
+  <p>Estimated arrival dates are not guaranteed. Weather delays and other unforeseen circumstances may impact delivery time.</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Shipping Method</th>
+        <th>Estimated Arrival Date</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr>
+        <td data-label='type'>Standard Shipping</td>
+        <td data-label='date'>Order should arrive between <%= format_date(Date.today()+5)%> and <%= format_date(Date.today()+7)%></td>
+      </tr>
+      <tr>
+        <td data-label='type'>Two-Day Shipping</td>
+        <td data-label='date'><%= format_date(Date.today()+2)%></td>
+      </tr>
+      <tr>
+        <td data-label='type'>One-Day Shipping</td>
+        <td data-label='date'><%= format_date(Date.today()+1)%></td>
+      </tr>
+      <tr>
+        <td data-label='type'>Hell Pick-up</td>
+        <td data-label='date'>∞</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>About Estimated Arrival Dates</h3>
+
+  <p>
+    Estimated arrival dates are for domestic orders placed today. We've adjusted these estimates to account for holidays and weekends.
+  </p>
+
+  <p>
+    Estimated arrival dates don't apply to:
+  </p>
+
+  <ul>
+    <li>Deliveries to Alaska, Hawaii, PO boxes and rural areas</li>
+    <li>Deliveries made to U.S. territories, APO, FPO and international addresses</li>
+    <li>Items that must be sent by ground shipping: hazardous, flammable and oversize items as noted in the product information</li>
+    <li>Items shipped common carrier freight, including boats and car-top boxes</li>
+    <li>Bikes</li>
+    <li>Items that are out of stock at the time of ordering</li>
+  </ul>
+    <p>
+      Packages Do Not Ship from Our Distribution Center on the Following Holidays:
+    </p>
+    <ul>
+      <li>New Year's Day</li>
+      <li>4th of July</li>
+      <li>Martin Luther King Jr. Day</li>
+      <li>Labor Day</li>
+      <li>President's Day</li>
+      <li>Thanksgiving and the day after Thanksgiving</li>
+      <li>Memorial Day</li>
+      <li>Christmas</li>
+    </ul>
+  </section>
