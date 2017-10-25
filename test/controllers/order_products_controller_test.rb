@@ -107,4 +107,17 @@ describe OrderProductsController do
 
     OrderProduct.find(one.id).cancelled.must_equal !start
   end
+
+  it "if all op are cancelled order is cancelled" do
+    login(users(:one), :github)
+    one = order_products(:one)
+    three = order_products(:three)
+
+    patch cancel_order_product_path(one.id)
+    puts OrderProduct.find(one.id).cancelled
+    patch cancel_order_product_path(three.id)
+    puts OrderProduct.find(three.id).cancelled
+    one.order.status.must_equal "cancelled"
+    must_respond_with :redirect
+  end
 end

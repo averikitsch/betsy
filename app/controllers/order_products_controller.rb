@@ -88,10 +88,10 @@ class OrderProductsController < ApplicationController
     @order_product.update_attributes(cancelled: @order_product.cancelled ? false : true)
     order = @order_product.order
     ops = order.order_products
-    all_op = ops.map { |op| op.shipped }
+    all_op = ops.map { |op| op.cancelled }
     unless all_op.include?(false)
       #if all op are shipped mark order as complete
-      order.update(status: "complete")
+      order.update(status: "cancelled")
     end
 
     redirect_to user_orders_path(session[:user_id])
