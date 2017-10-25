@@ -14,7 +14,8 @@ class User < ApplicationRecord
   end
 
   def orders
-    Order.joins(:products).where('products.user_id = ?', id).distinct
+    Order.where(status:["paid","completed"])
+    .joins(:products).where('products.user_id = ?', id).distinct
   end
 
   def orders_by(status)
@@ -23,10 +24,10 @@ class User < ApplicationRecord
 
   def order_products
     product_ids = products.collect { |product| product.id }
-    order_products = OrderProduct.where(:product_id => product_ids)
-    order_products = order_products.select do |order_product|
-      order = Order.find_by(id: order_product.order_id)
-      order.status == "paid" || order.status == "complete" end
+    order_products = OrderProduct.where(:product_id => product_ids).joins(:order).where("orders.status = ? OR orders.status = ?", "paid","completed")
+    # order_products = order_products.select do |order_product|
+    #   order = Order.find_by(id: order_product.order_id)
+    #   order.status == "paid" || order.status == "complete" end
   end
 
   def total_revenue
