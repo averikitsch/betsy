@@ -93,3 +93,22 @@ td:first-child, th:first-child {
     border-bottom: 0;
   }
 }
+
+// ----- Shipping ------
+
+.shipping table {
+  width: 50%;
+  margin: 2.5em auto 3em auto;
+}
+
+.shipping td {
+  text-align: left;
+}
+
+.shipping li {
+  list-style-type: square;
+}
+
+.shipping header {
+  text-align: center;
+}
