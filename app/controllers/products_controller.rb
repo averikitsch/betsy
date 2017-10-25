@@ -21,6 +21,8 @@ class ProductsController < ApplicationController
       else
         @products = Product.includes(:user).where(active: true, products: {user_id: params[:user_id]})
       end
+    elsif params[:search]
+        @products = Product.search(params[:search]).order(:name)
     else
       @products = Product.where(active: true).order(:id)
     end
