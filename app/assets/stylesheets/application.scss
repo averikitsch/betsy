@@ -112,19 +112,28 @@ nav li:hover ul a {
   line-height: 40px;
 }
 
-form {
-  display: inline;
-  margin: 0;
+.search-bar {
+  margin-right: 30px;
+}
+
+header h1 {
+  width: 70%;
+  margin: 0 auto;
 }
 
 .search-bar form input[type="text"]{
-  display: inline;
   width: 10rem;
 }
-.search-bar form input[type="submit"] {
-  display: inline;
-  margin: 0;
+
+.search-bar input::placeholder {
+  transform: rotate(-30deg);
+  transform-origin: left center;
+  font-weight: bold;
 }
+// .search-bar form input[type="submit"] {
+//   display: inline;
+//   margin: 0;
+// }
 /*----- Hide dropdown links -----*/
 nav li ul, .no_display_full, nav input[type=checkbox] {
   display: none;
