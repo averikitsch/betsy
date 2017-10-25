@@ -31,64 +31,94 @@ class ProductsController < ApplicationController
   end
 
   def new
-    #is currently set to choose user to add product to
-    @product = Product.new
+    if find_user
+      @product = Product.new
+    else
+      flash[:status] = :failure
+      flash[:result_text] = "Oops..You need to be logged in to add a product!"
+      redirect_to products_path
+    end
   end
 
   def create
-    @product = Product.new(product_params)
-    #appends categories into @products.categories
-    temp = @product.categories.map {|c| c.id }
-    if params[:product][:category_ids]
-      params[:product][:category_ids].each do |category|
-        if !temp.include?(category) && category != ""
-          @product.categories << Category.find(category)
+    if find_user
+      @product = Product.new(product_params)
+      #appends categories into @products.categories
+      temp = @product.categories.map {|c| c.id }
+      if params[:product][:category_ids]
+        params[:product][:category_ids].each do |category|
+          if !temp.include?(category) && category != ""
+            @product.categories << Category.find(category)
+          end
         end
       end
-    end
-    #replaces empty string with default image
-    if params[:product][:image] == ""
-      @product.image = valid_image
-    end
-    if @product.save
-      flash[:status] = :success
-      flash[:result_text] = "Successfully created #{@product.name}!"
-      redirect_to product_path(@product)
+
+      #replaces empty string with default image
+      if params[:product][:image] == ""
+        @product.image = valid_image
+      end
+
+      if @product.save
+        flash[:status] = :success
+        flash[:result_text] = "Successfully created #{@product.name}!"
+        redirect_to product_path(@product)
+      else
+        flash.now[:status] = :error
+        flash.now[:result_text] = "#{@product.name} could not be created"
+        render :new, status: :bad_request
+      end
     else
-      flash.now[:status] = :error
-      flash.now[:result_text] = "#{@product.name} could not be created"
-      render :new, status: :bad_request
+      flash[:status] = :failure
+      flash[:result_text] = "Oops..You can't create a product for someone else!"
+      redirect_to products_path
     end
   end
 
   def edit
+    if find_user
+      if @user.id != @product.user.id
+        flash[:status] = :failure
+        flash[:result_text] = "Oops..This isn't your product!"
+        redirect_to product_path(@product.id)
+      end
+    else
+      flash[:status] = :failure
+      flash[:result_text] = "Oops..You're not logged in!"
+      redirect_to product_path(@product.id)
+    end
   end
 
   def update
-    # note: clears categories, will keep categories if categories is not updated
-    @product.categories = []
-    #appends categories into @products.categories
-    if params[:product][:category_ids]
-      params[:product][:category_ids].each do |category|
-        unless category == ""
-          @product.categories << Category.find(category)
+    if find_user && (@user.id != @product.user.id)
+      flash[:status] = :failure
+      flash[:result_text] = "Oops..This isn't your product!"
+      redirect_to product_path(@product.id)
+    else
+      # note: clears categories, will keep categories if categories is not updated
+      @product.categories = []
+      #appends categories into @products.categories
+      if params[:product][:category_ids]
+        params[:product][:category_ids].each do |category|
+          unless category == ""
+            @product.categories << Category.find(category)
+          end
         end
       end
-    end
-    @product.update_attributes(product_params)
-    #replaces empty string with default image
-    if @product.image.length == 0
-      @product.image = valid_image
-    end
+      @product.update_attributes(product_params)
+      #replaces empty string with default image
+      if @product.image.length == 0
+        @product.image = valid_image
+      end
 
-    if @product.save
-      flash[:status] = :success
-      flash[:result_text] = "Successfully updated #{@product.name}!"
-      redirect_to product_path
-    else
-      flash.now[:status] = :error
-      flash.now[:result_text] = "#{@product.name} could not be updated"
-      render :edit, status: :bad_request
+      if @product.save
+        flash[:status] = :success
+        flash[:result_text] = "Successfully updated #{@product.name}!"
+        redirect_to product_path
+      else
+        flash.now[:status] = :error
+        flash.now[:result_text] = "#{@product.name} could not be updated"
+        render :edit, status: :bad_request
+      end
     end
   end
 
@@ -104,12 +134,9 @@ class ProductsController < ApplicationController
       @product.active = true
     end
 
-    @product.save
+    if @product.save
       redirect_to user_path(@product.user)
-    # else
-    #   flash[:status] = :failure
-    #   flash[:result_text] = "Active status cannot be loaded"
-    # end
+    end
   end
 
   private

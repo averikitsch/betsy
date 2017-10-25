@@ -2,8 +2,7 @@
 <h1>Add Product</h1>
 <%= form_for @product do |f| %>
 
-<%= f.label :user_id %>
-<%= f.select :user_id, options_from_collection_for_select(User.all, :id, :username) %>
+<%= f.hidden_field :user_id, required: true, value:@user.id, readonly: true %>
 
 <%= render partial: "form", locals: {button_name:"Add Product"} %>
 
