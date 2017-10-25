@@ -19,6 +19,10 @@ class OrdersController < ApplicationController
         redirect_to users_path
       end
     end
+
+    if session[:user_id]
+      @user = User.find_by(id: session[:user_id])
+    end
   end
 
   def new
