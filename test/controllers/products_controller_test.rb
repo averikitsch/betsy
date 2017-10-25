@@ -194,17 +194,14 @@ describe ProductsController do
         product.active.must_equal false
       end
       it "won't allow a user to toggle another user's product" do
-        #product belongs to user one, called ghost in these tests
         #ghost is currently logged in
         #product2 belongs to user two
-        product = products(:one)
         product2 = products(:three)
-        # product.active.must_equal false
         product2.active.must_equal false
         patch toggle_active_path(product2.id)
         must_respond_with :bad_request
-        product = Product.find_by(name: "tomb")
-        product.active.must_equal false
+        product2 = Product.find_by(name: "tomb")
+        product2.active.must_equal false
       end
     end
 

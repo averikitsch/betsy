@@ -135,14 +135,17 @@ class ProductsController < ApplicationController
         flash[:result_text] = "You must be logged in to do that!"
         redirect_to users_path, status: :bad_request
       else
-        render_404
+        # render_404
+        redirect_to users_path, status: :bad_request
       end
     elsif @user.id.to_i != Product.find_by(id: params[:id].to_i).user_id
-      if User.find_by(id: params[:id])
+      if User.find_by(id: @user.id)
         flash[:status] = :failure
         flash[:result_text] = "Dear Spooker: You cannot view another spooky's page!"
         redirect_to users_path, status: :bad_request
       else
+        flash[:status] = :failure
+        flash[:result_text] = "Dear Spooker: You cannot view another spooky's page!"
         render_404
       end
     else
