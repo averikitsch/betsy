@@ -16,7 +16,6 @@
     <span class="search-bar float-right display_full">
     <%= form_tag(products_path, :method => "get", id: "search-form") do %>
       <%= text_field_tag :search, params[:search], placeholder: raw("&#9906;") %>
-      <%# submit_tag "Search", :name => nil %>
     <% end %>
     </span>
 
@@ -127,6 +126,12 @@
           <%= fa_icon "tumblr" %>
           <%= fa_icon "youtube" %>
         </p>
+        <span class = "subscribe">
+          <%= form_tag(root_path, :method => "get") do %>
+          <%= text_field_tag :email, params[:email], placeholder: "Add Email" %>
+          <%= submit_tag "Sign Up", :name => nil %>
+          <% end %>
+        </span>
       </section>
 
     </header>

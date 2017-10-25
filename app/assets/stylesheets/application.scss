@@ -300,6 +300,25 @@ footer footer {
   }
 }
 
+.subscribe {
+  margin: 1em;
+  vertical-align: middle;
+}
+
+.subscribe input[type="text"]{
+  display: inline;
+  font-style: italic;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  width: 60%;
+  height: 2.8em;
+  margin: 0;
+}
+
+.subscribe input[type="submit"] {
+  display: inline;
+  margin: 0;
+}
 /*---------------------- FORMS ----------------------------*/
 
 .forms {
