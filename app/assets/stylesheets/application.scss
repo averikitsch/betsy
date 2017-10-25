@@ -180,10 +180,13 @@ nav .fa {
 
 	nav ul {
 		position: static;
+        background: $charcoal;
 	}
 
 	nav li{
     border-bottom: 1px solid rgba($white,0.1);
+    width: 100%;
+    background: $charcoal;
 	}
 
   nav li:hover a {

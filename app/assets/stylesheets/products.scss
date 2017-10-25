@@ -1,21 +1,11 @@
 @import '_colors';
 
-.all_products, .root-products {
-  text-align: center;
-}
-
-.all_products {
-  border-bottom: 0.5px solid rgba($white, 0.1);
-}
-
-.all_products h5 {
-  letter-spacing: 0.05em;
-}
+/*---------------------- GENERAL ----------------------------*/
 
 .product {
   text-align: left;
   display: inline-block;
-  width: 100%;
+  width: 90%;
   padding: 10px;
   margin-bottom: 20px;
   font-size: 0.75em;
@@ -43,6 +33,20 @@
   letter-spacing: 0.03em;
 }
 
+/*---------------------- ROOT & INDEX ----------------------------*/
+
+.all_products, .root-products {
+  text-align: center;
+}
+
+.all_products {
+  border-bottom: 0.5px solid rgba($white, 0.1);
+}
+
+.all_products h5 {
+  letter-spacing: 0.05em;
+}
+
 .categories, .categories ul, .nickname {
   padding: 0;
   margin: 0;
@@ -58,10 +62,7 @@
   background-size: cover;
   background-position: 50% 10%;
   text-align: left;
-  padding: 8em;
-  // font-family: 'Nosifer';
-  // color: crimson;
-  // text-shadow: 2px 2px white;
+  padding: 2em 3em;
   margin-bottom: 2em;
 }
 
@@ -72,7 +73,7 @@
 }
 
 .promo h2 {
-  margin-top: 15px;
+  margin-top: 20px;
   line-height: 0.9em;
 }
 
@@ -86,17 +87,26 @@
   letter-spacing: 0.8em;
 }
 
-.promo p {
-  margin-top: 20px;
-}
-
-@media screen and (min-width: 520px) {
+@media screen and (min-width: 500px) {
   .product {
     width: 48%;
     min-width: 200px;
     max-width: 300px;
   }
 
+  .promo {
+    padding: 9em 3em;
+  }
+
+  .root-products {
+    width: 80%;
+    margin: 0 auto;
+  }
+
+  .root-products .product {
+    width: auto;
+    max-width: 200px;
+  }
 }
 
 /*---------------------- SHOW PAGES ----------------------------*/
