@@ -126,6 +126,7 @@ class ProductsController < ApplicationController
   end
 
   def toggle_active
+    ###
     @product = Product.find_by(id: params[:id])
     # @product.active = params[:product][:active].to_i
     if @product.active
@@ -133,10 +134,10 @@ class ProductsController < ApplicationController
     else
       @product.active = true
     end
-
     if @product.save
       redirect_to user_path(@product.user)
     end
+    ###
   end
 
   private
