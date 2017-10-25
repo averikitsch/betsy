@@ -46,10 +46,9 @@ describe User do
     it "must return a collection of orders associated with the user" do
       users(:two).orders.size.must_equal 3
     end
-
   end
 
-  describe "order_prducts" do
+  describe "order_products" do
     it "must return a collection of order_products" do
       users(:two).order_products.size.must_equal 2
     end
