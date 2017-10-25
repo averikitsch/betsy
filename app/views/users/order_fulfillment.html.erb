@@ -1,20 +1,51 @@
+<article class="summary row">
+<h1>Order Summary</h1>
+<section class = "columns small-6">
+  <ul>
+    <li><strong>Total Revenue:</strong> <%= format_price(@user.total_revenue) %></li>
+    <ul>
+      <li><strong>by Paid:</strong> <%= format_price(@user.total_revenue) %></li>
+      <li><strong>by Completed:</strong> <%= format_price(@user.total_revenue) %></li>
+      <li><strong>by Cancelled:</strong> <%= format_price(@user.total_revenue) %></li>
+    </ul>
+  </ul>
+</section>
+<section class = "columns small-6">
+  <ul>
+    <li><strong>Total Orders:</strong> <%= format_price(@user.total_revenue) %></li>
+    <ul>
+      <li><strong>by Paid:</strong> <%= format_price(@user.total_revenue) %></li>
+      <li><strong>by Completed:</strong> <%= format_price(@user.total_revenue) %></li>
+      <li><strong>by Cancelled:</strong> <%= format_price(@user.total_revenue) %></li>
+    </ul>
+  </ul>
+</section>
 
-<h2>Total Revenue: <%= format_price(@user.total_revenue) %></h2>
 <table>
   <tr>
-    <th>ID</th>
-    <th>Date</th>
-    <th>Status</th>
+    <th colspan="2">Order #</th>
+    <th colspan="2">Purchase Date</th>
+    <th colspan="2">Order Status</th>
   </tr>
-
 
 <% @user.orders.each do |order| %>
   <% unless order.status == "pending" || order.status == "cancelled" %>
   <tr>
-    <td><%= link_to order.id, order_path(order.id) %></td>
-    <td><%= format_date(order.created_at) %></td>
-    <td><%= order.status %></td>
+    <td colspan="2"><strong><%= link_to order.id, order_path(order.id) %></strong></td>
+    <td colspan="2"><%= format_datetime(order.created_at) %></td>
+    <td colspan="2"><%= order.status %></td>
   </tr>
+  <% order.order_products.order(:product_id).each do |order_product| %>
+  <tr>
+    <td width="250">&emsp;<%= link_to order_product.product.name, product_path(order_product.product_id) %></td>
+    <td width="50"><%=format_price(order_product.product.price) %></td>
+    <td width="100">x <%=order_product.quantity %></td>
+    <td width="100"><%=format_price(order_product.product.price * order_product.quantity) %></td>
+    <td width="100"><%= link_to (order_product.shipped ? "SHIPPED" : "SHIP"), ship_order_product_path(order_product.id), method: :patch %></td>
+    <td width="100"><%= link_to (order_product.cancelled ? "CANCELLED" : "CANCEL"), cancel_order_product_path(order_product.id), method: :patch %></td>
+  </tr>
+  <% end %>
   <% end %>
 <% end %>
 </table>
+</article>

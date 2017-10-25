@@ -112,19 +112,21 @@ nav li:hover ul a {
   line-height: 40px;
 }
 
-form {
-  display: inline;
-  margin: 0;
+.search-bar {
+  margin-right: 30px;
 }
 
-.search-bar form input[type="text"]{
-  display: inline;
-  width: 10rem;
+header h1 {
+  width: 70%;
+  margin: 0 auto;
 }
-.search-bar form input[type="submit"] {
-  display: inline;
-  margin: 0;
+
+.search-bar input::placeholder {
+  transform: rotate(-30deg);
+  transform-origin: left center;
+  font-weight: bold;
 }
+
 /*----- Hide dropdown links -----*/
 nav li ul, .no_display_full, nav input[type=checkbox] {
   display: none;
@@ -141,6 +143,7 @@ nav li ul li a {
   min-width: 100px;
   padding: 0 20px;
 }
+
 
 /*----- Dropdown on hover -----*/
 nav ul li a:hover + .hidden, .hidden:hover, nav input[type=checkbox]:checked ~ #menu {
@@ -297,6 +300,25 @@ footer footer {
   }
 }
 
+.subscribe {
+  margin: 1em;
+  vertical-align: middle;
+}
+
+.subscribe input[type="text"]{
+  display: inline;
+  font-style: italic;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  width: 60%;
+  height: 2.8em;
+  margin: 0;
+}
+
+.subscribe input[type="submit"] {
+  display: inline;
+  margin: 0;
+}
 /*---------------------- FORMS ----------------------------*/
 
 .forms {
