@@ -1,10 +1,32 @@
-<section>
+<section class = "row merchant">
   <h1>All Merchants</h1>
-  <p>
-    <% @users.each do |user| %>
-    <%= @products %>
-    <%= link_to(user.username, user_products_path(user.id), alt: 'link to', class: "title") %> |
+  <% length = @users.length; split = length/3 %>
+  <section class = "column small-12 large-4">
+    <% split.times do |n| %>
+    <ul>
+      <li>
+        <%= link_to(@users[n].username, user_products_path(@users[n].id), alt: 'link to', class: "title") %>
+      </li>
+    </ul>
     <% end %>
-  </p>
+  </section>
+  <section class = "column small-12 large-4">
+    <% split.times do |n| %>
+    <ul>
+      <li>
+        <%= link_to(@users[n+split].username, user_products_path(@users[n+split].id), alt: 'link to', class: "title") %>
+      </li>
+    </ul>
+    <% end %>
+  </section>
+  <section class = "column small-12 large-4">
+    <% split.times do |n| %>
+    <ul>
+      <li>
+        <%= link_to(@users[n+2*split].username, user_products_path(@users[n+2*split].id), alt: 'link to', class: "title") %>
+      </li>
+    </ul>
+    <% end %>
+  </section>
 
 </section>

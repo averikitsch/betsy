@@ -89,6 +89,29 @@ describe UsersController do
       must_redirect_to root_path
     end
   end
+  describe "FulFillment page" do
+    it "get fulfillment page if logged in" do
+      login(users(:one),:github)
+      get user_orders_path(users(:one))
+      must_respond_with :success
+    end
+
+    it "logged in user can't access other user's page" do
+      login(users(:two),:github)
+      get user_orders_path(users(:one))
+      must_respond_with :redirect
+    end
+
+    it "guest can't access user's page" do
+      get user_orders_path(users(:one))
+      must_respond_with :redirect
+    end
+
+    it "renders 404 if not found" do
+      get user_orders_path(-1)
+      must_respond_with :redirect
+    end
+  end
 
   describe "order_fulfillment" do
     it "should redirect a guest user to merchants index" do

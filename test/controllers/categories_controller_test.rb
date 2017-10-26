@@ -36,12 +36,17 @@ describe CategoriesController do
     end
 
     it "must be a unique category" do
+      login(users(:one),:github)
       one.name.must_equal "potions"
       proc { post categories_path, params: {category: {name: "potions"}}}.must_change 'Category.count', 0
     end
 
     it "name not be blank" do
+      login(users(:one),:github)
       proc { post categories_path, params: {category: {name: "   "}}}.must_change 'Category.count', 0
+
+      post categories_path, params: {category: {name: ""}}
+      must_respond_with :bad_request
     end
   end
 

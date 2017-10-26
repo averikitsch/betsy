@@ -1,15 +1,6 @@
 class OrderProductsController < ApplicationController
   before_action :find_op, only: [:edit, :update, :destroy, :shipped, :cancel]
 
-  # def index
-  # end
-  #
-  # def show
-  # end
-  #
-  # def new
-  # end
-
   def create
     if session[:order_id].nil?
       @order = Order.create(status: "pending")
@@ -21,6 +12,7 @@ class OrderProductsController < ApplicationController
         session[:order_id] = @order.id
       end
     end
+
     @op = @order.order_products.find_by(product_id: params[:id])
     if @op
       @op.quantity += params[:order_product][:quantity].to_i
@@ -70,31 +62,68 @@ class OrderProductsController < ApplicationController
   end
 
   def shipped
-    @order_product.update_attributes(shipped: @order_product.shipped ? false : true)
+    if find_user
+      if @order_product.product.user.id == session[:user_id]
+        if !@order_product.cancelled
+          @order_product.update_attributes(shipped: @order_product.shipped ? false : true)
 
-    order = @order_product.order
-    ops = order.order_products
-    all_op = ops.map { |op| op.shipped }
-    unless all_op.include?(false)
-      #if all op are shipped mark order as complete
-      order.update(status: "complete")
+          order = @order_product.order
+          ops = order.order_products
+          all_op = ops.map { |op| op.shipped }
+          unless all_op.include?(false)
+            #if all op are shipped mark order as complete
+            order.update(status: "complete")
+          end
+          flash[:status] = :success
+          flash[:result_text] = @order_product.shipped ? "Successfully shipped!" : "Shipping cancelled!"
+          redirect_to user_orders_path(session[:user_id])
+        else
+          flash[:status] = :failure
+          flash[:result_text] = "You can't ship a cancelled item!"
+          redirect_to user_orders_path(session[:user_id])
+        end
+      else
+        flash[:status] = :failure
+        flash[:result_text] = "You don't have access to this order item!"
+        redirect_to root_path
+      end
+    else
+      flash[:status] = :failure
+      flash[:result_text] = "You don't have access to this order item!"
+      redirect_to root_path
     end
-
-    redirect_to user_orders_path(session[:user_id])
-
   end
 
   def cancel
-    @order_product.update_attributes(cancelled: @order_product.cancelled ? false : true)
-    order = @order_product.order
-    ops = order.order_products
-    all_op = ops.map { |op| op.cancelled }
-    unless all_op.include?(false)
-      #if all op are shipped mark order as complete
-      order.update(status: "cancelled")
+    if find_user
+      if @order_product.product.user.id == session[:user_id]
+        if !@order_product.shipped
+          @order_product.update_attributes(cancelled: @order_product.cancelled ? false : true)
+          order = @order_product.order
+          ops = order.order_products
+          all_op = ops.map { |op| op.cancelled }
+          unless all_op.include?(false)
+            #if all op are shipped mark order as complete
+            order.update(status: "cancelled")
+          end
+          flash[:status] = :success
+          flash[:result_text] = @order_product.cancelled ? "Successfully cancelled!" : "Reactivated order item"
+          redirect_to user_orders_path(session[:user_id])
+        else
+          flash[:status] = :failure
+          flash[:result_text] = "You can't cancel a shipped item"
+          redirect_to user_orders_path(session[:user_id])
+        end
+      else
+        flash[:status] = :failure
+        flash[:result_text] = "You don't have access to this order item!"
+        redirect_to root_path
+      end
+    else
+      flash[:status] = :failure
+      flash[:result_text] = "You don't have access to this order item!"
+      redirect_to root_path
     end
-
-    redirect_to user_orders_path(session[:user_id])
   end
 
   private

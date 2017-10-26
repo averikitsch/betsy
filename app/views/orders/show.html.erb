@@ -19,21 +19,34 @@
   </section>
 </article>
 
-<% if session[:user_id] %>
+<%# if session[:user_id] %>
 <article class="products row">
   <table>
-    <tr>
-      <th>Product</th>
-      <th>Quantity</th>
-      <th>Status</th>
-    </tr>
-    <% @user.order_products.where("order_id = ?", @order.id).each do |order_product| %>
-    <tr>
-      <td><%= Product.find_by(id: order_product.product_id).name %></td>
-      <td><%= order_product.quantity %></td>
-      <td><%= order_product.shipped %></td>
-    </tr>
-    <% end %>
+    <thead>
+      <tr>
+        <th>Product</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th>Subtotal</th>
+        <th>Shipping Status</th>
+        <th>Cancel Product</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @user.order_products.where("order_id = ?", @order.id).each do |order_product| %>
+      <tr>
+        <td  data-label='Name'><%= link_to order_product.product.name, product_path(order_product.product_id) %></td>
+        <td data-label='Price'><%=format_price(order_product.product.price) %></td>
+        <td  data-label='Quantity'>x <%=order_product.quantity %></td>
+        <td data-label='Price'><%=format_price(order_product.product.price * order_product.quantity) %></td>
+        <td  data-label='Ship'><%= link_to (order_product.shipped ? "SHIPPED" : "SHIP"), ship_order_product_path(order_product.id), method: :patch %></td>
+        <td  data-label='Cancel'><%= link_to (order_product.cancelled ? "CANCELLED" : "CANCEL"), cancel_order_product_path(order_product.id), method: :patch %></td>
+      </tr>
+      <% end %>
+    </tbody>
   </table>
 </article>
-<% end %>
+<section class = "row center">
+  <%= link_to "Back to Order Summary", user_orders_path(session[:user_id]), class: "button" %>
+</section>
+<%# end %>

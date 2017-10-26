@@ -70,6 +70,19 @@ class OrdersController < ApplicationController
     end
   end
 
+  def lookup
+    @order = Order.new
+  end
+
+  def found
+    @order = Order.where("id = ? AND name = ? AND email = ?",params[:id],params[:name],params[:email]).first
+    unless @order
+      flash.now[:status] = :failure
+      flash.now[:result_text] = "Trick or Treat?! Not home!"
+      render :lookup, status: :bad_request
+    end
+  end
+
   private
 
   def order_params

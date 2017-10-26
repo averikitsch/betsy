@@ -1,6 +1,9 @@
 module ApplicationHelper
 
   def format_price(price)
+    if price.nil?
+      price = 0
+    end
     "$" + format("%.2f", price)
   end
 

@@ -1,13 +1,4 @@
 <section class="row">
-  <section>
-    <% if @product.errors.any? %>
-    <ul class="errors">
-      <% @product.errors.each do |column, message| %>
-      <li><strong><%= column.capitalize %></strong><%= message %></li>
-      <% end %>
-    </ul>
-    <% end %>
-  </section>
 
   <section class="product_form">
     <!-- top and end of form_for is in edit.html and new.html -->
@@ -22,7 +13,7 @@
         <%= f.number_field :price, value: number_to_currency(f.object.price.to_f, delimiter: "", unit: ""), min: 0.01, step: 0.01 %>
 
         <%= f.label :stock, "Quantity in Stock" %>
-        <%= f.select :stock, options_for_select(1..20), :selected => @product.stock %>
+        <%= f.select :stock, options_for_select(1..20, @product.stock) %>
 
         <%= f.label :description %>
         <%= f.text_area :description %>

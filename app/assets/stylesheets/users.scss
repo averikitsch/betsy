@@ -69,6 +69,8 @@ td:first-child, th:first-child {
     background: rgba($white, 0.03);
   }
 
+
+
   td:first-child, th:first-child {
     padding:0.625rem 0.625rem 0.625rem;
   }
@@ -111,4 +113,17 @@ td:first-child, th:first-child {
 
 .shipping header {
   text-align: center;
+}
+
+thead td, thead th {
+  text-align: center;
+}
+
+// ----- User index ------
+.merchant {
+  text-align: center;
+}
+
+.merchant h1 {
+  margin-bottom: 2em;
 }
