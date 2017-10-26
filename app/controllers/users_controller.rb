@@ -95,4 +95,5 @@ class UsersController < ApplicationController
       render_404 unless @user
     end
   end
+
 end

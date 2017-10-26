@@ -112,3 +112,15 @@ td:first-child, th:first-child {
 .shipping header {
   text-align: center;
 }
+
+// ------- About --------
+.about {
+  margin: 0 auto;
+}
+
+#intro {
+  max-width: 500px;
+  margin: 0 auto;
+  text-align: justify;
+  margin-bottom: 50px;
+}
