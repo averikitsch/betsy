@@ -62,8 +62,7 @@
   background-size: cover;
   background-position: 50% 10%;
   text-align: left;
-  padding: 2em 3em;
-  margin: -50px 0 2em;
+  padding: 8em 3em;
 }
 
 .promo h2, .promo small, .promo h4, .promo .button {
@@ -92,6 +91,7 @@ box-shadow: 0 0 10px $black;
 }
 
 .small-promo img {
+  margin: 10px 0 15px 0;
   margin-bottom: 15px;
 }
 
@@ -104,16 +104,7 @@ box-shadow: 0 0 10px $black;
   background: rgba($white, 0.1);
 }
 
-@media screen and (min-width: 500px) {
-  .product {
-    width: 48%;
-    min-width: 200px;
-    max-width: 300px;
-  }
-
-  .promo {
-    padding: 9em 3em;
-  }
+@media screen and (min-width: 600px) {
 
   .root-products {
     width: 80%;
@@ -123,6 +114,14 @@ box-shadow: 0 0 10px $black;
   .root-products .product {
     width: auto;
     max-width: 220px;
+  }
+}
+
+@media screen and (min-width: 450px) {
+  .product {
+    width: 48%;
+    min-width: 200px;
+    max-width: 300px;
   }
 }
 

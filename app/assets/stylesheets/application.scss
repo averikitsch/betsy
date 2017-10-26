@@ -55,10 +55,19 @@ h5 {
   max-width: 100%;
 }
 
+section {
+  padding: 20px;
+}
+
+.container {
+  max-width: 900px;
+  margin: 10px auto;
+}
+
 /*---------------------- HEADER ----------------------------*/
 
 .top_header {
-  background: rgba($black, 0.3);
+  border-bottom: 1px solid rgba($black, 0.3);
   padding-top: 10px;
 }
 
@@ -252,7 +261,6 @@ nav .fa {
 /*---------------------- MAIN ----------------------------*/
 
 main {
-  margin: 50px 0;
   min-height: 50vh;
 }
 
@@ -265,24 +273,19 @@ main h1 {
 
 /*---------------------- FLASH ----------------------------*/
 .status {
-  margin: 10px auto 20px;
+  margin: 10px auto 10px;
   text-align: center;
   background: rgba($white,0.01);
   border-bottom: 0.5px solid rgba($bloodred, 0.7);
   border-top: 0.5px solid rgba($bloodred, 0.7);
-  padding-top: 8px;
   color:$bloodred;
+  position: relative;
+  padding: 8px 0 0;
 }
 
 .status h3 {
   font-size: 0.9em;
   font-style: italic;
-}
-
-.success {
-}
-
-.failure {
 }
 
 /*---------------------- FOOTER ----------------------------*/
