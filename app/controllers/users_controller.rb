@@ -58,9 +58,11 @@ class UsersController < ApplicationController
 
   def destroy
     # not functional
+
     flash[:status] = :failure
     flash[:result_text] = "This page isn't available"
     redirect_to root_path
+
   end
 
   def login
