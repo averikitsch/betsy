@@ -1,15 +1,15 @@
 <section class= "row promo">
   <small>Introducing</small>
-    <h2>Haunted collection</h2>
-    <small>by Casper</small>
-    <p>Tried and true products you won't want to live or die without,
-    </br>curated by your ghostly friends at Spooksy</p>
-    <%= link_to "Shop now", category_products_path(4), class: "button" %>
+  <h2>Haunted collection</h2>
+  <small>by Casper</small>
+  <p>Tried and true products you won't want to live or die without,
+  </br>curated by your ghostly friends at Spooksy</p>
+  <%= link_to "Shop now", category_products_path(4), class: "button" %>
 </section>
+
 <section class = "row root-products">
-  <section class = "columns small-12">
-    <h5>What's New</h5>
-    <% @recent_products.each do |p|%>
+  <h5>What's New</h5>
+  <% @recent_products.each do |p|%>
     <%= link_to product_path(p.id) do %>
     <article class="product">
       <%= image_tag p.image, alt:"product image"  unless p.image.blank? %>
@@ -18,21 +18,47 @@
     </article>
     <% end %>
   <%end %>
+</section>
+
+<section class = "row small-promo">
+  <section class = "columns small-12 medium-6">
+    <%= image_tag "promo2", alt:"shop potions" %>
+    <section>
+      <h4>Potions are a brewin'</h4>
+      <p>
+        Say goodbye to old brews</br>
+        And hello to something new
+      </p>
+      <%= link_to "Shop potions", category_products_path(4), class: "button" %>
+    </section>
   </section>
 
-  <section class = "columns small-12">
-    <h5>Trending</h5>
-    <% @top_products.each do |product|%>
-      <%p = Product.find(product.id)%>
-      <%= link_to product_path(p.id) do %>
-      <article class="product">
-        <%= image_tag p.image, alt:"product image" unless p.image.blank? %>
-        <p><%= p.name.titleize %></p>
-        <p><%= format_price(p.price) %></p>
-      </article>
-      <% end %>
-    <%end %>
+  <section class = "columns small-12 medium-6">
+    <%= image_tag "promo3", alt:"shop home"%>
+    <section>
+      <h4>Home for the hell-odays</h4>
+      <p>
+        Our latest decor will turn</br>
+        your coffin into a coven
+      </p>
+      <%= link_to "Shop home", category_products_path(4), class: "button" %>
+    </section>
   </section>
+</section>
+
+<section class = "row root-products">
+  <h5>Trending</h5>
+  <% @top_products.each do |product|%>
+  <%p = Product.find(product.id)%>
+    <%= link_to product_path(p.id) do %>
+    <article class="product">
+      <%= image_tag p.image, alt:"product image" unless p.image.blank? %>
+      <p><%= p.name.titleize %></p>
+      <p><%= format_price(p.price) %></p>
+    </article>
+    <% end %>
+  <%end %>
+</section>
 
 
 </section>

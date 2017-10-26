@@ -40,7 +40,7 @@
 }
 
 .all_products {
-  border-bottom: 0.5px solid rgba($white, 0.1);
+  border-bottom: 1px solid rgba($black, 0.3);
 }
 
 .all_products h5 {
@@ -87,6 +87,24 @@
   letter-spacing: 0.8em;
 }
 
+.small-promo {
+background: image-url(smoke);
+background-size: cover;
+margin: 60px 0;
+text-align: center;
+padding: 20px 0;
+box-shadow: 0 0 10px $black;
+}
+
+.small-promo .button {
+  margin: 0;
+  background: rgba($white, 0.1);
+}
+
+.small-promo .button:hover {
+  background: rgba($white, 0.1);
+}
+
 @media screen and (min-width: 500px) {
   .product {
     width: 48%;
@@ -105,7 +123,7 @@
 
   .root-products .product {
     width: auto;
-    max-width: 200px;
+    max-width: 220px;
   }
 }
 
