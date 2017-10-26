@@ -23,7 +23,6 @@ describe OrdersController do
       must_respond_with :redirect
 
       get order_path(orders(:one))
-      must_respond_with :found
       order_id = orders(:one).id
       orders(:one).destroy
 

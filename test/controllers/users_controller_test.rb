@@ -69,7 +69,7 @@ describe UsersController do
       login(user, :github)
       session[:user_id].must_equal user.id
       delete logout_path
-      session[:user_id].must_equal nil
+      session[:user_id].must_be_nil
       must_redirect_to root_path
     end
 
@@ -112,4 +112,26 @@ describe UsersController do
       must_respond_with :redirect
     end
   end
+<<<<<<< HEAD
+=======
+
+  describe "order_fulfillment" do
+    it "should redirect a guest user to merchants index" do
+      get user_orders_path(user.id)
+      must_redirect_to users_path
+    end
+
+    it "should get the order_fulfillment page for the session user" do
+      login(user, :github)
+      session[:user_id].must_equal user.id
+      get user_orders_path(user.id)
+      must_respond_with :success
+    end
+
+    it "should render a 404 if the user is not found" do
+      get user_orders_path(999)
+      must_respond_with :redirect
+    end
+  end
+>>>>>>> 4acce3c822b0d3348c1bd0a5e980dc8b5fa2508f
 end

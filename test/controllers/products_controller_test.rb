@@ -147,14 +147,11 @@ describe ProductsController do
 
       patch product_path(product.id), params: {product: { category_ids: c_i}}
       product.categories.count.must_equal 2
-
-      patch product_path(product.id), params: {product: { category_ids: c_i}}
-      product.categories.count.must_equal 2
     end
 
     it "can't view edit product page if not the logged in" do
       delete logout_path
-      session[:user_id].must_equal nil
+      session[:user_id].must_be_nil
       get edit_product_path(one)
       must_respond_with :redirect
     end
@@ -169,7 +166,7 @@ describe ProductsController do
       product = Product.find_by(name: "shoelace")
 
       delete logout_path
-      session[:user_id].must_equal nil
+      session[:user_id].must_be_nil
 
       patch product_path(product.id), params: {product: { price: 5.9}}
       must_respond_with :redirect
