@@ -1,9 +1,9 @@
 class ProductsController < ApplicationController
   before_action :find_product , only: [:show, :edit, :update]
   def root
-    @top_products =  Product.select("products.id, avg(reviews.rating) as average_rating").where(active: true).joins("LEFT JOIN reviews ON products.id = reviews.product_id").group("products.id").order("average_rating DESC NULLS LAST").limit(6)
+    @top_products =  Product.select("products.id, avg(reviews.rating) as average_rating").where(active: true).joins("LEFT JOIN reviews ON products.id = reviews.product_id").group("products.id").order("average_rating DESC NULLS LAST").limit(8)
     #Product.joins("LEFT JOIN order_products ON products.id = order_products.product_id").group(:id).order("count(order_products.id)  DESC").limit(10)
-    @recent_products =  Product.where(active: true).order(created_at: :desc).limit(6)
+    @recent_products =  Product.where(active: true).order(created_at: :desc).limit(8)
   end
 
   def index

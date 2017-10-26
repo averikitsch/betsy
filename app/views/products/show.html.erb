@@ -1,4 +1,4 @@
-<section class = "row product-show">
+<section class = "row product-show container">
   <article class = "column small-12 medium-6 image-show">
     <%= image_tag @product.image, alt:@product.name, class:"product" unless @product.image.blank? %>
   </article>
@@ -32,14 +32,14 @@
   </article>
 </section>
 
-<section class = "row rating-average">
+<section class = "row rating-average container">
   <h4>Ratings Summary</h4>
   <p>
     <%= average_rating(@product.reviews) %>
   </p>
 </section>
 
-<section class = "row rating">
+<section class = "row rating container">
   <h4>Reviews</h4>
   <% if @product.reviews.empty? %>
   <p>
