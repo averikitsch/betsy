@@ -121,6 +121,16 @@ describe OrdersController do
       delete order_path(Order.last)
       Product.find_by(name: "tomb").stock.must_equal 100
     end
+
+    it "can get lookup" do
+      get orders_lookup_path
+      must_respond_with :success
+    end
+
+    it "can get found" do
+      get orders_found_path params: {id: 1}
+      must_respond_with :bad_request
+    end
   end
 
 end

@@ -68,9 +68,7 @@ describe User do
     it "returns the amount of all order_products associated with the user" do
       op1 = order_products(:two)
        op2 = order_products(:three)
-      # op3 = order_products(:four)
       total = (op1.quantity * op1.product.price) +(op2.quantity * op2.product.price)
-      # +(op3.quantity * op3.product.price)
       users(:two).total_revenue.must_equal total
     end
   end
