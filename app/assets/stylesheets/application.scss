@@ -59,7 +59,7 @@ h5 {
 
 .top_header {
   background: rgba($black, 0.3);
-  padding-top: 0;
+  padding-top: 10px;
 }
 
 .top_header a {
@@ -118,32 +118,20 @@ nav li:hover ul a {
   line-height: 40px;
 }
 
-// .search-bar form input[type="text"] {
-//   border-radius: 0;
-// }
-//
-// #search {
-//   background: rgba($white, 0);
-//   width: 35px;
-//   padding-top: 20px;
-//   transition: all .5s ease;
-//   position: absolute;
-//   top: 0;
-//   right: 0;
-// }
-//
-// #search:focus {
-//    width: 100%;
-//    background: rgba($bloodred, 1);
-//    border-width: 0;
-// }
-//
-// .search-bar input::placeholder {
-//   transform: rotate(-30deg);
-//   transform-origin: left center;
-//   font-weight: bold;
-//   font-size: 2em;
-// }
+#search {
+  border-radius: 25px;
+  width: 120px;
+  transition: all .5s ease;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+#search:focus {
+   width: 200px;
+   background: rgba($bloodred, 1);
+   border-width: 0;
+}
 
 .search-bar {
   margin-right: 30px;
@@ -240,27 +228,25 @@ nav .fa {
 	.show-menu {
 		display:inline-block;
 	}
-  //
-  // #search {
-  //   background: rgba($white, 0.1);
-  //   border-radius: 5px;
-  //   width: 100%;
-  //   position: relative;
-  //   padding-top: 10px;
-  // }
-  //
-  // #search:focus {
-  //    background: rgba($white, 0.1);
-  // }
-  //
-  // .top_header [type='text'] {
-  //   margin: 10px 0;
-  // }
-  //
-  // .search-bar input::placeholder {
-  //   font-size: 1em;
-  //   line-height: 1em;
-  // }
+
+  #search {
+    position: relative;
+    width: 100%;
+    top: 0;
+    right: 0;
+  }
+
+  #search:focus {
+     width: 100%;
+  }
+
+  .promo p, .promo small:first-child, .promo .button {
+    display: none;
+  }
+
+  .promo {
+    min-height: 300px;
+  }
 }
 
 /*---------------------- MAIN ----------------------------*/
