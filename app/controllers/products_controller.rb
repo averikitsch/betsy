@@ -107,11 +107,12 @@ class ProductsController < ApplicationController
           end
         end
       end
-      @product.update_attributes(product_params)
       #replaces empty string with default image
-      if @product.image.length == 0
+      if @product.image.empty? && params[:image]
         @product.image = valid_image
       end
+      product_params = params.require(:product).permit(:user_id, :name, :price, :stock, :description, :active)
+      @product.update_attributes(product_params)
 
       if @product.save
         flash[:status] = :success

@@ -21,7 +21,9 @@ class CategoriesController < ApplicationController
     else
       @category = Category.new category_params
       if @category.save
-        redirect_to categories_path
+        flash[:status] = :success
+        flash[:result_text] = "Successfully created category: #{@category.name}!"
+        redirect_to user_path(session[:user_id])
       else
         render :new
       end
