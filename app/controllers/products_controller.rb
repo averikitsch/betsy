@@ -43,7 +43,9 @@ class ProductsController < ApplicationController
   end
 
   def create
+    #ARE WE IN A CURRENT SESSION?
     if find_user
+
       @product = Product.new(product_params)
       #appends categories into @products.categories
       temp = @product.categories.map {|c| c.id }
@@ -54,22 +56,29 @@ class ProductsController < ApplicationController
           end
         end
       end
-
       #replaces empty string with default image
       if params[:product][:image] == ""
         @product.image = valid_image
       end
-
-      if @product.save
-        flash[:status] = :success
-        flash[:result_text] = "Successfully created #{@product.name}!"
-        redirect_to product_path(@product)
+      #DOES THE USER ID MATCH THE PRODUCT OWNER'S ID?
+      #NO
+      if @user.id != params[:product][:user_id].to_i
+        flash[:status] = :failure
+        flash[:result_text] = "Are you trying to add this to another Spooker's store?!"
+        redirect_to products_path, status: :bad_request
+      #YES
       else
-        flash.now[:status] = :error
-        flash.now[:result_text] = "#{@product.name} could not be created"
-        render :new, status: :bad_request
+        if @product.save
+          flash[:status] = :success
+          flash[:result_text] = "Successfully created #{@product.name}!"
+          redirect_to product_path(@product)
+        else
+          flash.now[:status] = :error
+          flash.now[:result_text] = "#{@product.name} could not be created"
+          render :new, status: :bad_request
+        end
       end
-
+    #NO YOU AREN'T LOGGED IN
     else
       flash[:status] = :failure
       flash[:result_text] = "Oops..You can't create a product"
@@ -162,34 +171,6 @@ class ProductsController < ApplicationController
       end
     end
 
-
-      ###
-    # if find_user
-    #   if @user.id.to_i != Product.find_by(id: params[:id].to_i).user_id
-    #     if User.find_by(id: params[:id])
-    #       flash[:status] = :failure
-    #       flash[:result_text] = "Dear Spooker: You cannot view another spooky's page!"
-    #       redirect_to users_path
-    #     else
-    #       render_404
-    #     end
-    #   else
-    #     @product = Product.find_by(id: params[:id])
-    #     # @product.active = params[:product][:active].to_i
-    #     if @product.active
-    #       @product.active = false
-    #     else
-    #       @product.active = true
-    #     end
-    #     if @product.save
-    #       redirect_to user_path(@product.user)
-    #     end
-    #   end
-    # else
-    #   flash[:status] = :failure
-    #   flash[:result_text] = "You must be logged in to do that!"
-    #   redirect_to user_path(@product.user)
-    # end
   end
 
   private

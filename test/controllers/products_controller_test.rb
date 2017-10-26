@@ -75,40 +75,53 @@ describe ProductsController do
   end
 
   describe "create product" do
-    it "can access product new page when logged in" do
-      get new_product_path()
-      must_respond_with :success
+
+    describe "guest access" do
+      it "can't access product new page new product if not logged in" do
+        delete logout_path
+        get new_product_path
+        must_respond_with :redirect
+      end
+
+      it "can't add a product if not logged in" do
+        delete logout_path
+        proc {post products_path, params: {product: { user_id: ghost.id, name: "shoelace", price: 9.9,  stock: 20}}}.must_change "Product.count", 0
+      end
     end
 
-    it "can't access product new page new product if not logged in" do
-      delete logout_path
-      get new_product_path
-      must_respond_with :redirect
-    end
+    describe "user access" do
+      it "can access product new page when logged in" do
+        get new_product_path()
+        must_respond_with :success
+      end
 
-    it "can't add a product if not logged in" do
-      delete logout_path
-      proc {post products_path, params: {product: { user_id: ghost.id, name: "shoelace", price: 9.9,  stock: 20}}}.must_change "Product.count", 0
-    end
+      it "should be able to create a new product with no categories" do
+        proc {post products_path, params: {product: { user_id: ghost.id, name: "shoelace", price: 9.9,  stock: 20}}}.must_change "Product.count", 1
+        must_respond_with :redirect
+      end
 
-    it "should be able to create a new product with no categories" do
-      proc {post products_path, params: {product: { user_id: ghost.id, name: "shoelace", price: 9.9,  stock: 20}}}.must_change "Product.count", 1
-      must_respond_with :redirect
-    end
+      it "should be able to create a new product with categories" do
+        c_i = [categories(:one).id,categories(:two).id]
+        proc {post products_path, params: {product: { name: "shoelace", price: 9.9, user_id: ghost.id, category_ids: c_i, stock: 20}}}.must_change "Product.count", 1
+        must_respond_with :redirect
+        product = Product.find_by(name: "shoelace")
+        product.categories.length.must_equal 2
+      end
 
-    it "should be able to create a new product with categories" do
-      c_i = [categories(:one).id,categories(:two).id]
-      proc {post products_path, params: {product: { name: "shoelace", price: 9.9, user_id: ghost.id, category_ids: c_i, stock: 20}}}.must_change "Product.count", 1
-      must_respond_with :redirect
-      product = Product.find_by(name: "shoelace")
-      product.categories.length.must_equal 2
-    end
+      it "should rerender the form if it can't create a new product" do
+        proc { post products_path, params: { product: {user_id: ghost.id }}}.must_change "Product.count", 0
+        must_respond_with :bad_request
+      end
 
-    it "should rerender the form if it can't create a new product" do
-      proc { post products_path, params: {product: {name: "shoelace"}}}.must_change "Product.count", 0
-      must_respond_with :bad_request
-    end
+      it "should not allow a user to create a new product for another user" do
+        #ghost (user one in yml) is currently logged in
+        proc { post products_path, params: {product: {name: "shoelace", price: 12.3, user_id: ghoul.id}}}.must_change "Product.count", 0
+        must_respond_with :bad_request
+        product2 = Product.find_by(name: "tomb")
+        product2.active.must_equal false
+      end
 
+    end
   end
 
   describe "update product" do
@@ -194,7 +207,7 @@ describe ProductsController do
         product.active.must_equal false
       end
       it "won't allow a user to toggle another user's product" do
-        #ghost is currently logged in
+        #ghost is currently logged in (user one in yml)
         #product2 belongs to user two
         product2 = products(:three)
         product2.active.must_equal false
