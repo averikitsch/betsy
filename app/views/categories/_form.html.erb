@@ -1,12 +1,3 @@
-<% if @category.errors.any? %>
-  <ul class="errors">
-    <% @category.errors.each do |column, message| %>
-      <li>
-        <strong><%= column.capitalize %></strong> <%= message %>
-      </li>
-    <% end %>
-  </ul>
-<% end %>
 
 <%= form_for @category do |f| %>
 

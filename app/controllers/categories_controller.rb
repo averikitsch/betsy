@@ -25,6 +25,9 @@ class CategoriesController < ApplicationController
         flash[:result_text] = "Successfully created category: #{@category.name}!"
         redirect_to user_path(session[:user_id])
       else
+        flash[:status] = :failure
+        flash[:result_text] = "Boo!"
+        flash[:messages] = @category.errors.messages
         render :new
       end
     end
