@@ -30,7 +30,7 @@
 <tbody>
 
 <% @user.orders.each do |order| %>
-  <% unless order.status == "pending" || order.status == "cancelled" %>
+  <%# unless order.status == "pending" || order.status == "cancelled" %>
   <tr>
     <td colspan="1" data-label='Order'><strong><%= link_to order.id, order_path(order.id) %></strong></td>
     <td colspan="3" data-label='Date'><%= format_datetime(order.created_at) %></td>
@@ -45,7 +45,7 @@
     <td  data-label='Ship'><%= link_to (order_product.shipped ? "SHIPPED" : "SHIP"), ship_order_product_path(order_product.id), method: :patch %></td>
     <td  data-label='Cancel'><%= link_to (order_product.cancelled ? "CANCELLED" : "CANCEL"), cancel_order_product_path(order_product.id), method: :patch %></td>
   </tr>
-  <% end %>
+  <%# end %>
   <% end %>
 <% end %>
 
