@@ -12,16 +12,18 @@ two:
   product: two
   quantity: 5
   shipped: false
+  cancelled: false
 
 three:
   order: one
   product: three
   quantity: 3
   shipped: false
+  cancelled: false
 
 four:
   order: three
   product: two
   quantity: 2
   shipped: false
-  
+  cancelled: false

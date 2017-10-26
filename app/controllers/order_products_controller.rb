@@ -85,11 +85,12 @@ class OrderProductsController < ApplicationController
           end
           flash[:status] = :success
           flash[:result_text] = @order_product.shipped ? "Successfully shipped!" : "Shipping cancelled!"
+          redirect_to user_orders_path(session[:user_id])
         else
           flash[:status] = :failure
           flash[:result_text] = "You can't ship a cancelled item!"
+          redirect_to user_orders_path(session[:user_id])
         end
-        redirect_to user_orders_path(session[:user_id])
       else
         flash[:status] = :failure
         flash[:result_text] = "You don't have access to this order item!"
@@ -116,11 +117,12 @@ class OrderProductsController < ApplicationController
           end
           flash[:status] = :success
           flash[:result_text] = @order_product.cancelled ? "Successfully cancelled!" : "Reactivated order item"
+          redirect_to user_orders_path(session[:user_id])
         else
           flash[:status] = :failure
           flash[:result_text] = "You can't cancel a shipped item"
+          redirect_to user_orders_path(session[:user_id])
         end
-        redirect_to user_orders_path(session[:user_id])
       else
         flash[:status] = :failure
         flash[:result_text] = "You don't have access to this order item!"

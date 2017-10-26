@@ -28,7 +28,7 @@ class CategoriesController < ApplicationController
         flash[:status] = :failure
         flash[:result_text] = "Boo!"
         flash[:messages] = @category.errors.messages
-        render :new
+        render :new, status: :bad_request
       end
     end
   end

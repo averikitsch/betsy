@@ -81,6 +81,8 @@ describe OrderProductsController do
     three = order_products(:three)
 
     patch ship_order_product_path(one.id)
+    delete logout_path
+    login(users(:two), :github)
     patch ship_order_product_path(three.id)
 
     OrderProduct.find(three.id).shipped.must_equal true
@@ -112,9 +114,10 @@ describe OrderProductsController do
     login(users(:one), :github)
     one = order_products(:one)
     three = order_products(:three)
-
     patch cancel_order_product_path(one.id)
     puts OrderProduct.find(one.id).cancelled
+    delete logout_path
+    login(users(:two), :github)
     patch cancel_order_product_path(three.id)
     puts OrderProduct.find(three.id).cancelled
     one.order.status.must_equal "cancelled"
@@ -138,5 +141,21 @@ describe OrderProductsController do
     patch cancel_order_product_path(one.id)
 
     OrderProduct.find(one.id).shipped.must_equal start
+    must_respond_with :redirect
+  end
+
+  it "can't mark shipped or cancelled if not logged in" do
+    patch cancel_order_product_path(order_products(:one))
+    must_respond_with :redirect
+    patch ship_order_product_path(order_products(:one))
+    must_respond_with :redirect
+  end
+
+  it "can't mark shipped or cancelled if not owner" do
+    login(users(:two), :github)
+    patch cancel_order_product_path(order_products(:one))
+    must_respond_with :redirect
+    patch ship_order_product_path(order_products(:one))
+    must_respond_with :redirect
   end
 end
