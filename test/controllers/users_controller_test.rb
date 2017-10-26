@@ -112,8 +112,6 @@ describe UsersController do
       must_respond_with :redirect
     end
   end
-<<<<<<< HEAD
-=======
 
   describe "order_fulfillment" do
     it "should redirect a guest user to merchants index" do
@@ -133,5 +131,4 @@ describe UsersController do
       must_respond_with :redirect
     end
   end
->>>>>>> 4acce3c822b0d3348c1bd0a5e980dc8b5fa2508f
 end

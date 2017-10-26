@@ -64,7 +64,7 @@ class UsersController < ApplicationController
   end
 
   def order_fulfillment
-    @user = User.find_by(id: session[:user_id].to_i)
+    # @user = User.find_by(id: session[:user_id].to_i)
     if @user.nil?
       flash[:status] = :failure
       flash[:result_text] = "Dear Paranormal Ally: We regret to inform you that accesss to this page is restricted."
@@ -73,11 +73,12 @@ class UsersController < ApplicationController
       flash[:status] = :failure
       flash[:result_text] = "Dear Spooker: You cannot view another spooky's page!"
       redirect_to users_path
-    end
-    if params[:status]
-      @orders = @user.orders(params[:status])
     else
-      @orders = @user.orders(['paid', 'complete'])
+      if params[:status]
+        @orders = @user.orders(params[:status])
+      else
+        @orders = @user.orders(['paid', 'complete'])
+      end
     end
   end
 end
