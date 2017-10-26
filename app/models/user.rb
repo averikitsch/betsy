@@ -14,26 +14,14 @@ class User < ApplicationRecord
     return user
   end
 
-<<<<<<< HEAD
   def orders(status)
     Order.where(status: status)
     .joins(:products).where('products.user_id = ?', id).distinct
-=======
-  def orders
-    Order.where(status:["paid","complete"]).joins(:products).where('products.user_id = ?', id).distinct
->>>>>>> 4acce3c822b0d3348c1bd0a5e980dc8b5fa2508f
   end
 
   def order_products
     product_ids = products.collect { |product| product.id }
-<<<<<<< HEAD
     order_products = OrderProduct.where(:product_id => product_ids).joins(:order).where("orders.status = ? OR orders.status = ?", "paid","completed")
-=======
-    order_products = OrderProduct.where(:product_id => product_ids).joins(:order).where("orders.status = ? OR orders.status = ?", "paid","complete")
-    # order_products = order_products.select do |order_product|
-    #   order = Order.find_by(id: order_product.order_id)
-    #   order.status == "paid" || order.status == "complete" end
->>>>>>> 4acce3c822b0d3348c1bd0a5e980dc8b5fa2508f
   end
 
   def total_revenue
