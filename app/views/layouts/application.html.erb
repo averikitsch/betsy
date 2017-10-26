@@ -13,7 +13,7 @@
 
 <body>
   <header class="top_header">
-    <span class="search-bar float-right display_full">
+    <span class="search-bar display_full">
     <%= form_tag(products_path, :method => "get", id: "search-form") do %>
       <%= text_field_tag :search, params[:search], placeholder: raw("&#9906;") %>
       <%# submit_tag "Search", :name => nil %>
@@ -112,8 +112,8 @@
 
       <section class="columns medium-4 small-12">
         <ul>
-          <li><%= link_to "About Us" %></li>
-          <li><%= link_to "Careers" %></li>
+          <li><%= link_to "About Us", about_path  %></li>
+          <li><%= link_to "Careers"%></li>
           <li><%= link_to "Events" %></li>
           <li><%= link_to "Wholesale" %></li>
         </ul>

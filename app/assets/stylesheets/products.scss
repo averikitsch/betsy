@@ -63,7 +63,7 @@
   background-position: 50% 10%;
   text-align: left;
   padding: 2em 3em;
-  margin-bottom: 2em;
+  margin: -50px 0 2em;
 }
 
 .promo h2, .promo small, .promo h4, .promo .button {
@@ -89,6 +89,10 @@ margin: 60px 0;
 text-align: center;
 padding: 20px 0;
 box-shadow: 0 0 10px $black;
+}
+
+.small-promo img {
+  margin-bottom: 15px;
 }
 
 .small-promo .button {
