@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   # resources :order_products
   get '/users/:user_id/products', to: 'products#index', as: 'user_products'
   get '/users/:user_id/orders', to: 'users#order_fulfillment', as: 'user_orders'
-
+  get '/about', to: 'users#about'
   get '/shipping', to: 'users#shipping'
   get '/orders/lookup', to: 'orders#lookup'
   get '/orders/found', to: 'orders#found'

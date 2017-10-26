@@ -46,14 +46,29 @@ img {
 
 h5 {
   letter-spacing: 0.03em;
-  padding-bottom: 1em;
-  border-bottom: 0.5px solid rgba($white, 0.1);
+  padding: 0.7em 0 1em;
+  border-bottom: 1px solid rgba($black, 0.3);
+  background: image-url(symbol) top center no-repeat;
+}
+
+.row {
+  max-width: 100%;
+}
+
+section {
+  padding: 20px;
+}
+
+.container {
+  max-width: 900px;
+  margin: 10px auto;
 }
 
 /*---------------------- HEADER ----------------------------*/
 
 .top_header {
-  padding-top: 25px;
+  border-bottom: 1px solid rgba($black, 0.3);
+  padding-top: 10px;
 }
 
 .top_header a {
@@ -69,7 +84,7 @@ h5 {
 /*---------------------- NAV ----------------------------*/
 
 nav {
-  padding: 0 20px;
+  height: 35px;
   font-size: 0.75em;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -112,13 +127,23 @@ nav li:hover ul a {
   line-height: 40px;
 }
 
-.search-bar {
-  margin-right: 30px;
+#search {
+  border-radius: 25px;
+  width: 120px;
+  transition: all .5s ease;
+  position: absolute;
+  top: 10px;
+  right: 10px;
 }
 
-header h1 {
-  width: 70%;
-  margin: 0 auto;
+#search:focus {
+   width: 200px;
+   background: rgba($bloodred, 1);
+   border-width: 0;
+}
+
+.search-bar {
+  margin-right: 30px;
 }
 
 .search-bar input::placeholder {
@@ -160,6 +185,7 @@ nav ul li a:hover + .hidden, .hidden:hover, nav input[type=checkbox]:checked ~ #
 nav .fa {
   font-size: 2em;
   color: $white;
+  padding: 0 5px;
 }
 
 
@@ -167,7 +193,7 @@ nav .fa {
 
 @media screen and (max-width : 639px){
   nav {
-    margin-top: -35px;
+    margin-top: -40px;
   }
 
   nav ul li a:hover + .hidden, .hidden:hover, .display_full, nav ul {
@@ -176,10 +202,13 @@ nav .fa {
 
 	nav ul {
 		position: static;
+        background: $charcoal;
 	}
 
 	nav li{
     border-bottom: 1px solid rgba($white,0.1);
+    background: $charcoal;
+    padding: 0 15px;
 	}
 
   nav li:hover a {
@@ -208,12 +237,30 @@ nav .fa {
 	.show-menu {
 		display:inline-block;
 	}
+
+  #search {
+    position: relative;
+    width: 100%;
+    top: 0;
+    right: 0;
+  }
+
+  #search:focus {
+     width: 100%;
+  }
+
+  .promo p, .promo small:first-child, .promo .button {
+    display: none;
+  }
+
+  .promo {
+    min-height: 300px;
+  }
 }
 
 /*---------------------- MAIN ----------------------------*/
 
 main {
-  padding: 50px 30px;
   min-height: 50vh;
 }
 
@@ -226,24 +273,19 @@ main h1 {
 
 /*---------------------- FLASH ----------------------------*/
 .status {
-  margin: 10px auto 20px;
+  margin: 10px auto 10px;
   text-align: center;
   background: rgba($white,0.01);
   border-bottom: 0.5px solid rgba($bloodred, 0.7);
   border-top: 0.5px solid rgba($bloodred, 0.7);
-  padding-top: 8px;
   color:$bloodred;
+  position: relative;
+  padding: 8px 0 0;
 }
 
 .status h3 {
   font-size: 0.9em;
   font-style: italic;
-}
-
-.success {
-}
-
-.failure {
 }
 
 /*---------------------- FOOTER ----------------------------*/

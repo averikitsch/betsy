@@ -80,4 +80,5 @@ class UsersController < ApplicationController
       @orders = @user.orders(['paid', 'complete'])
     end
   end
+
 end
