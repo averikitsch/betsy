@@ -13,18 +13,18 @@ class ProductsController < ApplicationController
       if Category.find_by(id: params[:category_id]) == nil
         render_404
       else
-        @products = Product.includes(:categories).where(active: true, categories: { id: params[:category_id]})
+        @products = Product.includes(:categories).where(active: true, categories: { id: params[:category_id]}).paginate(:page => params[:page], :per_page => 6)
       end
     elsif params[:user_id]
       if User.find_by(id: params[:user_id]) == nil
         render_404
       else
-        @products = Product.includes(:user).where(active: true, products: {user_id: params[:user_id]})
+        @products = Product.includes(:user).where(active: true, products: {user_id: params[:user_id]}).paginate(:page => params[:page], :per_page => 6)
       end
     elsif params[:search]
-        @products = Product.search(params[:search]).order(:name)
+        @products = Product.search(params[:search]).order(:name).paginate(:page => params[:page], :per_page => 6)
     else
-      @products = Product.where(active: true).order(:id)
+      @products = Product.where(active: true).order(:id).paginate(:page => params[:page], :per_page => 6)
     end
   end
 
