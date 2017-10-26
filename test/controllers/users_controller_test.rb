@@ -37,9 +37,7 @@ describe UsersController do
         get user_path(-100)
         must_respond_with :not_found
       end
-
     end
-
   end
 
   describe "auth_callback" do
@@ -89,9 +87,11 @@ describe UsersController do
       must_redirect_to root_path
     end
   end
+
   describe "FulFillment page" do
     it "get fulfillment page if logged in" do
       login(users(:one),:github)
+      session[:user_id].must_equal user.id
       get user_orders_path(users(:one))
       must_respond_with :success
     end
@@ -110,25 +110,6 @@ describe UsersController do
     it "renders 404 if not found" do
       get user_orders_path(-1)
       must_respond_with :redirect
-    end
-  end
-
-  describe "order_fulfillment" do
-    it "should redirect a guest user to merchants index" do
-      get user_orders_path(user.id)
-      must_redirect_to users_path
-    end
-
-    it "should get the order_fulfillment page for the session user" do
-      login(user, :github)
-      session[:user_id].must_equal user.id
-      get user_orders_path(user.id)
-      must_respond_with :success
-    end
-
-    it "should render a 404 if the user is not found" do
-      get user_orders_path(999)
-      must_respond_with :not_found
     end
   end
 end

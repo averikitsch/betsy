@@ -10,8 +10,6 @@ class UsersController < ApplicationController
         flash[:result_text] = "Dear Paranormal Ally: We regret to inform you that accesss to this page is restricted."
         redirect_to users_path
       else
-        # flash.now[:status] = :failure
-        # flash.now[:result_text] = "Dear Paranormal Ally, this page doesn't exist"
         render_404
       end
 
@@ -21,8 +19,6 @@ class UsersController < ApplicationController
         flash[:result_text] = "Dear Spooker: You cannot view another spooky's page!"
         redirect_to users_path
       else
-        # flash.now[:status] = :failure
-        # flash.now[:result_text] = "Dear Spooker, this page does not exist"
         render_404
       end
     else
@@ -70,15 +66,18 @@ class UsersController < ApplicationController
   def order_fulfillment
     @user = User.find_by(id: session[:user_id].to_i)
     if @user.nil?
-        flash[:status] = :failure
-        flash[:result_text] = "Dear Paranormal Ally: We regret to inform you that accesss to this page is restricted."
-        redirect_to users_path
+      flash[:status] = :failure
+      flash[:result_text] = "Dear Paranormal Ally: We regret to inform you that accesss to this page is restricted."
+      redirect_to users_path
     elsif session[:user_id].to_i != params[:user_id].to_i
-        flash[:status] = :failure
-        flash[:result_text] = "Dear Spooker: You cannot view another spooky's page!"
-        redirect_to users_path
+      flash[:status] = :failure
+      flash[:result_text] = "Dear Spooker: You cannot view another spooky's page!"
+      redirect_to users_path
+    end
+    if params[:status]
+      @orders = @user.orders(params[:status])
     else
-      render_404 unless @user
+      @orders = @user.orders(['paid', 'complete'])
     end
   end
 end

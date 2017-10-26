@@ -14,6 +14,8 @@ class Order < ApplicationRecord
   validates :billing_zip, numericality: { only_integer: true }, :if => :confirm_payment?
   validates :status, presence: true, inclusion: { in: STATUS }
 
+  scope :status, ->(status) { where('status = ?', status) } 
+
   private
 
   def card_expiry_checks
