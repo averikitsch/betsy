@@ -71,7 +71,7 @@ describe UsersController do
       login(user, :github)
       session[:user_id].must_equal user.id
       delete logout_path
-      session[:user_id].must_equal nil
+      session[:user_id].must_be_nil
       must_redirect_to root_path
     end
 
@@ -128,7 +128,7 @@ describe UsersController do
 
     it "should render a 404 if the user is not found" do
       get user_orders_path(999)
-      must_respond_with :not_found
+      must_respond_with :redirect
     end
   end
 end

@@ -18,7 +18,6 @@ describe OrderProductsController do
     post order_products_path(products(:one), order_product: {quantity: 1})
     startID = session[:order_id]
 
-
     Order.destroy_all
 
     post order_products_path(products(:one), order_product: {quantity: 1})
@@ -115,11 +114,9 @@ describe OrderProductsController do
     one = order_products(:one)
     three = order_products(:three)
     patch cancel_order_product_path(one.id)
-    puts OrderProduct.find(one.id).cancelled
     delete logout_path
     login(users(:two), :github)
     patch cancel_order_product_path(three.id)
-    puts OrderProduct.find(three.id).cancelled
     one.order.status.must_equal "cancelled"
     must_respond_with :redirect
   end
