@@ -1,9 +1,4 @@
 class ReviewsController < ApplicationController
-  def index
-  end
-
-  def show
-  end
 
   def new
     @product = Product.find_by(id: params[:product_id])
@@ -35,19 +30,10 @@ class ReviewsController < ApplicationController
         flash[:messages] = @review.errors.messages
         @product = Product.find_by(id: params[:product_id])
         render :new, status: :bad_request
-        # redirect_to new_product_review_path( params[:product_id]), status: :bad_request # make instance variable
       end
     end
   end
 
-  def edit
-  end
-
-  def update
-  end
-
-  def destroy
-  end
 
   private
   def review_params

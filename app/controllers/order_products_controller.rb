@@ -1,15 +1,6 @@
 class OrderProductsController < ApplicationController
   before_action :find_op, only: [:edit, :update, :destroy, :shipped, :cancel]
 
-  # def index
-  # end
-  #
-  # def show
-  # end
-  #
-  # def new
-  # end
-
   def create
     if session[:order_id].nil?
       @order = Order.create(status: "pending")

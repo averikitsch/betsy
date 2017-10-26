@@ -139,7 +139,8 @@ describe OrderProductsController do
     one = order_products(:one)
     start = one.shipped
     patch cancel_order_product_path(one.id)
-
+    OrderProduct.find(one.id).cancelled.must_equal true
+    session[:user_id].must_equal users(:one).id
     OrderProduct.find(one.id).shipped.must_equal start
     must_respond_with :redirect
   end
