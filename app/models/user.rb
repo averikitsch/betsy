@@ -21,7 +21,7 @@ class User < ApplicationRecord
 
   def order_products
     product_ids = products.collect { |product| product.id }
-    order_products = OrderProduct.where(:product_id => product_ids).joins(:order).where("orders.status = ? OR orders.status = ?", "paid","completed")
+    order_products = OrderProduct.where(:product_id => product_ids).joins(:order).where("orders.status = ? OR orders.status = ?", "paid","complete")
   end
 
   def total_revenue

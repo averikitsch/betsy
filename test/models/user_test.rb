@@ -44,13 +44,13 @@ describe User do
 
   describe "orders" do
     it "must return a collection of orders associated with the user" do
-      users(:two).orders.size.must_equal 1
+      users(:two).orders(['paid','complete']).count.must_equal 2
     end
   end
 
   describe "order_products" do
     it "must return a collection of order_products" do
-      users(:two).order_products.count.must_equal 1
+      users(:two).order_products.count.must_equal 2
     end
 
     it "must have only order_products associated with the user" do
@@ -66,7 +66,12 @@ describe User do
 
   describe "total_revenue" do
     it "returns the amount of all order_products associated with the user" do
-      users(:two).total_revenue.must_equal 79.92
+      op1 = order_products(:two)
+       op2 = order_products(:three)
+      # op3 = order_products(:four)
+      total = (op1.quantity * op1.product.price) +(op2.quantity * op2.product.price)
+      # +(op3.quantity * op3.product.price)
+      users(:two).total_revenue.must_equal total
     end
   end
 end
