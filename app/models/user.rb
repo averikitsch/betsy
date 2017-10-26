@@ -15,8 +15,7 @@ class User < ApplicationRecord
   end
 
   def orders
-    Order.where(status:["paid","completed"])
-    .joins(:products).where('products.user_id = ?', id).distinct
+    Order.where(status:["paid","complete"]).joins(:products).where('products.user_id = ?', id).distinct
   end
 
   def orders_by(status)
@@ -25,7 +24,7 @@ class User < ApplicationRecord
 
   def order_products
     product_ids = products.collect { |product| product.id }
-    order_products = OrderProduct.where(:product_id => product_ids).joins(:order).where("orders.status = ? OR orders.status = ?", "paid","completed")
+    order_products = OrderProduct.where(:product_id => product_ids).joins(:order).where("orders.status = ? OR orders.status = ?", "paid","complete")
     # order_products = order_products.select do |order_product|
     #   order = Order.find_by(id: order_product.order_id)
     #   order.status == "paid" || order.status == "complete" end
@@ -36,6 +35,6 @@ class User < ApplicationRecord
   end
 
   def total_by(status)
-    order_products.inject(0) {|sum, op| sum + (op.quantity * op.product.price) if op.order.status == status}
+    order_products.inject(0) {|sum, op| sum + (op.order.status == status ? (op.quantity * op.product.price): 0)}
   end
 end

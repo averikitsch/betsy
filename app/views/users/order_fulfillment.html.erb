@@ -5,7 +5,7 @@
     <li><strong>Total Revenue:</strong> <%= format_price(@user.total_revenue) %></li>
     <ul>
       <li><strong>by Paid:</strong> <%= format_price(@user.total_by("paid")) %></li>
-      <li><strong>by Completed:</strong> <%= format_price(@user.total_by("completed")) %></li>
+      <li><strong>by Completed:</strong> <%= format_price(@user.total_by("complete")) %></li>
     </ul>
   </ul>
 </section>
@@ -14,7 +14,7 @@
     <li><strong>Total Orders:</strong> <%= @user.orders.count %></li>
     <ul>
       <li><strong>by Paid:</strong> <%= @user.orders_by("paid").count %></li>
-      <li><strong>by Completed:</strong> <%= @user.orders_by("completed").count %></li>
+      <li><strong>by Completed:</strong> <%= @user.orders_by("complete").count %></li>
     </ul>
   </ul>
 </section>
