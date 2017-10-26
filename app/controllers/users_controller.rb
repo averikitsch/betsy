@@ -100,7 +100,7 @@ class UsersController < ApplicationController
   end
 
   def order_fulfillment
-    @user = User.find_by(id: params[:user_id].to_i)
+    @user = User.find_by(id: session[:user_id].to_i)
     if @user.nil?
         flash[:status] = :failure
         flash[:result_text] = "Dear Paranormal Ally: We regret to inform you that accesss to this page is restricted."
