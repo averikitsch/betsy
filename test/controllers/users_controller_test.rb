@@ -128,7 +128,7 @@ describe UsersController do
 
     it "should render a 404 if the user is not found" do
       get user_orders_path(999)
-      must_respond_with :not_found
+      must_respond_with :redirect
     end
   end
 end
