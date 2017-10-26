@@ -1,63 +1,63 @@
-<article class="summary row">
-<h1>Order Summary</h1>
-<section class = "columns small-6 medium-4">
-  <ul>
-    <li><strong>Total Revenue:</strong> <%= format_price(@user.total_revenue) %></li>
+<section class="summary row">
+  <h1>Order Summary</h1>
+  <section class = "columns small-6 medium-4">
     <ul>
-      <li><strong>by Paid:</strong> <%= format_price(@user.total_by("paid")) %></li>
-      <li><strong>by Completed:</strong> <%= format_price(@user.total_by("complete")) %></li>
+      <li><strong>Total Revenue:</strong> <%= format_price(@user.total_revenue) %></li>
+      <ul>
+        <li><strong>by Paid:</strong> <%= format_price(@user.total_by("paid")) %></li>
+        <li><strong>by Completed:</strong> <%= format_price(@user.total_by("complete")) %></li>
+      </ul>
     </ul>
-  </ul>
-</section>
-<section class = "columns small-6 medium-4">
-  <ul>
-    <li><strong>Total Orders:</strong> <%= @user.orders(['paid', 'complete']).count %></li>
+  </section>
+  <section class = "columns small-6 medium-4">
     <ul>
-      <li><strong>by Paid:</strong> <%= @user.orders("paid").count %></li>
-      <li><strong>by Completed:</strong> <%= @user.orders("complete").count %></li>
+      <li><strong>Total Orders:</strong> <%= @user.orders(['paid', 'complete']).count %></li>
+      <ul>
+        <li><strong>by Paid:</strong> <%= @user.orders("paid").count %></li>
+        <li><strong>by Completed:</strong> <%= @user.orders("complete").count %></li>
+      </ul>
     </ul>
-  </ul>
-</section>
-<section class = "columns small-12 medium-4">
-  <ul>
-    <li><strong>Filter by status: </strong><%= link_to 'All Orders', {controller: 'users', action: 'order_fulfillment', :status => ['paid', 'complete'] } %></li>
+  </section>
+  <section class = "columns small-12 medium-4">
     <ul>
-      <li><%= link_to 'Paid Status', {controller: 'users', action: 'order_fulfillment', :status => 'paid'} %></li>
-      <li><%= link_to 'Complete Status', {controller: 'users', action: 'order_fulfillment', :status => 'complete'} %></li>
-  </ul>
-  </ul>
+      <li><strong>Filter by status: </strong><%= link_to 'All Orders', {controller: 'users', action: 'order_fulfillment', :status => ['paid', 'complete'] } %></li>
+      <ul>
+        <li><%= link_to 'Paid Status', {controller: 'users', action: 'order_fulfillment', :status => 'paid'} %></li>
+        <li><%= link_to 'Complete Status', {controller: 'users', action: 'order_fulfillment', :status => 'complete'} %></li>
+      </ul>
+    </ul>
+  </section>
+
+  <table>
+    <thead>
+      <tr>
+        <th colspan="1">Order #</th>
+        <th colspan="3">Purchase Date</th>
+        <th colspan="2">Order Status</th>
+      </tr>
+    </thead>
+    <tbody>
+
+      <% @orders.each do |order| %>
+      <%# unless order.status == "pending" || order.status == "cancelled" %>
+      <tr>
+        <td colspan="1" data-label='Order'><strong><%= link_to order.id, order_path(order.id) %></strong></td>
+        <td colspan="3" data-label='Date'><%= format_datetime(order.created_at) %></td>
+        <td colspan="2" data-label='Status'><%= order.status %></td>
+      </tr>
+      <% @user.order_products.where("order_id = ?", order.id).order(:product_id).each do |order_product| %>
+      <tr>
+        <td data-label='Name'>&emsp;<%= link_to order_product.product.name, product_path(order_product.product_id) %></td>
+        <td data-label='Price'><%=format_price(order_product.product.price) %></td>
+        <td data-label='Quantity'>x <%=order_product.quantity %></td>
+        <td data-label='Subtotal'><%=format_price(order_product.product.price * order_product.quantity) %></td>
+        <td  data-label='Ship'><%= link_to (order_product.shipped ? "SHIPPED" : "SHIP"), ship_order_product_path(order_product.id), method: :patch %></td>
+        <td  data-label='Cancel'><%= link_to (order_product.cancelled ? "CANCELLED" : "CANCEL"), cancel_order_product_path(order_product.id), method: :patch %></td>
+      </tr>
+      <%# end %>
+      <% end %>
+      <% end %>
+
+    </tbody>
+  </table>
 </section>
-
-<table>
-  <thead>
-    <tr>
-      <th colspan="1">Order #</th>
-      <th colspan="3">Purchase Date</th>
-      <th colspan="2">Order Status</th>
-    </tr>
-  </thead>
-<tbody>
-
-<% @orders.each do |order| %>
-  <%# unless order.status == "pending" || order.status == "cancelled" %>
-  <tr>
-    <td colspan="1" data-label='Order'><strong><%= link_to order.id, order_path(order.id) %></strong></td>
-    <td colspan="3" data-label='Date'><%= format_datetime(order.created_at) %></td>
-    <td colspan="2" data-label='Status'><%= order.status %></td>
-  </tr>
-  <% @user.order_products.where("order_id = ?", order.id).order(:product_id).each do |order_product| %>
-  <tr>
-    <td data-label='Name'>&emsp;<%= link_to order_product.product.name, product_path(order_product.product_id) %></td>
-    <td data-label='Price'><%=format_price(order_product.product.price) %></td>
-    <td data-label='Quantity'>x <%=order_product.quantity %></td>
-    <td data-label='Subtotal'><%=format_price(order_product.product.price * order_product.quantity) %></td>
-    <td  data-label='Ship'><%= link_to (order_product.shipped ? "SHIPPED" : "SHIP"), ship_order_product_path(order_product.id), method: :patch %></td>
-    <td  data-label='Cancel'><%= link_to (order_product.cancelled ? "CANCELLED" : "CANCEL"), cancel_order_product_path(order_product.id), method: :patch %></td>
-  </tr>
-  <%# end %>
-  <% end %>
-<% end %>
-
-</tbody>
-</table>
-</article>
