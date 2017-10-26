@@ -7,6 +7,8 @@ Rails.application.routes.draw do
   get '/users/:user_id/orders', to: 'users#order_fulfillment', as: 'user_orders'
 
   get '/shipping', to: 'users#shipping'
+  get '/orders/lookup', to: 'orders#lookup'
+  get '/orders/found', to: 'orders#found'
 
   resources :categories, only: [:new, :create, :index] do
     resources :products, only: [:index]
