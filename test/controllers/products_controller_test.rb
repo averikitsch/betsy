@@ -27,6 +27,12 @@ describe ProductsController do
       must_respond_with :success
     end
 
+    it "should replace image if blank" do
+      post products_path, params: {product: { user_id: ghost.id, name: "shoelace", price: 9.9,  stock: 20}}
+      product = Product.find_by(name: "shoelace")
+      product.image.must_equal "http://placebeyonce.com/200-300"
+    end
+
     it "succeeds with no products" do
       Product.destroy_all
       get root_path
@@ -60,6 +66,11 @@ describe ProductsController do
       get category_products_path(999)
       must_respond_with :not_found
     end
+
+    it "should get search results" do
+      get products_path, params: {search: "blood"}
+      must_respond_with :success
+    end
   end
 
   describe "show product page" do
@@ -72,6 +83,8 @@ describe ProductsController do
       get product_path(999)
       must_respond_with :not_found
     end
+
+
   end
 
   describe "create product" do
@@ -130,6 +143,13 @@ describe ProductsController do
       updated_product = Product.find(one.id)
       updated_product.name.must_equal "New Name"
       must_redirect_to product_path
+    end
+
+    it "should be able to update a product's information" do
+      delete logout_path
+      login(users(:two),"github")
+      patch product_path(one), params: {product: {name: "New Name"}}
+      must_respond_with :redirect
     end
 
     it "shouldn't update with bogus data" do
