@@ -131,6 +131,11 @@ describe OrdersController do
       get orders_found_path params: {id: 1}
       must_respond_with :bad_request
     end
+
+    # it "can't destroy" do
+    #   delete order_path(-1)
+    #   must_respond_with :bad_request
+    # end
   end
 
 end
