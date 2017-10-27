@@ -57,6 +57,7 @@ class ProductsController < ApplicationController
       #replaces empty string with default image
       if params[:product][:image] == ""
         @product.image = valid_image
+
       end
 
       if @product.save
@@ -138,23 +139,15 @@ class ProductsController < ApplicationController
         flash[:status] = :failure
         flash[:result_text] = "You must be logged in to do that!"
         redirect_to users_path, status: :bad_request
-      else
-        # render_404
-        redirect_to users_path, status: :bad_request
       end
     elsif @user.id.to_i != Product.find_by(id: params[:id].to_i).user_id
       if User.find_by(id: @user.id)
         flash[:status] = :failure
         flash[:result_text] = "Dear Spooker: You cannot view another spooky's page!"
         redirect_to users_path, status: :bad_request
-      else
-        flash[:status] = :failure
-        flash[:result_text] = "Dear Spooker: You cannot view another spooky's page!"
-        render_404
       end
     else
       @product = Product.find_by(id: params[:id])
-      # @product.active = params[:product][:active].to_i
       if @product.active
         @product.active = false
       else
