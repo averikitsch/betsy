@@ -30,7 +30,7 @@ describe ProductsController do
     it "should replace image if blank" do
       post products_path, params: {product: { user_id: ghost.id, name: "shoelace", price: 9.9,  stock: 20}}
       product = Product.find_by(name: "shoelace")
-      product.image.must_equal "http://placebeyonce.com/200-300"
+      product.image.must_equal "placeholder.jpg"
     end
 
     it "succeeds with no products" do
@@ -119,7 +119,7 @@ describe ProductsController do
         must_respond_with :redirect
         product = Product.find_by(name: "shoelace")
         product.categories.length.must_equal 2
-        product.image.must_equal "http://placebeyonce.com/200-300"
+        product.image.must_equal "placeholder.jpg"
       end
 
       it "should rerender the form if it can't create a new product" do
