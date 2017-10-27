@@ -19,27 +19,10 @@ class OrdersController < ApplicationController
         redirect_to users_path
       end
     end
-
-    # if session[:user_id]
-    #   @user = User.find_by(id: session[:user_id])
-    # end
   end
 
   def new
   end
-
-  # def create
-  #   # @order.write_attribute(order_params)
-  #   # unless @order.update(status: "paid")
-  #   #   flash.now[:status] = :failure
-  #   #   flash.now[:result_text] = "Oops!"
-  #   #   flash.now[:messages] = @order.errors.messages
-  #   #   render :new
-  #   # end
-  # end
-
-  # def edit
-  # end
 
   def update
     @order.update(order_params)
