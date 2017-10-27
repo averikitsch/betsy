@@ -37,7 +37,6 @@ describe OrderProductsController do
   end
 
   it "should not let the order quantity exceed the available stock" do
-    # start_qty = order_products(:two).quantity
     proc{post order_products_path(products(:two)), params: {order_product: {quantity: 5}}}.must_change 'OrderProduct.count', 0
     must_respond_with :bad_request
   end
