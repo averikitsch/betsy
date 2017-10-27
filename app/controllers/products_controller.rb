@@ -2,7 +2,6 @@ class ProductsController < ApplicationController
   before_action :find_product , only: [:show, :edit, :update]
   def root
     @top_products =  Product.select("products.id, avg(reviews.rating) as average_rating").where(active: true).joins("LEFT JOIN reviews ON products.id = reviews.product_id").group("products.id").order("average_rating DESC NULLS LAST").limit(8)
-    #Product.joins("LEFT JOIN order_products ON products.id = order_products.product_id").group(:id).order("count(order_products.id)  DESC").limit(10)
     @recent_products =  Product.where(active: true).order(created_at: :desc).limit(8)
   end
 
@@ -165,35 +164,6 @@ class ProductsController < ApplicationController
         redirect_to user_path(@product.user)
       end
     end
-
-
-      ###
-    # if find_user
-    #   if @user.id.to_i != Product.find_by(id: params[:id].to_i).user_id
-    #     if User.find_by(id: params[:id])
-    #       flash[:status] = :failure
-    #       flash[:result_text] = "Dear Spooker: You cannot view another spooky's page!"
-    #       redirect_to users_path
-    #     else
-    #       render_404
-    #     end
-    #   else
-    #     @product = Product.find_by(id: params[:id])
-    #     # @product.active = params[:product][:active].to_i
-    #     if @product.active
-    #       @product.active = false
-    #     else
-    #       @product.active = true
-    #     end
-    #     if @product.save
-    #       redirect_to user_path(@product.user)
-    #     end
-    #   end
-    # else
-    #   flash[:status] = :failure
-    #   flash[:result_text] = "You must be logged in to do that!"
-    #   redirect_to user_path(@product.user)
-    # end
   end
 
   private
