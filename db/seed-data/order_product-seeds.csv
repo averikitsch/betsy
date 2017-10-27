@@ -8,3 +8,12 @@ order_id,product_id,quantity,shipped
 1,7,3,FALSE
 1,4,10,FALSE
 1,5,1,FALSE
+4,27,1,TRUE
+4,4,1,TRUE
+4,9,1,TRUE
+4,2,1,TRUE
+5,8,1,TRUE
+5,4,1,TRUE
+5,12,1,TRUE
+6,20,1,TRUE
+6,27,1,TRUE

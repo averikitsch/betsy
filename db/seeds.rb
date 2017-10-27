@@ -44,7 +44,7 @@ end
 
 puts "Added #{Order.count} order records"
 puts "#{order_failures.length} orders failed to save"
-puts
+p order_failures
 puts
 
 USER_FILE = Rails.root.join('db','seed-data', 'user-seeds.csv')
@@ -118,7 +118,7 @@ end
 
 puts "Added #{Review.count} review records"
 puts "#{review_failures.length} reviews failed to save"
-puts
+p review_failures
 puts
 
 
@@ -141,7 +141,7 @@ end
 
 puts "Added #{OrderProduct.count} order_product records"
 puts "#{order_product_failures.length} order_products failed to save"
-puts
+p order_product_failures
 puts
 
 puts "Manually resetting PK sequence on each table"
