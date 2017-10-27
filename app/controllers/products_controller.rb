@@ -181,6 +181,6 @@ class ProductsController < ApplicationController
   end
 
   def valid_image
-    "http://placebeyonce.com/200-300"
+    "placeholder"
   end
 end
