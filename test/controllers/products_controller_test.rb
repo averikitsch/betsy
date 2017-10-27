@@ -115,10 +115,11 @@ describe ProductsController do
 
       it "should be able to create a new product with categories" do
         c_i = [categories(:one).id,categories(:two).id]
-        proc {post products_path, params: {product: { name: "shoelace", price: 9.9, user_id: ghost.id, category_ids: c_i, stock: 20}}}.must_change "Product.count", 1
+        proc {post products_path, params: {product: { name: "shoelace", price: 9.9, user_id: ghost.id, category_ids: c_i, stock: 20, image: ""}}}.must_change "Product.count", 1
         must_respond_with :redirect
         product = Product.find_by(name: "shoelace")
         product.categories.length.must_equal 2
+        product.image.must_equal "http://placebeyonce.com/200-300"
       end
 
       it "should rerender the form if it can't create a new product" do
@@ -181,16 +182,15 @@ describe ProductsController do
       must_respond_with :redirect
     end
 
-    it "can't edit a product if not the owner" do
-      post products_path, params: {product: { name: "shoelace", price: 9.9, user_id: ghost.id, stock: 20}}
-      product = Product.find_by(name: "shoelace")
-
-      delete logout_path
-      session[:user_id].must_be_nil
-
-      patch product_path(product.id), params: {product: { price: 5.9}}
-      must_respond_with :redirect
+    it "should not allow a user to edit a product for another user" do
+      #ghost (user one in yml) is currently logged in
+      #product three belongs to user ghoul
+      patch product_path(three), params: {product: {name: "this won't get updated"}}
+      not_updated = Product.find(three.id)
+      not_updated.name.must_equal "tomb"
+      must_redirect_to product_path
     end
+
   end
 
   it "removes a category" do
@@ -233,6 +233,7 @@ describe ProductsController do
         product2 = Product.find_by(name: "tomb")
         product2.active.must_equal false
       end
+
     end
 
     describe "guest functionality" do
@@ -259,7 +260,18 @@ describe ProductsController do
         product = Product.find_by(name: "sheet")
         product.active.must_equal true
       end
+      it "will not toggle active" do
+        product = products(:one)
+        product.active.must_equal false
+        delete logout_path
+
+        patch toggle_active_path(product.id)
+        must_respond_with :bad_request
+        product = Product.find_by(name: "sheet")
+        product.active.must_equal false
+      end
     end
+
   end
 
 end
