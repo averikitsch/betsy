@@ -181,6 +181,6 @@ class ProductsController < ApplicationController
   end
 
   def valid_image
-    "placeholder"
+    "placeholder.jpg"
   end
 end
