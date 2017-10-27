@@ -32,7 +32,6 @@ describe ReviewsController do
     it "renders 404 not_found " do
       get new_product_review_path(-1)
       must_respond_with :not_found
-      # must_respond_with :not_found
     end
 
     it "should be able to create a review" do
