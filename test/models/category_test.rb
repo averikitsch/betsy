@@ -7,6 +7,8 @@ describe Category do
       category.valid?.must_equal false
       category.name = ''
       category.valid?.must_equal false
+      category.name = nil
+      category.valid?.must_equal false
     end
 
     it "category with name is valid" do
