@@ -373,11 +373,22 @@ footer footer {
   width: 60%;
   height: 2.8em;
   margin: 0;
+  font-size: 1em;
+  background: rgba($black, 0);
 }
 
 .subscribe input[type="submit"] {
   display: inline;
   margin: 0;
+}
+
+.subscribe form input[type="text"] {
+  border-radius: 0;
+  border-bottom: 1px solid rgba($white, 0.4);
+}
+
+.subscribe form {
+  text-align: center;
 }
 /*---------------------- FORMS ----------------------------*/
 

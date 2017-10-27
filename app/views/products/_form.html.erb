@@ -1,6 +1,7 @@
 <section class="row">
 
   <section class="product_form">
+      <%= form_for @product do |f| %>
       <article>
 
         <%= f.label :name %>
@@ -23,6 +24,7 @@
 
         <%= f.submit button_name %>
       </article>
+      <% end %>
   </section>
 
 </section>
