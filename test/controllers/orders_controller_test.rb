@@ -87,12 +87,6 @@ describe OrdersController do
   describe "order destroy" do
     let(:delete_product) {delete order_product_path(products(:one))}
 
-    # it "can delete an order" do
-    #   proc {new_order}.must_change 'Order.count', 1
-    #   Order.last.order_products.count.must_equal 1
-    #   proc {delete_product}.must_change 'Order.count', -1
-    # end
-
     it "removes session with deletion" do
       delete order_product_path(order_products(:one))
       session[:order_id].must_be_nil
@@ -132,10 +126,6 @@ describe OrdersController do
       must_respond_with :bad_request
     end
 
-    # it "can't destroy" do
-    #   delete order_path(-1)
-    #   must_respond_with :bad_request
-    # end
   end
 
 end
