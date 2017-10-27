@@ -67,8 +67,8 @@ section {
 /*---------------------- HEADER ----------------------------*/
 
 .top_header {
-  border-bottom: 1px solid rgba($black, 0.3);
   padding-top: 10px;
+  background: linear-gradient(rgba($black, 0.3), $charcoal);
 }
 
 .top_header a {
@@ -76,9 +76,18 @@ section {
 }
 
 .logo {
+  background: image-url(bat1) top center no-repeat;
+  background-size: contain;
   text-align: center;
   font-family: 'Creepster', cursive;
   letter-spacing: 0.1em;
+  padding: 35px 0 45px;
+  font-size: 2em;
+}
+
+.logo:hover {
+  background: image-url(bat2) top center no-repeat;
+  background-size: contain;
 }
 
 /*---------------------- NAV ----------------------------*/
@@ -88,6 +97,7 @@ nav {
   font-size: 0.75em;
   letter-spacing: 0.1em;
   text-transform: uppercase;
+  border-bottom: 1px solid rgba($black, 0.1);
 }
 
 .top_header nav a, .top_header nav li a {
@@ -121,10 +131,12 @@ nav li:hover a, nav li:hover ul a:hover {
 }
 
 nav li:hover ul a {
-  background: $charcoal;
+  background: darken($charcoal, 2%);
   color: $white;
   height: 40px;
   line-height: 40px;
+  position: relative;
+  z-index: 999;
 }
 
 #search {
@@ -256,6 +268,10 @@ nav .fa {
   .promo {
     min-height: 300px;
   }
+
+  input#search {
+    margin: 0;
+  }
 }
 
 /*---------------------- MAIN ----------------------------*/
@@ -365,7 +381,7 @@ footer footer {
 
 .forms {
   margin: 0 auto;
-  max-width: 550px;
+  max-width: 650px;
 }
 
 [type='text']:focus, [type='number']:focus, [type='collection-select']:focus,

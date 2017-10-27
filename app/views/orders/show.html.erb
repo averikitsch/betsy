@@ -1,52 +1,52 @@
+<section>
+  <article class="summary row">
+    <h1>Order #<%= @order.id %></h1>
+    <section class = "columns small-6">
+      <ul>
+        <li><strong>Purchased On:</strong> <%= format_date(@order.created_at) %> at <%= format_time(@order.created_at) %></li>
+        <li><strong>Purchase Status:</strong> <%= @order.status%></li>
+        <li><strong>Shipping Method:</strong> Standard</li>
+      </ul>
+    </section>
+    <section class = "columns small-6">
+      <ul>
+        <li><strong>Name:</strong> <%= @order.name %></li>
+        <li><strong>Shipping Address:</strong> <%= @order.address %></li>
+        <li><strong>Email:</strong> <%= @order.email %></li>
+        <li><strong>Credit Card:</strong> <%= hide_num(@order.cc_num) %></li>
+        <li><strong>Expiration Date:</strong> <%= @order.cc_expiry %></li>
+      </ul>
+    </section>
+  </article>
 
-<article class="summary row">
-  <h1>Order #<%= @order.id %></h1>
-  <section class = "columns small-6">
-    <ul>
-      <li><strong>Purchased On:</strong> <%= format_date(@order.created_at) %> at <%= format_time(@order.created_at) %></li>
-      <li><strong>Purchase Status:</strong> <%= @order.status%></li>
-      <li><strong>Shipping Method:</strong> Standard</li>
-    </ul>
+  <article class="products row">
+    <table>
+      <thead>
+        <tr>
+          <th>Product</th>
+          <th>Price</th>
+          <th>Quantity</th>
+          <th>Subtotal</th>
+          <th>Shipping Status</th>
+          <th>Cancel Product</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @user.order_products.where("order_id = ?", @order.id).each do |order_product| %>
+        <tr>
+          <td  data-label='Name'><%= link_to order_product.product.name, product_path(order_product.product_id) %></td>
+          <td data-label='Price'><%=format_price(order_product.product.price) %></td>
+          <td  data-label='Quantity'>x <%=order_product.quantity %></td>
+          <td data-label='Price'><%=format_price(order_product.product.price * order_product.quantity) %></td>
+          <td  data-label='Ship'><%= link_to (order_product.shipped ? "SHIPPED" : "SHIP"), ship_order_product_path(order_product.id), method: :patch %></td>
+          <td  data-label='Cancel'><%= link_to (order_product.cancelled ? "CANCELLED" : "CANCEL"), cancel_order_product_path(order_product.id), method: :patch %></td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </article>
+  
+  <section class = "row center">
+    <%= link_to "Back to Order Summary", user_orders_path(session[:user_id]), class: "button" %>
   </section>
-  <section class = "columns small-6">
-    <ul>
-      <li><strong>Name:</strong> <%= @order.name %></li>
-      <li><strong>Shipping Address:</strong> <%= @order.address %></li>
-      <li><strong>Email:</strong> <%= @order.email %></li>
-      <li><strong>Credit Card:</strong> <%= hide_num(@order.cc_num) %></li>
-      <li><strong>Expiration Date:</strong> <%= @order.cc_expiry %></li>
-    </ul>
-  </section>
-</article>
-
-<%# if session[:user_id] %>
-<article class="products row">
-  <table>
-    <thead>
-      <tr>
-        <th>Product</th>
-        <th>Price</th>
-        <th>Quantity</th>
-        <th>Subtotal</th>
-        <th>Shipping Status</th>
-        <th>Cancel Product</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @user.order_products.where("order_id = ?", @order.id).each do |order_product| %>
-      <tr>
-        <td  data-label='Name'><%= link_to order_product.product.name, product_path(order_product.product_id) %></td>
-        <td data-label='Price'><%=format_price(order_product.product.price) %></td>
-        <td  data-label='Quantity'>x <%=order_product.quantity %></td>
-        <td data-label='Price'><%=format_price(order_product.product.price * order_product.quantity) %></td>
-        <td  data-label='Ship'><%= link_to (order_product.shipped ? "SHIPPED" : "SHIP"), ship_order_product_path(order_product.id), method: :patch %></td>
-        <td  data-label='Cancel'><%= link_to (order_product.cancelled ? "CANCELLED" : "CANCEL"), cancel_order_product_path(order_product.id), method: :patch %></td>
-      </tr>
-      <% end %>
-    </tbody>
-  </table>
-</article>
-<section class = "row center">
-  <%= link_to "Back to Order Summary", user_orders_path(session[:user_id]), class: "button" %>
 </section>
-<%# end %>
