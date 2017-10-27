@@ -25,7 +25,7 @@
 
         <span class="display_full">
           <% if session[:user_id] %>
-          <%= link_to "My Account", user_path(User.find_by(id: session[:user_id]).id) %>
+          <%= link_to "My Account", user_path(User.find_by(id: session[:user_id])) %>
           <%= link_to "Log out", logout_path, method: :delete %>
           <% else %>
             <%= link_to "Log In", '/auth/github' %>
