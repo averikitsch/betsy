@@ -40,3 +40,5 @@
 | Content is organized with HTML5 semantic tags |  |
 | CSS is DRY |  |
 |  **Overall** |   |
+
+# IMPORTANT: Whoever submitted the PR (and thus will get the notification about this feedback) should share this with their teammates.
