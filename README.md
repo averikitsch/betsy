@@ -1,11 +1,17 @@
-# Welcome to Spooksy
-Spooksy is an online retailer of all things spooky. This is a play off of the popular website Etsy. This project was built using Ruby on Rails along with HTML&CSS and Foundation.
-![Front Page](./assests/full-screen-front.png)
-![Front Page Banner](./assests/full-screen-banner.png)
-![Shopping cart](./assests/shopping-cart.png)
-![Product Page](./assests/product-page.png)
-![Shopping Cart](./assests/full-screen-front.png)
-![About us](./assests/about-us.png)
+# Welcome to Spooksy  
+Spooksy is an online retailer of all things spooky. This is a play off of the popular website Etsy. This project was built using Ruby on Rails along with HTML&CSS and Foundation.  
+
+![Front Page](./assests/full-screen-front.png)  
+
+![Front Page Banner](./assests/full-screen-banner.png)  
+
+![Shopping cart](./assests/shopping-cart.png)  
+
+![Product Page](./assests/product-page.png)  
+
+![Shopping Cart](./assests/full-screen-front.png)  
+
+![About us](./assests/about-us.png)  
 
 # bEtsy
 [b]Etsy will be an online store where a wide variety of products can be listed and sold by any user. In this project we will focus on reinforcing the major components of Rails, Model Validation, as well as introducing some more complex logic such as user authentication.
