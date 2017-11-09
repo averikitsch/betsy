@@ -9,7 +9,7 @@ Spooksy is an online retailer of all things spooky. This is a play off of the po
 
 ![Product Page](./assets/product-page.png)  
 
-![Shopping Cart](./assets/full-screen-front.png)  
+![Shopping Cart](./assets/shopping-cart.png)  
 
 ![About us](./assets/about-us.png)  
 
